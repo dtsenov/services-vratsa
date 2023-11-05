@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ВиК Услуги Враца</title>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header th:fragment="nav" class="header">
+    <nav class="header__nav">
+        <div class="header__logo">
+            <img src="/images/logo.png" alt="">
+        </div>
+        <ul class="nav_list">
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">Начало</a></button>
+            </li>
+            <li class="nav_list-item">
+                <div class="dropdown">
+                    <button class="dropbtn">Услуги</button>
+                    <div class="dropdown-content">
+                        <a href="#">Изграждане на ВиК инсталации</a>
+                        <a href="#">Отстраняване на течове</a>
+                        <a href="#">Ремонт на теч в банята</a>
+                        <a href="#">Ремонт на тоалетно казанче</a>
+                        <a href="#">Смяна на спирателен кран</a>
+                        <a href="#">Смяна на водомер</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav_list-item">
+                <div class="dropdown">
+                    <button class="dropbtn">Продукти</button>
+                    <div class="dropdown-content">
+                        <a href="#">Водомери</a>
+                        <a href="#">Кранове</a>
+                        <a href="#">Водопроводни ключове</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">За нас</a></button>
+            </li>
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">Контакти</a></button>
+            </li>
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">Вход</a></button>
+            </li>
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">Регистрация</a></button>
+            </li>
+            <li class="nav_list-item">
+                <button class="dropbtn"><a href="#">Изход</a></button>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="header__text">
+        <h1 class="header__text-heading">ВиК Услуги във Враца</h1>
+        <h2 class="header__text-subheading">Бързи ВиК услуги и Ремонти по Домовете във Враца.
+            Квалифицирани Водопроводчици за Качествени ВиК ремонти.</h2>
+
+        <button class="header__text-btn"><a href="#">Нашите специалисти</a></button>
+    </div>
+</header>
+</body>
+<footer th:fragment="footer" class="footer">
+    <p>
+        &copy; ВиК Услуги Враца. Всички права запазени.
+    </p>
+</footer>
+</html>
