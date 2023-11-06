@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<main class="about-container">
+    <h2>ЗА НАС</h2>
+    <div>
+        <div class="about-container__info">
+            <div class="about-container__info-img">
+                <img src="/images/info-plumber.png">
+            </div>
+            <div class="about-container__info-desc-all">
+                <div class="about-container__info-desc">
+                    <h3>Екип от опитни водопроводчици</h3>
+                    <p>Разполагаме с опитен и квалифициран екип от професионалисти, които имат дългогодишен опит в
+                        сферата на ВиК услугите.
+                        Те са готови да разрешат всеки един Ваш проблем.</p>
+                </div>
+                <div class="about-container__info-desc">
+                    <h3>Качествени услуги</h3>
+                    <p>Гарантираме за качеството на извършваните от нас ВиК услуги. Работим с висококачествени
+                        материали,
+                        но това не се отразява на крайната цена, която Вие заплащате.</p>
+                </div>
+                <div class="about-container__info-desc">
+                    <h3>Денонощни услуги</h3>
+                    <p>При нужда от водопроводчик във Вашия дом или офис, свържете се с нас денонощно.
+                        Експресно обслужване на територията на град Враца.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>
