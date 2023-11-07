@@ -8,6 +8,7 @@ import bg.softuni.vikuslugivratsa.repository.RoleRepository;
 import bg.softuni.vikuslugivratsa.repository.UserRepository;
 import bg.softuni.vikuslugivratsa.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,11 +17,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -29,6 +32,7 @@ public class UserServiceImpl implements UserService {
         RoleEntity role = roleRepository.findByRole(RoleNameEnum.CLIENT);
 
         UserEntity user = modelMapper.map(userServiceModel, UserEntity.class);
+        user.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
         user.setRole(role);
 
         userRepository.save(user);
