@@ -1,16 +1,13 @@
 package bg.softuni.vikuslugivratsa.config;
 
-import bg.softuni.vikuslugivratsa.VikUslugiVratsaApplication;
 import bg.softuni.vikuslugivratsa.repository.UserRepository;
-import bg.softuni.vikuslugivratsa.service.impl.VikUslugiVratsaDetailsService;
+import bg.softuni.vikuslugivratsa.service.impl.VikUslugiVratsaUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -20,7 +17,7 @@ public class SecurityConfiguration {
 
     private final String rememberMeKey;
 
-    public SecurityConfiguration(@Value("${remember.me.key}") String rememberMeKey) {
+    public SecurityConfiguration(@Value("${vikuslugi.remember.me.key}") String rememberMeKey) {
         this.rememberMeKey = rememberMeKey;
     }
 
@@ -61,7 +58,7 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return new VikUslugiVratsaDetailsService(userRepository);
+        return new VikUslugiVratsaUserDetailsService(userRepository);
     }
 
     @Bean

@@ -7,11 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-public class VikUslugiVratsaDetailsService implements UserDetailsService {
+public class VikUslugiVratsaUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public VikUslugiVratsaDetailsService(UserRepository userRepository) {
+    public VikUslugiVratsaUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -19,7 +19,7 @@ public class VikUslugiVratsaDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return
                 userRepository.findByUsername(username)
-                        .map(VikUslugiVratsaDetailsService::map)
+                        .map(VikUslugiVratsaUserDetailsService::map)
                         .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found!"));
     }
 
