@@ -21,7 +21,7 @@ public class UserServiceModel {
 
     private String phoneNumber;
 
-    private Set<RoleEntity> roles;
+    private RoleEntity role;
 
     public UserServiceModel() {
     }
@@ -90,12 +90,11 @@ public class UserServiceModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<RoleEntity> getRoles() {
-        return roles;
+    public RoleEntity getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RoleEntity> roles) {
-        this.roles = roles;
+    public void setRole(RoleEntity role) {
+        this.role = role;
     }
-
 }

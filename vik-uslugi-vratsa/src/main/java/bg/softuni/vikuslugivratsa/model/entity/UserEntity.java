@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "clients")
-public class UserEntity extends BaseEntity{
+@Table(name = "users")
+public class UserEntity extends BaseEntity {
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
@@ -29,8 +29,8 @@ public class UserEntity extends BaseEntity{
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @ManyToMany
-    private Set<RoleEntity> roles;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private RoleEntity role;
 
     @OneToMany(mappedBy = "client")
     private Set<WaterMeterEntity> waterMeters;
@@ -103,12 +103,12 @@ public class UserEntity extends BaseEntity{
         this.phoneNumber = phoneNumber;
     }
 
-    public Set<RoleEntity> getRoles() {
-        return roles;
+    public RoleEntity getRole() {
+        return role;
     }
 
-    public void setRoles(Set<RoleEntity> roles) {
-        this.roles = roles;
+    public void setRole(RoleEntity role) {
+        this.role = role;
     }
 
     public Set<WaterMeterEntity> getWaterMeters() {

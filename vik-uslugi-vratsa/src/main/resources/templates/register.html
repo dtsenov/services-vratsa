@@ -7,7 +7,8 @@
 <main class="main__reg-form">
     <h2>РЕГИСТРАЦИЯ</h2>
     <div class="register__container-form">
-    <form action="POST">
+    <form th:method="POST"
+          th:action="@{/users/register}">
 
         <label for="username" class="form-label">Потребителско име</label>
         <input type="text" id="username" name="username" class="reg-form" placeholder="Потребителско име..">
@@ -20,16 +21,19 @@
                placeholder="Потвърдете паролата..">
 
         <label for="fname" class="form-label">Име</label>
-        <input type="text" id="fname" name="firstname" class="reg-form" placeholder="Име..">
+        <input type="text" id="fname" name="firstName" class="reg-form" placeholder="Име..">
 
         <label for="lname" class="form-label">Фамилия</label>
-        <input type="text" id="lname" name="lastname" class="reg-form" placeholder="Фамилия..">
+        <input type="text" id="lname" name="lastName" class="reg-form" placeholder="Фамилия..">
+
+        <label for="age" class="form-label">Години</label>
+        <input type="text" id="age" name="age" class="reg-form" placeholder="Години..">
 
         <label for="email" class="form-label">Имейл</label>
         <input type="text" id="email" name="email" class="reg-form" placeholder="Имейл..">
 
         <label for="phone" class="form-label">Телефон</label>
-        <input type="text" id="phone" name="phone" class="reg-form" placeholder="+359..">
+        <input type="text" id="phone" name="phoneNumber" class="reg-form" placeholder="+359..">
 
         <input type="submit" value="Регистрация" class="reg-submit-form">
 
