@@ -1,18 +1,19 @@
 package bg.softuni.vikuslugivratsa.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "workers")
-public class WorkerEntity extends BaseEntity {
+@Table(name = "clients")
+public class UserEntity extends BaseEntity{
 
     @Column(name = "username", nullable = false, unique = true)
     private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
@@ -22,25 +23,28 @@ public class WorkerEntity extends BaseEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Column(name = "age", nullable = false)
+    private Integer age;
+
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "password", nullable = false)
-    private String password;
+    @ManyToMany
+    private Set<RoleEntity> roles;
 
-    @OneToMany(mappedBy = "worker")
-    private Set<ClientEntity> clients;
-
-    @OneToMany(mappedBy = "worker")
+    @OneToMany(mappedBy = "client")
     private Set<WaterMeterEntity> waterMeters;
 
-    @OneToMany(mappedBy = "worker")
+    @OneToMany(mappedBy = "client")
     private Set<WaterTapEntity> waterTaps;
 
-    @OneToMany(mappedBy = "worker")
+    @OneToMany(mappedBy = "client")
     private Set<ServiceEntity> services;
 
-    public WorkerEntity() {
+    @OneToMany(mappedBy = "client")
+    private Set<PlumbingWrenchEntity> plumbingWrenches;
+
+    public UserEntity() {
     }
 
     public String getUsername() {
@@ -49,6 +53,14 @@ public class WorkerEntity extends BaseEntity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -75,6 +87,14 @@ public class WorkerEntity extends BaseEntity {
         this.email = email;
     }
 
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -83,20 +103,12 @@ public class WorkerEntity extends BaseEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPassword() {
-        return password;
+    public Set<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<ClientEntity> getClients() {
-        return clients;
-    }
-
-    public void setClients(Set<ClientEntity> clients) {
-        this.clients = clients;
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 
     public Set<WaterMeterEntity> getWaterMeters() {
@@ -121,5 +133,13 @@ public class WorkerEntity extends BaseEntity {
 
     public void setServices(Set<ServiceEntity> services) {
         this.services = services;
+    }
+
+    public Set<PlumbingWrenchEntity> getPlumbingWrenches() {
+        return plumbingWrenches;
+    }
+
+    public void setPlumbingWrenches(Set<PlumbingWrenchEntity> plumbingWrenches) {
+        this.plumbingWrenches = plumbingWrenches;
     }
 }

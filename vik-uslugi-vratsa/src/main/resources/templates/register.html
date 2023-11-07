@@ -1,40 +1,41 @@
 <!DOCTYPE html>
-<!-- Coding by CodingLab | www.codinglabweb.com-->
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Registration or Sign Up form in HTML CSS | CodingLab </title>
-    <link rel="stylesheet" href="style.css">
-   </head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
-  <div class="wrapper">
-    <h2>Registration</h2>
-    <form action="#">
-      <div class="input-box">
-        <input type="text" placeholder="Enter your name" required>
-      </div>
-      <div class="input-box">
-        <input type="text" placeholder="Enter your email" required>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Create password" required>
-      </div>
-      <div class="input-box">
-        <input type="password" placeholder="Confirm password" required>
-      </div>
-      <div class="policy">
-        <input type="checkbox">
-        <h3>I accept all terms & condition</h3>
-      </div>
-      <div class="input-box button">
-        <input type="Submit" value="Register Now">
-      </div>
-      <div class="text">
-        <h3>Already have an account? <a href="#">Login now</a></h3>
-      </div>
-    </form>
-  </div>
+<header th:replace="~{fragments/commons::nav}"></header>
+<main class="main__reg-form">
+    <h2>РЕГИСТРАЦИЯ</h2>
+    <div class="register__container-form">
+    <form action="POST">
 
+        <label for="username" class="form-label">Потребителско име</label>
+        <input type="text" id="username" name="username" class="reg-form" placeholder="Потребителско име..">
+
+        <label for="password" class="form-label">Парола</label>
+        <input type="text" id="password" name="password" class="reg-form" placeholder="Парола..">
+
+        <label for="confirmPassword" class="form-label">Потвърдете паролата</label>
+        <input type="text" id="confirmPassword" name="confirmPassword" class="reg-form"
+               placeholder="Потвърдете паролата..">
+
+        <label for="fname" class="form-label">Име</label>
+        <input type="text" id="fname" name="firstname" class="reg-form" placeholder="Име..">
+
+        <label for="lname" class="form-label">Фамилия</label>
+        <input type="text" id="lname" name="lastname" class="reg-form" placeholder="Фамилия..">
+
+        <label for="email" class="form-label">Имейл</label>
+        <input type="text" id="email" name="email" class="reg-form" placeholder="Имейл..">
+
+        <label for="phone" class="form-label">Телефон</label>
+        <input type="text" id="phone" name="phone" class="reg-form" placeholder="+359..">
+
+        <input type="submit" value="Регистрация" class="reg-submit-form">
+
+    </form>
+    </div>
+</main>
 </body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

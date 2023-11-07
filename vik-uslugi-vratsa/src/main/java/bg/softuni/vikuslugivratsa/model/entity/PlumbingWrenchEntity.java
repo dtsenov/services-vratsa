@@ -22,7 +22,7 @@ public class PlumbingWrenchEntity extends BaseEntity {
     private BigDecimal price;
 
     @ManyToOne
-    private ClientEntity client;
+    private UserEntity client;
 
     public PlumbingWrenchEntity() {
     }
@@ -51,11 +51,11 @@ public class PlumbingWrenchEntity extends BaseEntity {
         this.price = price;
     }
 
-    public ClientEntity getClient() {
+    public UserEntity getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(UserEntity client) {
         this.client = client;
     }
 }

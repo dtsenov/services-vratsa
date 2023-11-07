@@ -229,4 +229,60 @@
     margin: 0 auto;
     padding: 10px;
     position: relative;
+    border: 1px solid #1845ad;
+    border-radius: 40px;
+}
+
+.about-container__info-desc {
+    margin-bottom: 30px;
+    text-align: center;
+    color: #1845ad;
+}
+
+.about-container__info-desc h3 {
+    font-size: 24px;
+}
+
+.about-container__info-desc p {
+    font-size: 18px;
+}
+
+.contacts__container-form,
+.register__container-form {
+    width: 50%;
+    margin-top: 50px;
+    display: inline-block;
+}
+
+.form-input,
+.reg-form {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.form-label,
+.submit-form,
+.reg-submit-form {
+    font-size: 26px;
+    color: #1845ad;
+}
+
+.main__contact-form,
+.main__reg-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.main__reg-form h2,
+.main__contact-form h2 {
+    text-align: center;
+    font-size: 50px;
+    color: #1845ad;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }

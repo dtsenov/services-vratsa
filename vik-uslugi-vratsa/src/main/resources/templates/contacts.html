@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<main class="main__contact-form">
+    <h2>СВЪРЖЕТЕ СЕ С НАС</h2>
+    <div class="contacts__container-form">
+        <form action="POST">
+
+            <label for="fname" class="form-label">Име</label>
+            <input type="text" id="fname" name="firstname" class="form-input" placeholder="Име..">
+
+            <label for="lname" class="form-label">Фамилия</label>
+            <input type="text" id="lname" name="lastname" class="form-input" placeholder="Фамилия..">
+
+            <label for="email" class="form-label">Имейл</label>
+            <input type="text" id="email" name="email" class="form-input" placeholder="Имейл..">
+
+            <label for="phone" class="form-label">Телефон</label>
+            <input type="text" id="phone" name="phone" class="form-input" placeholder="+359..">
+
+            <label for="subject" class="form-label">Съобщение</label>
+            <textarea id="subject" name="subject" placeholder="Съобщение.." class="form-input" style="height:200px"></textarea>
+
+            <input type="submit" value="Изпрати" class="submit-form">
+
+        </form>
+    </div>
+</main>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>

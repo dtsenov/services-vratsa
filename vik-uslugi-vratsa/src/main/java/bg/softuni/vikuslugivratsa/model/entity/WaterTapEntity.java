@@ -24,10 +24,10 @@ public class WaterTapEntity extends BaseEntity {
     private BigDecimal price;
 
     @ManyToOne
-    private WorkerEntity worker;
+    private RoleEntity worker;
 
     @ManyToOne
-    private ClientEntity client;
+    private UserEntity client;
 
     public WaterTapEntity() {
     }
@@ -64,19 +64,19 @@ public class WaterTapEntity extends BaseEntity {
         this.price = price;
     }
 
-    public WorkerEntity getWorker() {
+    public RoleEntity getWorker() {
         return worker;
     }
 
-    public void setWorker(WorkerEntity worker) {
+    public void setWorker(RoleEntity worker) {
         this.worker = worker;
     }
 
-    public ClientEntity getClient() {
+    public UserEntity getClient() {
         return client;
     }
 
-    public void setClient(ClientEntity client) {
+    public void setClient(UserEntity client) {
         this.client = client;
     }
 }
