@@ -27,7 +27,7 @@ public class VikUslugiVratsaUserDetailsService implements UserDetailsService {
         return User
                 .withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
-                .authorities(String.valueOf(userEntity.getRole()))
+//                .authorities(userEntity.getRole().getRole().name())
                 .build();
     }
 }

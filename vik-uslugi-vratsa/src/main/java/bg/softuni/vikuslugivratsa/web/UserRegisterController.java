@@ -26,11 +26,11 @@ public class UserRegisterController {
         return "register";
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public String registerConfirm(UserRegisterBindingModel userRegisterBindingModel) {
 
         userService.registerUser(modelMapper.map(userRegisterBindingModel, UserServiceModel.class));
 
-        return "redirect:/login";
+        return "redirect:/users/login";
     }
 }

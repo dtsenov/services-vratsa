@@ -32,16 +32,16 @@ public class UserEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private RoleEntity role;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<WaterMeterEntity> waterMeters;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<WaterTapEntity> waterTaps;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ServiceEntity> services;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<PlumbingWrenchEntity> plumbingWrenches;
 
     public UserEntity() {

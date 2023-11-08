@@ -40,7 +40,8 @@
 }
 
 .nav_list-item button,
-.header__text-btn {
+.header__text-btn,
+.logout-dropbtn {
     color: white;
     background-color: #1845ad;
     padding: 6px 30px;

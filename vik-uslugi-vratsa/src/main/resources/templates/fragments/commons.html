@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -12,6 +12,18 @@
     <nav class="header__nav">
         <div class="header__logo">
             <img src="/images/logo.png" alt="">
+        </div>
+
+        <div class="container-fluid">
+            <h5 class="text-center text-white mt-5"> Добре дошъл,
+                <th:block sec:authorize="isAuthenticated()">
+                    <th:block sec:authentication="name"></th:block>
+                </th:block>
+                <th:block sec:authorize="!isAuthenticated()">
+                    Anonymous!
+                </th:block>
+
+            </h5>
         </div>
         <ul class="nav_list">
             <li class="nav_list-item">
@@ -46,14 +58,18 @@
             <li class="nav_list-item">
                 <button class="dropbtn"><a href="/contacts">Контакти</a></button>
             </li>
-            <li class="nav_list-item">
+            <li class="nav_list-item" sec:authorize="!isAuthenticated()">
                 <button class="dropbtn"><a href="/users/login">Вход</a></button>
             </li>
-            <li class="nav_list-item">
+            <li class="nav_list-item" sec:authorize="!isAuthenticated()">
                 <button class="dropbtn"><a href="/users/register">Регистрация</a></button>
             </li>
-            <li class="nav_list-item">
-                <button class="dropbtn"><a href="/users/logout">Изход</a></button>
+            <li class="nav_list-item" sec:authorize="isAuthenticated()">
+                <form th:method="post"
+                      th:action="@{/users/logout}"
+                      class="logout-dropbtn">
+                    <input type="submit"  class="logout-dropbtn" value="Изход"/>
+                </form>
             </li>
         </ul>
     </nav>
