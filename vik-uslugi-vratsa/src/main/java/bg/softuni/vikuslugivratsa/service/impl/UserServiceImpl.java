@@ -28,6 +28,60 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public void initUsers() {
+
+        if (userRepository.count() != 0) {
+            return;
+        }
+
+        UserEntity user = new UserEntity();
+
+        for (int i = 0; i < 3; i++) {
+
+            switch (i) {
+                case 0:
+                    user.setId(1L);
+                    user.setFirstName("Pesho");
+                    user.setLastName("Petrov");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.BOSS));
+                    user.setEmail("pesho@example.com");
+                    user.setUsername("pesho");
+                    user.setPassword(passwordEncoder.encode("pesho"));
+                    user.setPhoneNumber("+359848444444");
+                    user.setAge(35);
+                    break;
+                case 1:
+                    user.setId(2L);
+                    user.setFirstName("Tosho");
+                    user.setLastName("Toshev");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
+                    user.setEmail("tosho@example.com");
+                    user.setUsername("tosho");
+                    user.setPassword(passwordEncoder.encode("tosho"));
+                    user.setPhoneNumber("+359848444433");
+                    user.setAge(25);
+                    break;
+                case 2:
+                    user.setId(3L);
+                    user.setFirstName("Gosho");
+                    user.setLastName("Goshev");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
+                    user.setEmail("gosho@example.com");
+                    user.setUsername("gosho");
+                    user.setPassword(passwordEncoder.encode("gosho"));
+                    user.setPhoneNumber("+359848444422");
+                    user.setAge(19);
+                    break;
+            }
+
+            userRepository.save(user);
+
+        }
+
+
+    }
+
+    @Override
     public void registerUser(UserServiceModel userServiceModel) {
         RoleEntity role = roleRepository.findByRole(RoleNameEnum.CLIENT);
 
