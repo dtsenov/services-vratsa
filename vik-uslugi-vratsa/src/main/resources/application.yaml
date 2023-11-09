@@ -28,3 +28,6 @@ logging:
 server:
   port: 8080
 
+vikuslugivratsa:
+    remember.me.key: ${REMEMBER_ME_KEY:topsecret}
+
