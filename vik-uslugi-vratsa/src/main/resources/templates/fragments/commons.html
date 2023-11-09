@@ -55,8 +55,11 @@
             <li class="nav_list-item">
                 <button class="dropbtn"><a href="/about">За нас</a></button>
             </li>
-            <li class="nav_list-item">
+            <li class="nav_list-item" sec:authorize="isAuthenticated()">
                 <button class="dropbtn"><a href="/contacts">Контакти</a></button>
+            </li>
+            <li class="nav_list-item" sec:authorize='hasRole("BOSS")'>
+                <button class="dropbtn"><a href="/admin">Админ</a></button>
             </li>
             <li class="nav_list-item" sec:authorize="!isAuthenticated()">
                 <button class="dropbtn"><a href="/users/login">Вход</a></button>

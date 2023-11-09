@@ -1,7 +1,10 @@
 package bg.softuni.vikuslugivratsa.service.impl;
 
+import bg.softuni.vikuslugivratsa.model.entity.RoleEntity;
 import bg.softuni.vikuslugivratsa.model.entity.UserEntity;
 import bg.softuni.vikuslugivratsa.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +30,13 @@ public class VikUslugiVratsaUserDetailsService implements UserDetailsService {
         return User
                 .withUsername(userEntity.getUsername())
                 .password(userEntity.getPassword())
-//                .authorities(userEntity.getRole().getRole().name())
+                .authorities(mapAuthority(userEntity.getRole()))
                 .build();
+    }
+
+    private static GrantedAuthority mapAuthority(RoleEntity roleEntity) {
+        return new SimpleGrantedAuthority(
+                "ROLE_" + roleEntity.getRole().name()
+        );
     }
 }
