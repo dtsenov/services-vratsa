@@ -10,16 +10,16 @@ public class ProductController {
 
     @GetMapping("/water-meters")
     public String waterMeters() {
-        return "water-meters";
+        return "product-water-meters";
     }
 
     @GetMapping("water-taps")
     public String waterTaps() {
-        return "water-taps";
+        return "product-water-taps";
     }
 
     @GetMapping("/plumbing-wrenches")
     public String plumbingWrenches() {
-        return "plumbing-wrenches";
+        return "product-plumbing-wrenches";
     }
 }

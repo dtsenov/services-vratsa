@@ -33,16 +33,10 @@ public class UserEntity extends BaseEntity {
     private RoleEntity role;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<WaterMeterEntity> waterMeters;
+    private Set<ProductEntity> products;
 
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<WaterTapEntity> waterTaps;
-
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<ServiceEntity> services;
-
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<PlumbingWrenchEntity> plumbingWrenches;
+    private Set<PictureEntity> pictures;
 
     public UserEntity() {
     }
@@ -111,35 +105,19 @@ public class UserEntity extends BaseEntity {
         this.role = role;
     }
 
-    public Set<WaterMeterEntity> getWaterMeters() {
-        return waterMeters;
+    public Set<ProductEntity> getProducts() {
+        return products;
     }
 
-    public void setWaterMeters(Set<WaterMeterEntity> waterMeters) {
-        this.waterMeters = waterMeters;
+    public void setProducts(Set<ProductEntity> products) {
+        this.products = products;
     }
 
-    public Set<WaterTapEntity> getWaterTaps() {
-        return waterTaps;
+    public Set<PictureEntity> getPictures() {
+        return pictures;
     }
 
-    public void setWaterTaps(Set<WaterTapEntity> waterTaps) {
-        this.waterTaps = waterTaps;
-    }
-
-    public Set<ServiceEntity> getServices() {
-        return services;
-    }
-
-    public void setServices(Set<ServiceEntity> services) {
-        this.services = services;
-    }
-
-    public Set<PlumbingWrenchEntity> getPlumbingWrenches() {
-        return plumbingWrenches;
-    }
-
-    public void setPlumbingWrenches(Set<PlumbingWrenchEntity> plumbingWrenches) {
-        this.plumbingWrenches = plumbingWrenches;
+    public void setPictures(Set<PictureEntity> pictures) {
+        this.pictures = pictures;
     }
 }

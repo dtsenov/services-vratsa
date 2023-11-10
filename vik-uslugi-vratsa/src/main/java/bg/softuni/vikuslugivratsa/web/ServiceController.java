@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/services")
 public class ServiceController {
 
+    @GetMapping("/add")
+    public String addService() {
+        return "add-service";
+    }
+
+
     @GetMapping("/water-and-plumbing-installations")
     public String waterAndPlumbingInstallations() {
-        return "water-and-plumbing-installations";
+        return "service-water-and-plumbing-installations";
     }
 
     @GetMapping("/leaks")
@@ -20,21 +26,23 @@ public class ServiceController {
 
     @GetMapping("/bathroom-leak-repair")
     public String bathroomLeakRepair() {
-        return "bathroom-leak-repair";
+        return "service-bathroom-leak-repair";
     }
 
     @GetMapping("/toilet-cistern-repair")
     public String toiletCisternRepair() {
-        return "toilet-cistern-repair";
+        return "service-toilet-cistern-repair";
     }
 
     @GetMapping("/faucet-replacement")
     public String faucetReplacement() {
-        return "faucet-replacement";
+        return "service-faucet-replacement";
     }
 
     @GetMapping("/water-meter-replacement")
     public String waterMeterReplacement() {
-        return "water-meter-replacement";
+        return "service-water-meter-replacement";
     }
+
+
 }
