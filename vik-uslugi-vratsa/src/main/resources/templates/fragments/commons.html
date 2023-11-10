@@ -59,7 +59,13 @@
                 <button class="dropbtn"><a href="/contacts">Контакти</a></button>
             </li>
             <li class="nav_list-item" sec:authorize='hasRole("BOSS")'>
-                <button class="dropbtn"><a href="/admin">Админ</a></button>
+                <div class="dropdown">
+                    <button class="dropbtn">Админ</button>
+                    <div class="dropdown-content">
+                        <a href="/services/add">Добави услуга</a>
+                        <a href="/products/add">Добави продукт</a>
+                    </div>
+                </div>
             </li>
             <li class="nav_list-item" sec:authorize="!isAuthenticated()">
                 <button class="dropbtn"><a href="/users/login">Вход</a></button>
@@ -71,7 +77,7 @@
                 <form th:method="post"
                       th:action="@{/users/logout}"
                       class="logout-dropbtn">
-                    <input type="submit"  class="logout-dropbtn" value="Изход"/>
+                    <input type="submit" class="logout-dropbtn" value="Изход"/>
                 </form>
             </li>
         </ul>

@@ -1,11 +1,9 @@
 package bg.softuni.vikuslugivratsa.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "services")
@@ -25,6 +23,9 @@ public class ServiceEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity client;
+
+    @ManyToMany
+    private Set<PictureEntity> pictures;
 
     public ServiceEntity() {
     }
@@ -67,5 +68,13 @@ public class ServiceEntity extends BaseEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public Set<PictureEntity> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<PictureEntity> pictures) {
+        this.pictures = pictures;
     }
 }

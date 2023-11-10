@@ -5,6 +5,19 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
+<h2>Добави услуга</h2>
+<form
+        th:method="POST"
+        enctype="multipart/form-data">
+
+    <input type="text" name="name"><br/>
+    <input type="text" name="description"><br/>
+    <input type="text" name="price"><br/>
+    <input type="file" name="picture"><br/>
+    <input type="submit" value="Добави">
+
+
+</form>
 
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>

@@ -4,6 +4,7 @@ import bg.softuni.vikuslugivratsa.model.enums.PipeSizeEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -28,6 +29,9 @@ public class ProductEntity extends BaseEntity {
 
     @ManyToOne
     private UserEntity client;
+
+    @ManyToMany
+    private Set<PictureEntity> pictures;
 
     public ProductEntity() {
     }
@@ -78,5 +82,13 @@ public class ProductEntity extends BaseEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public Set<PictureEntity> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(Set<PictureEntity> pictures) {
+        this.pictures = pictures;
     }
 }
