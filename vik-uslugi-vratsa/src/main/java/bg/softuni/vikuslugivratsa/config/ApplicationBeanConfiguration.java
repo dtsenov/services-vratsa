@@ -21,14 +21,14 @@ public class ApplicationBeanConfiguration {
         return new ModelMapper();
     }
 
-//    @Bean
-//    public Cloudinary cloudinary() {
-//        return new Cloudinary(
-//                Map.of(
-//                        "cloud_name", cloudinaryConfig.getCloudName(),
-//                        "api_key", cloudinaryConfig.getApiKey(),
-//                        "api_secret", cloudinaryConfig.getApiSecret()
-//                )
-//        );
-//    }
+    @Bean
+    public Cloudinary cloudinary() {
+        return new Cloudinary(
+                Map.of(
+                        "cloud_name", cloudinaryConfig.getCloudName(),
+                        "api_key", cloudinaryConfig.getApiKey(),
+                        "api_secret", cloudinaryConfig.getApiSecret()
+                )
+        );
+    }
 }
