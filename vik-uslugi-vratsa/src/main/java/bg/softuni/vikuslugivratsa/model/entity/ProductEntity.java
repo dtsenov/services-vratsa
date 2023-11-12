@@ -1,6 +1,7 @@
 package bg.softuni.vikuslugivratsa.model.entity;
 
 import bg.softuni.vikuslugivratsa.model.enums.PipeSizeEnum;
+import bg.softuni.vikuslugivratsa.model.enums.ProductTypeEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,9 +21,9 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "brand", nullable = false)
     private String brand;
 
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private String type;
+    private ProductTypeEnum type;
 
     @Column(name = "description", nullable = false)
     private String description;
@@ -60,11 +61,11 @@ public class ProductEntity extends BaseEntity {
         this.brand = brand;
     }
 
-    public String getType() {
+    public ProductTypeEnum getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ProductTypeEnum type) {
         this.type = type;
     }
 

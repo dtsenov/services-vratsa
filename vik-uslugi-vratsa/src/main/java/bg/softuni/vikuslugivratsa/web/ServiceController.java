@@ -2,9 +2,12 @@ package bg.softuni.vikuslugivratsa.web;
 
 import bg.softuni.vikuslugivratsa.model.binding.ServiceAddBindingModel;
 import bg.softuni.vikuslugivratsa.model.entity.PictureEntity;
+import bg.softuni.vikuslugivratsa.model.service.ServicesServiceModel;
 import bg.softuni.vikuslugivratsa.repository.PictureRepository;
 import bg.softuni.vikuslugivratsa.service.CloudinaryService;
 import bg.softuni.vikuslugivratsa.service.PictureService;
+import bg.softuni.vikuslugivratsa.service.ServiceService;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +22,15 @@ public class ServiceController {
     private final CloudinaryService cloudinaryService;
     private final PictureService pictureService;
     private final PictureRepository pictureRepository;
+    private final ServiceService serviceService;
+    private final ModelMapper modelMapper;
 
-    public ServiceController(CloudinaryService cloudinaryService, PictureService pictureService, PictureRepository pictureRepository) {
+    public ServiceController(CloudinaryService cloudinaryService, PictureService pictureService, PictureRepository pictureRepository, ServiceService serviceService, ModelMapper modelMapper) {
         this.cloudinaryService = cloudinaryService;
         this.pictureService = pictureService;
         this.pictureRepository = pictureRepository;
+        this.serviceService = serviceService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/add")
@@ -43,7 +50,12 @@ public class ServiceController {
                 (serviceAddBindingModel.getPicture(), serviceAddBindingModel.getPicture().getName());
 
 
-        pictureRepository.save(picture);
+        if (picture != null) {
+            pictureRepository.save(picture);
+        }
+
+        serviceService.addNewService(picture.getId(), modelMapper.map(
+                serviceAddBindingModel, ServicesServiceModel.class));
 
         return "redirect:all-services";
 

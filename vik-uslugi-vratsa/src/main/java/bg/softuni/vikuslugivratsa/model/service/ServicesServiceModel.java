@@ -1,24 +1,27 @@
-package bg.softuni.vikuslugivratsa.model.binding;
+package bg.softuni.vikuslugivratsa.model.service;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
+import bg.softuni.vikuslugivratsa.model.entity.PictureEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
-public class ServiceAddBindingModel {
+public class ServicesServiceModel {
 
-    @NotBlank
+    private Long id;
     private String name;
-
-    @NotBlank
     private String description;
-
     private BigDecimal price;
-
     private MultipartFile picture;
 
-    public ServiceAddBindingModel() {
+    public ServicesServiceModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
