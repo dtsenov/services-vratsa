@@ -9,19 +9,29 @@
 <form
         th:method="POST"
         th:action="@{/products/add}"
+        th:object="${productAddBindingModel}"
         enctype="multipart/form-data">
 
     <label for="product-name" class="form-label">Име на продукт</label><br/>
-    <input type="text" id="product-name" name="product-name" placeholder="Име на продукт.."><br/>
-
-    <label for="product-description" class="form-label">Описание на услуга</label><br/>
-    <textarea name="product-description" id="product-description" placeholder="Описание на продукт.."></textarea><br/>
+    <input type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
 
     <label for="product-price" class="form-label">Цена на услуга</label><br/>
-    <input type="text" name="product-price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
+    <input type="text" name="price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
+
+    <label for="product-brand" class="form-label">Име на производител</label><br/>
+    <input type="text" name="brand" id="product-brand" placeholder="Име на производител.."><br/>
+
+    <select th:field="*{type}" id="product-type" name="type">
+        <option value="">Избери тип</option>
+        <option th:each="t : ${T(bg.softuni.vikuslugivratsa.model.enums.ProductTypeEnum).values()}"
+                th:value="${t}" th:text="${t}">Водомер</option>
+    </select>
+
+    <label for="product-description" class="form-label">Описание на услуга</label><br/>
+    <textarea name="description" id="product-description" placeholder="Описание на продукт.."></textarea><br/>
 
     <label for="product-picture" class="form-label">Добави снимка</label><br/>
-    <input type="file" name="product-picture" id="product-picture"><br/>
+    <input type="file" name="picture" id="product-picture"><br/>
 
     <input type="submit" value="Добави">
 

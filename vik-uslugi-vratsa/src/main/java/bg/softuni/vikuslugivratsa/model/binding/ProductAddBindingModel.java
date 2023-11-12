@@ -1,18 +1,43 @@
 package bg.softuni.vikuslugivratsa.model.binding;
 
-import bg.softuni.vikuslugivratsa.model.enums.PipeSizeEnum;
 import bg.softuni.vikuslugivratsa.model.enums.ProductTypeEnum;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
 public class ProductAddBindingModel {
 
+    @NotBlank(message = "Не трябва да е празно!")
+    private String name;
+
+    @Positive(message = "Цената трябва да е положителна!")
+    @NotBlank(message = "Не трябва да е празно!")
     private BigDecimal price;
-    private PipeSizeEnum size;
+
+    @NotBlank(message = "Не трябва да е празно!")
     private String brand;
+
     private ProductTypeEnum type;
 
+    @NotBlank(message = "Описанието не трябва да е празно!")
+    @Length(min = 5, message = "Дължината трябва да е над 5 символа.")
+    private String description;
+
+    @NotBlank(message = "Снимката на продукта е задължителна!")
+    private MultipartFile picture;
+
     public ProductAddBindingModel() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -21,14 +46,6 @@ public class ProductAddBindingModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public PipeSizeEnum getSize() {
-        return size;
-    }
-
-    public void setSize(PipeSizeEnum size) {
-        this.size = size;
     }
 
     public String getBrand() {
@@ -45,5 +62,21 @@ public class ProductAddBindingModel {
 
     public void setType(ProductTypeEnum type) {
         this.type = type;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public void setPicture(MultipartFile picture) {
+        this.picture = picture;
     }
 }

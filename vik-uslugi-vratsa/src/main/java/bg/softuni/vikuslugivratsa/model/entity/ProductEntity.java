@@ -1,22 +1,19 @@
 package bg.softuni.vikuslugivratsa.model.entity;
 
-import bg.softuni.vikuslugivratsa.model.enums.PipeSizeEnum;
 import bg.softuni.vikuslugivratsa.model.enums.ProductTypeEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @Column(name = "price", nullable = false)
     private BigDecimal price;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "size", nullable = false)
-    private PipeSizeEnum size;
 
     @Column(name = "brand", nullable = false)
     private String brand;
@@ -31,10 +28,17 @@ public class ProductEntity extends BaseEntity {
     @ManyToOne
     private UserEntity client;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private PictureEntity picture;
+    private Long pictureId;
 
     public ProductEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public BigDecimal getPrice() {
@@ -43,14 +47,6 @@ public class ProductEntity extends BaseEntity {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public PipeSizeEnum getSize() {
-        return size;
-    }
-
-    public void setSize(PipeSizeEnum size) {
-        this.size = size;
     }
 
     public String getBrand() {
@@ -85,11 +81,11 @@ public class ProductEntity extends BaseEntity {
         this.client = client;
     }
 
-    public PictureEntity getPicture() {
-        return picture;
+    public Long getPictureId() {
+        return pictureId;
     }
 
-    public void setPicture(PictureEntity picture) {
-        this.picture = picture;
+    public void setPictureId(Long pictureId) {
+        this.pictureId = pictureId;
     }
 }

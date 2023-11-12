@@ -19,9 +19,6 @@ public class PictureEntity extends BaseEntity {
     @OneToOne(mappedBy = "picture")
     private UserEntity client;
 
-    @OneToOne(mappedBy = "picture")
-    private ProductEntity product;
-
     public PictureEntity() {
     }
 
@@ -57,11 +54,4 @@ public class PictureEntity extends BaseEntity {
         this.client = client;
     }
 
-    public ProductEntity getProduct() {
-        return product;
-    }
-
-    public void setProduct(ProductEntity product) {
-        this.product = product;
-    }
 }
