@@ -1,8 +1,6 @@
 package bg.softuni.vikuslugivratsa.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
@@ -18,8 +16,14 @@ public class PictureEntity extends BaseEntity {
     @NotBlank
     private String publicId;
 
-    @ManyToOne
+    @OneToOne(mappedBy = "picture")
     private UserEntity client;
+
+    @OneToOne(mappedBy = "picture")
+    private ServiceEntity service;
+
+    @OneToOne(mappedBy = "picture")
+    private ProductEntity product;
 
     public PictureEntity() {
     }
@@ -54,5 +58,21 @@ public class PictureEntity extends BaseEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public ServiceEntity getService() {
+        return service;
+    }
+
+    public void setService(ServiceEntity service) {
+        this.service = service;
+    }
+
+    public ProductEntity getProduct() {
+        return product;
+    }
+
+    public void setProduct(ProductEntity product) {
+        this.product = product;
     }
 }

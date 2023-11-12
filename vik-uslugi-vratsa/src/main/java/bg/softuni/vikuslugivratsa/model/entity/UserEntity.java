@@ -35,8 +35,8 @@ public class UserEntity extends BaseEntity {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<ProductEntity> products;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-    private Set<PictureEntity> pictures;
+    @OneToOne(fetch = FetchType.EAGER)
+    private PictureEntity picture;
 
     public UserEntity() {
     }
@@ -113,11 +113,11 @@ public class UserEntity extends BaseEntity {
         this.products = products;
     }
 
-    public Set<PictureEntity> getPictures() {
-        return pictures;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public void setPictures(Set<PictureEntity> pictures) {
-        this.pictures = pictures;
+    public void setPicture(PictureEntity picture) {
+        this.picture = picture;
     }
 }

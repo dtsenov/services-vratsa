@@ -24,8 +24,8 @@ public class ServiceEntity extends BaseEntity {
     @ManyToOne
     private UserEntity client;
 
-    @ManyToMany
-    private Set<PictureEntity> pictures;
+    @OneToOne(fetch = FetchType.EAGER)
+    private PictureEntity picture;
 
     public ServiceEntity() {
     }
@@ -70,11 +70,11 @@ public class ServiceEntity extends BaseEntity {
         this.client = client;
     }
 
-    public Set<PictureEntity> getPictures() {
-        return pictures;
+    public PictureEntity getPicture() {
+        return picture;
     }
 
-    public void setPictures(Set<PictureEntity> pictures) {
-        this.pictures = pictures;
+    public void setPicture(PictureEntity picture) {
+        this.picture = picture;
     }
 }
