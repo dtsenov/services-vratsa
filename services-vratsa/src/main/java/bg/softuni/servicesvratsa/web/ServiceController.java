@@ -10,14 +10,18 @@ import bg.softuni.servicesvratsa.service.ServiceService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Controller
 @RequestMapping("/services")
@@ -43,9 +47,54 @@ public class ServiceController {
     }
 
     @GetMapping("/add")
-    public String addService() {
+    public String addService(Model model) {
+        model.addAttribute("picture", new MultipartFile() {
+
+
+            @Override
+            public String getName() {
+                return null;
+            }
+
+            @Override
+            public String getOriginalFilename() {
+                return null;
+            }
+
+            @Override
+            public String getContentType() {
+                return null;
+            }
+
+            @Override
+            public boolean isEmpty() {
+                return true;
+            }
+
+            @Override
+            public long getSize() {
+                return 0;
+            }
+
+            @Override
+            public byte[] getBytes() throws IOException {
+                return new byte[0];
+            }
+
+            @Override
+            public InputStream getInputStream() throws IOException {
+                return null;
+            }
+
+            @Override
+            public void transferTo(File dest) throws IOException, IllegalStateException {
+
+            }
+        });
+
         return "add-service";
     }
+
 
     @GetMapping("/all-services")
     public String allServices() {
@@ -57,7 +106,8 @@ public class ServiceController {
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) throws IOException {
 
-        if (bindingResult.hasErrors()) {
+
+        if (bindingResult.hasErrors() || serviceAddBindingModel.getPicture().isEmpty()) {
             redirectAttributes
                     .addFlashAttribute("serviceAddBindingModel", serviceAddBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.serviceAddBindingModel", bindingResult);

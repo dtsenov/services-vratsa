@@ -12,26 +12,40 @@
         th:object="${serviceAddBindingModel}"
         enctype="multipart/form-data">
 
-    <label for="service-name" class="form-label">Име на услуга</label><br/>
-    <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
-            type="text" id="service-name" name="name" placeholder="Име на услуга.."><br/>
-    <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
+    <div class="form-group">
+        <div class="label-holder">
+            <label for="service-name" class="form-label">Име на услуга</label>
+        </div>
+        <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
+               type="text" id="service-name" name="name" placeholder="Име на услуга.."><br/>
+        <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
+    </div>
 
-    <label for="service-description" class="form-label">Описание на услуга</label><br/>
-    <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
-            name="description" id="service-description" placeholder="Описание на услуга.."></textarea><br/>
-    <small th:errors="*{description}" class="invalid-feedback text-danger">Description error message</small>
+    <div class="form-group">
+        <div class="label-holder">
+            <label for="service-description" class="form-label">Описание на услуга</label>
+        </div>
+        <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
+                  name="description" id="service-description" placeholder="Описание на услуга.."></textarea><br/>
+        <small th:errors="*{description}" class="invalid-feedback text-danger">Description error message</small>
+    </div>
 
-    <label for="service-price" class="form-label">Цена на услуга</label><br/>
-    <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
-            type="text" name="price" id="service-price" placeholder="Цена на услуга (пример: 1.11).."><br/>
-    <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
+    <div class="form-group">
+        <div class="label-holder">
+            <label for="service-price" class="form-label">Цена на услуга</label>
+        </div>
+        <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
+               type="text" name="price" id="service-price" placeholder="Цена на услуга (пример: 1.11).."><br/>
+        <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
+    </div>
 
-    <label for="service-picture" class="form-label">Добави снимка</label><br/>
-    <input th:field="*{picture}" th:errorclass="'is-invalid alert-danger'"
-            type="file" name="picture" id="service-picture"><br/>
-    <small th:errors="*{picture}" class="invalid-feedback text-danger">Picture error message</small>
-
+    <div class="form-group">
+        <div class="label-holder">
+            <label for="service-picture" class="form-label">Добави снимка</label>
+        </div>
+        <input type="file" name="picture" id="service-picture"><br/>
+        <small th:if="${picture.isEmpty()}" class="invalid-feedback text-danger"> *Задължително поле. Моля добавете снимка!</small><br/>
+    </div>
     <input type="submit" value="Добави">
 
 
