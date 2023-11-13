@@ -12,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -84,6 +81,15 @@ public class ProductController {
 
 
         return "redirect:all";
+    }
+
+    @GetMapping("/all/{id}")
+    public String productInfo(@PathVariable ("id") Long id, Model model) {
+
+        
+
+
+        return "product-info";
     }
 
     @GetMapping("/water-meters")

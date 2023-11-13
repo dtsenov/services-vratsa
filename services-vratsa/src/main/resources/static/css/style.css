@@ -287,3 +287,45 @@
     margin-bottom: 0;
     padding-bottom: 0;
 }
+
+/*.product-tr-hover:hover {*/
+/*    transform: scale(1.05);*/
+/*}*/
+
+/*.product-table {*/
+/*    width: 80%;*/
+/*}*/
+
+/*.product-table tr {*/
+/*    border: 1px solid black;*/
+/*}*/
+
+.product-table {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+   text-align: center;
+}
+
+.product-table td,
+.product-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    font-size: 20px;
+}
+
+.product-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.product-table tr:hover {background-color: #ddd;}
+
+.product-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #1845ad;
+    color: white;
+    text-align: center;
+}
+
+.pr-table-wrapper {
+    margin-top: 40px;
+}
