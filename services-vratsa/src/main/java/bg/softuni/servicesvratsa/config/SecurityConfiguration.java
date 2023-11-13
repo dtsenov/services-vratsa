@@ -17,7 +17,7 @@ public class SecurityConfiguration {
 
     private final String rememberMeKey;
 
-    public SecurityConfiguration(@Value("${vikuslugivratsa.remember.me.key}") String rememberMeKey) {
+    public SecurityConfiguration(@Value("${services-vratsa.remember.me.key}") String rememberMeKey) {
         this.rememberMeKey = rememberMeKey;
     }
 

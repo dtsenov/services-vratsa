@@ -16,7 +16,7 @@ public class ProductAddBindingModel {
     private String name;
 
     @Positive(message = "Цената трябва да е положителна!")
-    @NotBlank(message = "Цената не трябва да е празна!")
+    @NotNull(message = "Цената не трябва да е празна!")
     private BigDecimal price;
 
     @NotBlank(message = "Полето не трябва да е празно!")
@@ -33,6 +33,7 @@ public class ProductAddBindingModel {
 
     public ProductAddBindingModel() {
         picture = null;
+        price = BigDecimal.ZERO;
     }
 
     public String getName() {

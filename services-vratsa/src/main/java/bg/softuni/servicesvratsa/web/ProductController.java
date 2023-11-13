@@ -6,12 +6,16 @@ import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -47,15 +51,28 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addConfirm(ProductAddBindingModel productAddBindingModel) throws IOException {
+    public String addConfirm(@Valid ProductAddBindingModel productAddBindingModel,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) throws IOException {
+
+        if (bindingResult.hasErrors() || productAddBindingModel.getPicture().isEmpty()) {
+
+            if (productAddBindingModel.getPicture().isEmpty()) {
+                redirectAttributes.addFlashAttribute("isEmpty", true);
+            }
+
+            redirectAttributes
+                    .addFlashAttribute("productAddBindingModel", productAddBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.productAddBindingModel", bindingResult);
+
+                    return "redirect:add";
+        }
+
+
 
         PictureEntity picture = pictureService.uploadPicture
                 (productAddBindingModel.getPicture(), productAddBindingModel.getPicture().getName());
 
-
-//        if (picture != null) {
-//            pictureRepository.save(picture);
-//        }
 
         productService.addNewProduct(picture.getId(), modelMapper.map(
                 productAddBindingModel, ProductServiceModel.class));

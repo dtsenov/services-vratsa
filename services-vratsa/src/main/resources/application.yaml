@@ -33,7 +33,7 @@ logging:
 server:
   port: 8080
 
-vikuslugivratsa:
+services-vratsa:
   remember.me.key: ${REMEMBER_ME_KEY:topsecret}
 
 cloudinary:

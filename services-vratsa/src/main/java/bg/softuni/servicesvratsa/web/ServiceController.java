@@ -47,51 +47,7 @@ public class ServiceController {
     }
 
     @GetMapping("/add")
-    public String addService(Model model) {
-        model.addAttribute("picture", new MultipartFile() {
-
-
-            @Override
-            public String getName() {
-                return null;
-            }
-
-            @Override
-            public String getOriginalFilename() {
-                return null;
-            }
-
-            @Override
-            public String getContentType() {
-                return null;
-            }
-
-            @Override
-            public boolean isEmpty() {
-                return true;
-            }
-
-            @Override
-            public long getSize() {
-                return 0;
-            }
-
-            @Override
-            public byte[] getBytes() throws IOException {
-                return new byte[0];
-            }
-
-            @Override
-            public InputStream getInputStream() throws IOException {
-                return null;
-            }
-
-            @Override
-            public void transferTo(File dest) throws IOException, IllegalStateException {
-
-            }
-        });
-
+    public String addService() {
         return "add-service";
     }
 
@@ -108,6 +64,11 @@ public class ServiceController {
 
 
         if (bindingResult.hasErrors() || serviceAddBindingModel.getPicture().isEmpty()) {
+
+            if (serviceAddBindingModel.getPicture().isEmpty()) {
+                redirectAttributes.addFlashAttribute("isEmpty", true);
+            }
+
             redirectAttributes
                     .addFlashAttribute("serviceAddBindingModel", serviceAddBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.serviceAddBindingModel", bindingResult);
@@ -118,11 +79,6 @@ public class ServiceController {
 
         PictureEntity picture = pictureService.uploadPicture
                 (serviceAddBindingModel.getPicture(), serviceAddBindingModel.getPicture().getName());
-
-
-//        if (picture != null) {
-//            pictureRepository.save(picture);
-//        }
 
         serviceService.addNewService(picture.getId(), modelMapper.map(
                 serviceAddBindingModel, ServicesServiceModel.class));

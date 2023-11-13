@@ -44,7 +44,7 @@
             <label for="service-picture" class="form-label">Добави снимка</label>
         </div>
         <input type="file" name="picture" id="service-picture"><br/>
-        <small th:if="${picture.isEmpty()}" class="invalid-feedback text-danger"> *Задължително поле. Моля добавете снимка!</small><br/>
+        <small th:if="${isEmpty}" class="invalid-feedback text-danger">*Задължително поле. Моля добавете снимка!</small><br/>
     </div>
     <input type="submit" value="Добави">
 
