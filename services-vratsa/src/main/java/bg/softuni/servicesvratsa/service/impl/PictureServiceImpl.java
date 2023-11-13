@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 public class PictureServiceImpl implements PictureService {
@@ -35,4 +36,10 @@ public class PictureServiceImpl implements PictureService {
 
        return picture;
     }
+
+    @Override
+    public PictureEntity findPictureById(Long pictureId) {
+        return pictureRepository.findById(pictureId).orElse(null);
+    }
+
 }

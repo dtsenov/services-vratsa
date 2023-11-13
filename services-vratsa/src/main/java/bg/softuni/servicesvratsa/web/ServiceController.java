@@ -52,7 +52,7 @@ public class ServiceController {
     }
 
 
-    @GetMapping("/all-services")
+    @GetMapping("/all")
     public String allServices() {
         return "all-services";
     }
@@ -83,7 +83,7 @@ public class ServiceController {
         serviceService.addNewService(picture.getId(), modelMapper.map(
                 serviceAddBindingModel, ServicesServiceModel.class));
 
-        return "redirect:all-services";
+        return "redirect:all";
 
     }
 

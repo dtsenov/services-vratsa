@@ -4,6 +4,33 @@
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
+
+<table>
+    <thead>
+    <tr>
+        <th> Име на продукт </th>
+        <th> Цена на продукт </th>
+        <th> Производител </th>
+        <th> Тип </th>
+        <th> Описание </th>
+        <th> Снимка </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${allProducts.isEmpty()}">
+        <td colspan="2"> В момента няма налични продукти. </td>
+    </tr>
+    <tr th:each="p : ${allProducts}">
+        <td><span th:text="${p.name}"> Име </span></td>
+        <td><span th:text="${p.price}"> Цена </span></td>
+        <td><span th:text="${p.brand}"> Производител </span></td>
+        <td><span th:text="${p.type}"> Тип </span></td>
+        <td><span th:text="${p.description}"> Описание </span></td>
+        <td><img th:src="${p.pictureUrl}" th:alt="${p.pictureTitle}"></td>
+    </tr>
+    </tbody>
+</table>
+
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

@@ -3,6 +3,7 @@ package bg.softuni.servicesvratsa.web;
 import bg.softuni.servicesvratsa.model.binding.ProductAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
+import bg.softuni.servicesvratsa.model.view.ProductAllViewModel;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
@@ -18,19 +19,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
 
     private final PictureService pictureService;
-    private final PictureRepository pictureRepository;
     private final ProductService productService;
     private final ModelMapper modelMapper;
 
-    public ProductController(PictureService pictureService, PictureRepository pictureRepository, ProductService productService, ModelMapper modelMapper) {
+    public ProductController(PictureService pictureService, ProductService productService, ModelMapper modelMapper) {
         this.pictureService = pictureService;
-        this.pictureRepository = pictureRepository;
         this.productService = productService;
         this.modelMapper = modelMapper;
     }
@@ -40,8 +40,13 @@ public class ProductController {
         return new ProductAddBindingModel();
     }
 
-    @GetMapping("all-products")
-    public String allProducts() {
+    @GetMapping("/all")
+    public String allProducts(Model model) {
+
+        List<ProductAllViewModel> allProducts = productService.getAllProducts();
+
+        model.addAttribute("allProducts", allProducts);
+
         return "all-products";
     }
 
@@ -78,7 +83,7 @@ public class ProductController {
                 productAddBindingModel, ProductServiceModel.class));
 
 
-        return "redirect:all-products";
+        return "redirect:all";
     }
 
     @GetMapping("/water-meters")
