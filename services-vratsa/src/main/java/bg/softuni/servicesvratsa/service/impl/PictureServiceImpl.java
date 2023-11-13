@@ -22,7 +22,7 @@ public class PictureServiceImpl implements PictureService {
     }
 
     @Override
-    public PictureEntity createPictureEntity(MultipartFile file, String title) throws IOException {
+    public PictureEntity uploadPicture(MultipartFile file, String title) throws IOException {
 
         CloudinaryImage uploaded = this.cloudinaryService.upload(file);
 
@@ -30,6 +30,8 @@ public class PictureServiceImpl implements PictureService {
        picture.setPublicId(uploaded.getPublicId());
        picture.setUrl(uploaded.getUrl());
        picture.setTitle(title);
+
+       pictureRepository.save(picture);
 
        return picture;
     }

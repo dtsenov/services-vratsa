@@ -1,23 +1,32 @@
 package bg.softuni.servicesvratsa.model.binding;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 
 public class ServiceAddBindingModel {
 
-    @NotBlank
+    @NotBlank(message = "Не трябва да е празно!")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Описанието не трябва да е празно!")
+    @Length(min = 5, message = "Дължината трябва да е над 5 символа.")
     private String description;
 
+    @Positive(message = "Цената трябва да е положителна!")
+    @NotNull(message = "Не трябва да е празно!")
     private BigDecimal price;
 
+    @NotNull(message = "Снимката на продукта е задължителна!")
     private MultipartFile picture;
 
     public ServiceAddBindingModel() {
+        price = BigDecimal.ZERO;
+        picture = null;
     }
 
     public String getName() {

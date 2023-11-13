@@ -49,13 +49,13 @@ public class ProductController {
     @PostMapping("/add")
     public String addConfirm(ProductAddBindingModel productAddBindingModel) throws IOException {
 
-        PictureEntity picture = pictureService.createPictureEntity
+        PictureEntity picture = pictureService.uploadPicture
                 (productAddBindingModel.getPicture(), productAddBindingModel.getPicture().getName());
 
 
-        if (picture != null) {
-            pictureRepository.save(picture);
-        }
+//        if (picture != null) {
+//            pictureRepository.save(picture);
+//        }
 
         productService.addNewProduct(picture.getId(), modelMapper.map(
                 productAddBindingModel, ProductServiceModel.class));

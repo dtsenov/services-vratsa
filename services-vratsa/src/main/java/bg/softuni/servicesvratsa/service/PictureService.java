@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface PictureService {
 
-    PictureEntity createPictureEntity(MultipartFile file, String title) throws IOException;
+    PictureEntity uploadPicture(MultipartFile file, String title) throws IOException;
 }

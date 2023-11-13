@@ -7,11 +7,15 @@ import bg.softuni.servicesvratsa.repository.PictureRepository;
 import bg.softuni.servicesvratsa.service.CloudinaryService;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ServiceService;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
@@ -33,6 +37,11 @@ public class ServiceController {
         this.modelMapper = modelMapper;
     }
 
+    @ModelAttribute
+    public ServiceAddBindingModel serviceAddBindingModel() {
+        return new ServiceAddBindingModel();
+    }
+
     @GetMapping("/add")
     public String addService() {
         return "add-service";
@@ -44,15 +53,26 @@ public class ServiceController {
     }
 
     @PostMapping("/add")
-    public String addServiceConfirm(ServiceAddBindingModel serviceAddBindingModel) throws IOException {
+    public String addServiceConfirm(@Valid ServiceAddBindingModel serviceAddBindingModel,
+                                    BindingResult bindingResult,
+                                    RedirectAttributes redirectAttributes) throws IOException {
 
-        PictureEntity picture = pictureService.createPictureEntity
+        if (bindingResult.hasErrors()) {
+            redirectAttributes
+                    .addFlashAttribute("serviceAddBindingModel", serviceAddBindingModel)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.serviceAddBindingModel", bindingResult);
+
+            return "redirect:add";
+        }
+
+
+        PictureEntity picture = pictureService.uploadPicture
                 (serviceAddBindingModel.getPicture(), serviceAddBindingModel.getPicture().getName());
 
 
-        if (picture != null) {
-            pictureRepository.save(picture);
-        }
+//        if (picture != null) {
+//            pictureRepository.save(picture);
+//        }
 
         serviceService.addNewService(picture.getId(), modelMapper.map(
                 serviceAddBindingModel, ServicesServiceModel.class));
