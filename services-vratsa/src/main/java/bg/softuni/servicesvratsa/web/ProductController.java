@@ -86,7 +86,7 @@ public class ProductController {
     @GetMapping("/all/{id}")
     public String productInfo(@PathVariable ("id") Long id, Model model) {
 
-        
+
 
 
         return "product-info";
