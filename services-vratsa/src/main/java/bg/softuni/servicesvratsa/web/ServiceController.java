@@ -12,10 +12,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -87,36 +84,12 @@ public class ServiceController {
 
     }
 
+    @GetMapping("/all/{id}")
+    public String productInfo(@PathVariable ("id") String id, Model model) {
 
-    @GetMapping("/water-and-plumbing-installations")
-    public String waterAndPlumbingInstallations() {
-        return "service-water-and-plumbing-installations";
+        serviceService.findServiceById(); //TODO
+
+        return "service-info";
     }
-
-    @GetMapping("/leaks")
-    public String leaks() {
-        return "leaks";
-    }
-
-    @GetMapping("/bathroom-leak-repair")
-    public String bathroomLeakRepair() {
-        return "service-bathroom-leak-repair";
-    }
-
-    @GetMapping("/toilet-cistern-repair")
-    public String toiletCisternRepair() {
-        return "service-toilet-cistern-repair";
-    }
-
-    @GetMapping("/faucet-replacement")
-    public String faucetReplacement() {
-        return "service-faucet-replacement";
-    }
-
-    @GetMapping("/water-meter-replacement")
-    public String waterMeterReplacement() {
-        return "service-water-meter-replacement";
-    }
-
 
 }
