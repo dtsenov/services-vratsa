@@ -35,7 +35,7 @@
             <li class="nav_list-item">
                 <div class="dropdown">
                     <button class="dropbtn">Услуги</button>
-                    <div class="dropdown-content" th:each="s : ${allServices}" th:object="${s}">
+                    <div class="dropdown-content" th:each="s : ${allServices}">
                         <a th:href="@{/services/all/{id}(id=${s.id})}" th:text="${s.name}">Изграждане на ВиК
                             инсталации</a>
                     </div>
