@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface PictureService {
 
+    void initPictures();
+
     PictureEntity uploadPicture(MultipartFile file, String title) throws IOException;
 
     PictureEntity findPictureById(Long pictureId);

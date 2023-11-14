@@ -78,6 +78,8 @@ public class ServiceServiceImpl implements ServiceService {
                     break;
             }
 
+            serviceRepository.save(service);
+
         }
     }
 
