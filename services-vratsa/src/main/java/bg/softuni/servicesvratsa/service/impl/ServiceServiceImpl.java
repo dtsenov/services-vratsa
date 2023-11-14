@@ -7,6 +7,10 @@ import bg.softuni.servicesvratsa.service.ServiceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ServiceServiceImpl implements ServiceService {
 
@@ -20,8 +24,65 @@ public class ServiceServiceImpl implements ServiceService {
 
 
     @Override
-    public void addNewService(Long pictureId, ServicesServiceModel servicesServiceModel) {
+    public void initServices() {
 
+        if (serviceRepository.count() != 0) {
+            return;
+        }
+
+        ServiceEntity service = new ServiceEntity();
+
+        for (int i = 0; i < 4; i++) {
+            switch (i) {
+                case 0:
+                    service.setId(1L);
+                    service.setName("Смяна на Водомер");
+                    service.setDescription("Професионална услуга за смяна на водомер с нов, " +
+                            "висококачествен модел. Включва изваждане на стария водомер, инсталиране на новия, " +
+                            "и тестване за коректна работа. " +
+                            "Гарантирано качество и прецизност в измерванията.");
+                    service.setPrice(BigDecimal.valueOf(20.60));
+                    service.setPictureId(1L);
+                    break;
+
+                case 1:
+                    service.setId(2L);
+                    service.setName("Ремонт и Смяна на Кранове");
+                    service.setDescription("Извършваме ремонт и смяна на всички видове кранове в дома или бизнес сграда. " +
+                            "Независимо дали става въпрос за течове, неправилна работа или просто обновяване, " +
+                            "нашите техници осигуряват бърза и ефективна услуга.");
+                    service.setPrice(BigDecimal.valueOf(25.30));
+                    service.setPictureId(2L);
+                    break;
+
+                case 2:
+                    service.setId(3L);
+                    service.setName("Инсталиране на Санитарни Прибори");
+                    service.setDescription("Предлагаме услуги за инсталиране на санитарни прибори като тоалетни, " +
+                            "умивалници, душ кабини и други. Нашият екип от квалифицирани техници гарантира " +
+                            "коректна инсталация и функционалност на всеки санитарен елемент. " +
+                            "Цената варира в зависимост от обема на работа.");
+                    service.setPrice(BigDecimal.valueOf(50.35));
+                    service.setPictureId(3L);
+                    break;
+
+                case 3:
+                    service.setId(4L);
+                    service.setName("Обновяване на Водопроводната Система");
+                    service.setDescription("Планираме и извършваме обновяване на водопроводната система в жилищни, " +
+                            "търговски или индустриални обекти. Това включва замяна на стари тръби, " +
+                            "инсталация на нови кранове и оборудване за подобряване на ефективността и " +
+                            "надеждността на системата. Цената варира в зависимост от обема на работа.");
+                    service.setPrice(BigDecimal.valueOf(90.60));
+                    service.setPictureId(4L);
+                    break;
+            }
+
+        }
+    }
+
+    @Override
+    public void addNewService(Long pictureId, ServicesServiceModel servicesServiceModel) {
 
 
         ServiceEntity service = modelMapper.map(
@@ -30,5 +91,14 @@ public class ServiceServiceImpl implements ServiceService {
         service.setPictureId(pictureId);
 
         serviceRepository.save(service);
+    }
+
+    @Override
+    public List<ServicesServiceModel> findAllServices() {
+        return serviceRepository
+                .findAll()
+                .stream()
+                .map(serviceEntity -> modelMapper.map(serviceEntity, ServicesServiceModel.class))
+                .collect(Collectors.toList());
     }
 }

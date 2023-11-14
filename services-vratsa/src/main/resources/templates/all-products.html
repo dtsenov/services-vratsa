@@ -24,7 +24,7 @@
     </tr>
     <tr th:each="p : ${allProducts}" class="product-tr-hover tr">
         <td><span th:text="${p.name}"> Име </span></td>
-        <td><span th:text="${p.price}"> Цена </span></td>
+        <td><span th:text="${p.price} + 'лв.'"> Цена </span></td>
         <td><span th:text="${p.brand}"> Производител </span></td>
         <td><span th:text="${p.type}"> Тип </span></td>
         <td><img th:src="${p.pictureUrl}" th:alt="${p.pictureTitle}" height="50" width="50" class="img-zoom-hover"></td>

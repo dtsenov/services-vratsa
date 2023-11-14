@@ -4,6 +4,7 @@ import bg.softuni.servicesvratsa.model.binding.ProductAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
 import bg.softuni.servicesvratsa.model.view.ProductAllViewModel;
+import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
@@ -87,23 +88,11 @@ public class ProductController {
     public String productInfo(@PathVariable ("id") Long id, Model model) {
 
 
+        ProductCurrentViewModel currentProduct = productService.findProductById(id);
+        model.addAttribute("currentProduct", currentProduct);
+
 
 
         return "product-info";
-    }
-
-    @GetMapping("/water-meters")
-    public String waterMeters() {
-        return "product-water-meters";
-    }
-
-    @GetMapping("water-taps")
-    public String waterTaps() {
-        return "product-water-taps";
-    }
-
-    @GetMapping("/plumbing-wrenches")
-    public String plumbingWrenches() {
-        return "product-plumbing-wrenches";
     }
 }

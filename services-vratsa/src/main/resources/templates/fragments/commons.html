@@ -27,36 +27,34 @@
         </div>
         <ul class="nav_list">
             <li class="nav_list-item">
-                <button class="dropbtn"><a href="/">Начало</a></button>
+                <a href="/">
+                    <button class="dropbtn">Начало</button>
+                </a>
             </li>
+
             <li class="nav_list-item">
                 <div class="dropdown">
                     <button class="dropbtn">Услуги</button>
-                    <div class="dropdown-content">
-                        <a href="/services/water-and-plumbing-installations">Изграждане на ВиК инсталации</a>
-                        <a href="/services/leaks">Отстраняване на течове</a>
-                        <a href="/services/bathroom-leak-repair">Ремонт на теч в банята</a>
-                        <a href="/services/toilet-cistern-repair">Ремонт на тоалетно казанче</a>
-                        <a href="/services/faucet-replacement">Смяна на спирателен кран</a>
-                        <a href="/services/water-meter-replacement">Смяна на водомер</a>
+                    <div class="dropdown-content" th:each="s : ${allServices}" th:object="${s}">
+                        <a th:href="@{/services/all/{id}(id=${s.id})}" th:text="${s.name}">Изграждане на ВиК
+                            инсталации</a>
                     </div>
                 </div>
             </li>
             <li class="nav_list-item">
-                <div class="dropdown">
+                <a href="/products/all">
                     <button class="dropbtn">Продукти</button>
-                    <div class="dropdown-content">
-                        <a href="/products/water-meters">Водомери</a>
-                        <a href="/products/water-taps">Кранове</a>
-                        <a href="/products/plumbing-wrenches">Водопроводни ключове</a>
-                    </div>
-                </div>
+                </a>
             </li>
             <li class="nav_list-item">
-                <button class="dropbtn"><a href="/about">За нас</a></button>
+                <a href="/about">
+                    <button class="dropbtn">За нас</button>
+                </a>
             </li>
             <li class="nav_list-item" sec:authorize="isAuthenticated()">
-                <button class="dropbtn"><a href="/contacts">Контакти</a></button>
+                <a href="/contacts">
+                    <button class="dropbtn">Контакти</button>
+                </a>
             </li>
             <li class="nav_list-item" sec:authorize='hasRole("BOSS")'>
                 <div class="dropdown">
@@ -68,10 +66,14 @@
                 </div>
             </li>
             <li class="nav_list-item" sec:authorize="!isAuthenticated()">
-                <button class="dropbtn"><a href="/users/login">Вход</a></button>
+                <a href="/users/login">
+                    <button class="dropbtn">Вход</button>
+                </a>
             </li>
             <li class="nav_list-item" sec:authorize="!isAuthenticated()">
-                <button class="dropbtn"><a href="/users/register">Регистрация</a></button>
+                <a href="/users/register">
+                    <button class="dropbtn">Регистрация</button>
+                </a>
             </li>
             <li class="nav_list-item" sec:authorize="isAuthenticated()">
                 <form th:method="post"
