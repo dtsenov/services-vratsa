@@ -15,7 +15,7 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     password: 1234
     username: root
-    url: jdbc:mysql://localhost:3306/vik_services?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/services_vratsa?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
   servlet:
     multipart:
       max-file-size: 10MB

@@ -41,14 +41,14 @@ public class UserServiceImpl implements UserService {
             switch (i) {
                 case 0:
                     user.setId(1L);
-                    user.setFirstName("Pesho");
-                    user.setLastName("Petrov");
+                    user.setFirstName("Denislav");
+                    user.setLastName("Cenov");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.BOSS));
-                    user.setEmail("pesho@example.com");
-                    user.setUsername("pesho");
-                    user.setPassword(passwordEncoder.encode("pesho"));
+                    user.setEmail("denislav@example.com");
+                    user.setUsername("denislav");
+                    user.setPassword(passwordEncoder.encode("cenov"));
                     user.setPhoneNumber("+359848444444");
-                    user.setAge(35);
+                    user.setAge(30);
                     break;
                 case 1:
                     user.setId(2L);

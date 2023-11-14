@@ -22,7 +22,7 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "type", nullable = false)
     private ProductTypeEnum type;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
     @ManyToOne

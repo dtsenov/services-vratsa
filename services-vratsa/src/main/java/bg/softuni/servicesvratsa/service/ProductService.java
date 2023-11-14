@@ -7,6 +7,8 @@ import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
 import java.util.List;
 
 public interface ProductService {
+    void initProducts();
+
     void addNewProduct(Long pictureId, ProductServiceModel productServiceModel);
 
     List<ProductAllViewModel> getAllProducts();

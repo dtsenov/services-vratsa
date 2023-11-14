@@ -31,7 +31,7 @@ public class PictureServiceImpl implements PictureService {
 
         PictureEntity picture = new PictureEntity();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             switch (i) {
                 case 0:
                     picture.setId(1L);
@@ -56,6 +56,42 @@ public class PictureServiceImpl implements PictureService {
                     picture.setTitle("водопроводна-система");
                     picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699961300/services-vratsa/pt5iw4mv57eqfkcp1dn4.jpg");
                     picture.setPublicId("services-vratsa/pt5iw4mv57eqfkcp1dn4");
+                    break;
+                case 4:
+                    picture.setId(5L);
+                    picture.setTitle("водомер-powogaz");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699964439/services-vratsa/aonakewaogzhkgfbgq8a.jpg");
+                    picture.setPublicId("services-vratsa/aonakewaogzhkgfbgq8a");
+                    break;
+                case 5:
+                    picture.setId(6L);
+                    picture.setTitle("водомер-zenner");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699964439/services-vratsa/mvo9map5fppdiikauai0.jpg");
+                    picture.setPublicId("services-vratsa/mvo9map5fppdiikauai0");
+                    break;
+                case 6:
+                    picture.setId(7L);
+                    picture.setTitle("кран-sakar");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699965473/services-vratsa/znrl0xuf6d9fnep5neyd.jpg");
+                    picture.setPublicId("services-vratsa/znrl0xuf6d9fnep5neyd");
+                    break;
+                case 7:
+                    picture.setId(8L);
+                    picture.setTitle("кран-arco");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699965473/services-vratsa/jgklmogphgmdfqyljklh.jpg");
+                    picture.setPublicId("services-vratsa/jgklmogphgmdfqyljklh");
+                    break;
+                case 8:
+                    picture.setId(9L);
+                    picture.setTitle("ключ-rothenberger");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699966112/services-vratsa/bpofp6bdigv7asmhwybj.jpg");
+                    picture.setPublicId("services-vratsa/bpofp6bdigv7asmhwybj");
+                    break;
+                case 9:
+                    picture.setId(10L);
+                    picture.setTitle("ключ-topmaster");
+                    picture.setUrl("https://res.cloudinary.com/ddxk7emug/image/upload/v1699966112/services-vratsa/tefl3nafeuey13geth9b.jpg");
+                    picture.setPublicId("services-vratsa/tefl3nafeuey13geth9b");
                     break;
             }
 
