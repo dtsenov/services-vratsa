@@ -12,12 +12,12 @@
             <tbody th:object="${currentProduct}">
             <tr>
                 <th class="c-pr-text">Име на продукт</th>
-                <th th:text="*{name}"></th>
+                <th id="name" th:text="*{name}"></th>
             </tr>
 
             <tr>
                 <th class="c-pr-text">Цена на продукт</th>
-                <th th:text="*{price}"></th>
+                <th id="price" th:text="*{price}"></th>
             </tr>
 
             <tr>
@@ -41,26 +41,53 @@
         </table>
 
         <div class="cart-container">
-            <table class="cart-table">
-                <tbody th:object="${currentService}">
-                <tr>
-                    <th class="c-pr-text">Количка</th>
-                </tr>
-                <tr>
-                    <th class="cart-text">Количката е празна!</th>
-                </tr>
-                <tr>
-                    <th class="cart-text">Продукти</th>
-                </tr>
-                </tbody>
-            </table>
+            <div id="cart" class="cart">
+                <h3 class="c-pr-text">Количка</h3>
+                <div id="cartItems"></div>
+                <p>Крайна цена: <span id="totalPrice">0.00</span>лв.</p>
+            </div>
         </div>
     </div>
 
     <div class="add-to-cart-btn-wrapper">
-        <button class="add-to-cart-btn">Добави в количка</button>
+        <button onclick="addToCart(name, price)" id="add-to-cart-btn" class="add-to-cart-btn">Добави в количка</button>
     </div>
+
 </div>
+
+<script>
+    let totalCartPrice = 0;
+
+    function addToCart(name, price) {
+        const cartItemsElement = document.getElementById("cartItems");
+        const totalPriceElement = document.getElementById("totalPrice");
+
+        const cartItemElement = document.createElement("div");
+        cartItemElement.className = 'cart-item';
+
+        const itemNameElement = document.createElement('span');
+        itemNameElement.textContent = name + price + ' лв.';
+
+        const deleteBtnElement = document.createElement('button');
+        deleteBtnElement.textContent = 'Изтрий';
+        deleteBtnElement.className = 'delete-btn';
+        deleteBtnElement.onclick = function () {
+            cartItemsElement.removeChild(cartItemElement);
+            totalCartPrice -= price;
+            totalPriceElement.textContent = totalCartPrice;
+        }
+
+        cartItemElement.appendChild(itemNameElement);
+        cartItemElement.appendChild(deleteBtnElement);
+
+        cartItemsElement.appendChild(cartItemElement);
+
+        totalCartPrice += price;
+        totalPriceElement.textContent = totalCartPrice;
+
+    }
+
+</script>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>
