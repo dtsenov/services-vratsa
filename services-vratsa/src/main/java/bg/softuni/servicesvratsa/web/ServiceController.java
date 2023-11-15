@@ -3,6 +3,7 @@ package bg.softuni.servicesvratsa.web;
 import bg.softuni.servicesvratsa.model.binding.ServiceAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.service.ServicesServiceModel;
+import bg.softuni.servicesvratsa.model.view.ServiceViewModel;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
 import bg.softuni.servicesvratsa.service.CloudinaryService;
 import bg.softuni.servicesvratsa.service.PictureService;
@@ -85,9 +86,10 @@ public class ServiceController {
     }
 
     @GetMapping("/all/{id}")
-    public String productInfo(@PathVariable ("id") String id, Model model) {
+    public String productInfo(@PathVariable ("id") Long id, Model model) {
 
-        serviceService.findServiceById(); //TODO
+        ServiceViewModel currentService = serviceService.findServiceById(id);
+        model.addAttribute("currentService", currentService);
 
         return "service-info";
     }

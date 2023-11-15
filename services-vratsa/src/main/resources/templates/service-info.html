@@ -4,6 +4,38 @@
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="pr-table-wrapper">
+    <table class="current-pr-table">
+
+        <tbody th:object="${currentService}">
+        <tr>
+            <th class="c-pr-text">Име на услуга</th>
+            <th th:text="*{name}"></th>
+        </tr>
+
+        <tr>
+            <th class="c-pr-text">Описание на услуга</th>
+            <th th:text="*{description}"></th>
+        </tr>
+
+        <tr>
+            <th class="c-pr-text">Снимка на услуга</th>
+            <th><img th:src="*{pictureUrl}" th:alt="*{pictureTitle}" height="200" width="200" class="img-zoom-hover">
+            </th>
+        </tr>
+
+        <tr>
+            <th class="c-pr-text">Цена на услуга</th>
+            <th th:text="|*{price}лв.|"></th>
+        </tr>
+        </tbody>
+    </table>
+    <div class="add-to-cart-btn-wrapper">
+        <button class="add-to-cart-btn">Добави в количка</button>
+    </div>
+</div>
+
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

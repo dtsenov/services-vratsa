@@ -9,7 +9,6 @@ public class ServiceViewModel {
     private String name;
     private String description;
     private BigDecimal price;
-    private MultipartFile picture;
     private String pictureUrl;
     private String pictureTitle;
 
@@ -38,14 +37,6 @@ public class ServiceViewModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public MultipartFile getPicture() {
-        return picture;
-    }
-
-    public void setPicture(MultipartFile picture) {
-        this.picture = picture;
     }
 
     public String getPictureUrl() {

@@ -1,8 +1,11 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.entity.ServiceEntity;
 import bg.softuni.servicesvratsa.model.service.ServicesServiceModel;
+import bg.softuni.servicesvratsa.model.view.ServiceViewModel;
 import bg.softuni.servicesvratsa.repository.ServiceRepository;
+import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ServiceService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,12 @@ public class ServiceServiceImpl implements ServiceService {
 
     private final ServiceRepository serviceRepository;
     private final ModelMapper modelMapper;
+    private final PictureService pictureService;
 
-    public ServiceServiceImpl(ServiceRepository serviceRepository, ModelMapper modelMapper) {
+    public ServiceServiceImpl(ServiceRepository serviceRepository, ModelMapper modelMapper, PictureService pictureService) {
         this.serviceRepository = serviceRepository;
         this.modelMapper = modelMapper;
+        this.pictureService = pictureService;
     }
 
 
@@ -102,5 +107,22 @@ public class ServiceServiceImpl implements ServiceService {
                 .stream()
                 .map(serviceEntity -> modelMapper.map(serviceEntity, ServicesServiceModel.class))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public ServiceViewModel findServiceById(Long id) {
+        ServiceEntity serviceEntity = serviceRepository.findById(id).orElse(null);//TODO THROW EXCEPTION
+
+        ServiceViewModel serviceViewModel = modelMapper.map(serviceEntity, ServiceViewModel.class);
+
+        if (serviceEntity != null) {
+            PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
+
+            serviceViewModel.setPictureTitle(picture.getTitle());
+            serviceViewModel.setPictureUrl(picture.getUrl());
+        }
+
+        return serviceViewModel;
+
     }
 }
