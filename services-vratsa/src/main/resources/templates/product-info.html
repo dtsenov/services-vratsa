@@ -5,11 +5,11 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
-<div class="pr-table-wrapper">
+<div class="pr-table-wrapper" th:object="${currentProduct}">
     <div class="table-cart-wrapper">
         <table class="current-pr-table">
 
-            <tbody th:object="${currentProduct}">
+            <tbody >
             <tr>
                 <th class="c-pr-text">Име на продукт</th>
                 <th id="name" th:text="*{name}"></th>
@@ -50,7 +50,7 @@
     </div>
 
     <div class="add-to-cart-btn-wrapper">
-        <button onclick="addToCart(name, price)" id="add-to-cart-btn" class="add-to-cart-btn">Добави в количка</button>
+        <button onclick="addToCart()" id="add-to-cart-btn" class="add-to-cart-btn">Добави в количка</button>
     </div>
 
 </div>
@@ -58,32 +58,37 @@
 <script>
     let totalCartPrice = 0;
 
-    function addToCart(name, price) {
+    function addToCart() {
+        const currentName = document.getElementById("name");
+        const currentPrice = document.getElementById("price");
         const cartItemsElement = document.getElementById("cartItems");
         const totalPriceElement = document.getElementById("totalPrice");
 
         const cartItemElement = document.createElement("div");
         cartItemElement.className = 'cart-item';
 
-        const itemNameElement = document.createElement('span');
-        itemNameElement.textContent = name + price + ' лв.';
+        const itemNameElement = document.createElement('p');
+        const itemPriceElement = document.createElement('p');
+        itemNameElement.textContent = 'Продукт: ' + currentName.textContent;
+        itemPriceElement.textContent = 'Цена: ' + currentPrice.textContent + 'лв'
 
         const deleteBtnElement = document.createElement('button');
         deleteBtnElement.textContent = 'Изтрий';
         deleteBtnElement.className = 'delete-btn';
         deleteBtnElement.onclick = function () {
             cartItemsElement.removeChild(cartItemElement);
-            totalCartPrice -= price;
-            totalPriceElement.textContent = totalCartPrice;
+            totalCartPrice -= currentName;
+            totalPriceElement.textContent = totalCartPrice.textContent;
         }
 
         cartItemElement.appendChild(itemNameElement);
+        cartItemElement.appendChild(itemPriceElement)
         cartItemElement.appendChild(deleteBtnElement);
 
         cartItemsElement.appendChild(cartItemElement);
 
-        totalCartPrice += price;
-        totalPriceElement.textContent = totalCartPrice;
+        totalCartPrice += currentPrice;
+        totalPriceElement.textContent = totalCartPrice.textContent;
 
     }
 
