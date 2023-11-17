@@ -40,11 +40,18 @@
             </tbody>
         </table>
 
-        <div class="cart-container">
+        <div class="cart-container" th:object="${cartViewModels}">
             <div id="cart" class="cart">
                 <h3 class="c-pr-text">Количка</h3>
                 <div id="cartItems"></div>
-                <p>Крайна цена: <span id="totalPrice">0.00</span>лв.</p>
+                <div th:if="${cartViewModels.isEmpty()}">Количката е празна!
+                <p>Крайна цена: 0.00лв.</p>
+                </div>
+
+<!--                <div th:if="${!cartViewModels.isEmpty()}">-->
+<!--                    <div th:each="c : ${cartViewModels}" th:value="{}"></div>-->
+<!--                    -->
+<!--                </div>-->
             </div>
         </div>
     </div>

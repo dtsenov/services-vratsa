@@ -2,14 +2,12 @@ package bg.softuni.servicesvratsa.service.impl;
 
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
-import bg.softuni.servicesvratsa.service.CloudinaryImage;
 import bg.softuni.servicesvratsa.service.CloudinaryService;
 import bg.softuni.servicesvratsa.service.PictureService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Optional;
 
 @Service
 public class PictureServiceImpl implements PictureService {

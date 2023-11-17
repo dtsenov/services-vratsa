@@ -3,9 +3,10 @@ package bg.softuni.servicesvratsa.web;
 import bg.softuni.servicesvratsa.model.binding.ProductAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
+import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductAllViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
-import bg.softuni.servicesvratsa.repository.PictureRepository;
+import bg.softuni.servicesvratsa.service.CartService;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
 import jakarta.validation.Valid;
@@ -25,11 +26,13 @@ public class ProductController {
 
     private final PictureService pictureService;
     private final ProductService productService;
+    private final CartService cartService;
     private final ModelMapper modelMapper;
 
-    public ProductController(PictureService pictureService, ProductService productService, ModelMapper modelMapper) {
+    public ProductController(PictureService pictureService, ProductService productService, CartService cartService, ModelMapper modelMapper) {
         this.pictureService = pictureService;
         this.productService = productService;
+        this.cartService = cartService;
         this.modelMapper = modelMapper;
     }
 
@@ -68,9 +71,8 @@ public class ProductController {
                     .addFlashAttribute("productAddBindingModel", productAddBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.productAddBindingModel", bindingResult);
 
-                    return "redirect:add";
+            return "redirect:add";
         }
-
 
 
         PictureEntity picture = pictureService.uploadPicture
@@ -85,12 +87,14 @@ public class ProductController {
     }
 
     @GetMapping("/all/{id}")
-    public String productInfo(@PathVariable ("id") Long id, Model model) {
+    public String productInfo(@PathVariable("id") Long id, Model model) {
 
 
         ProductCurrentViewModel currentProduct = productService.findProductById(id);
-        model.addAttribute("currentProduct", currentProduct);
+        List<CartViewModel> cartViewModels = cartService.findAllInCart();
 
+        model.addAttribute("currentProduct", currentProduct);
+        model.addAttribute("cartViewModels", cartViewModels);
 
 
         return "product-info";

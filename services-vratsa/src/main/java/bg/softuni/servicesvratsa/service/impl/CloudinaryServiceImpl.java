@@ -1,6 +1,5 @@
 package bg.softuni.servicesvratsa.service.impl;
 
-import bg.softuni.servicesvratsa.service.CloudinaryImage;
 import bg.softuni.servicesvratsa.service.CloudinaryService;
 import com.cloudinary.Cloudinary;
 import org.springframework.stereotype.Service;

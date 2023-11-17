@@ -1,4 +1,4 @@
-package bg.softuni.servicesvratsa.service;
+package bg.softuni.servicesvratsa.service.impl;
 
 public class CloudinaryImage {
 
