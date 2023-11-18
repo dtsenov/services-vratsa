@@ -4,6 +4,7 @@ import bg.softuni.servicesvratsa.model.enums.ProductTypeEnum;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -25,8 +26,8 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @ManyToOne
-    private UserEntity client;
+    @ManyToMany
+    private Set<UserEntity> clients;
 
     private Long pictureId;
 
@@ -73,12 +74,12 @@ public class ProductEntity extends BaseEntity {
         this.description = description;
     }
 
-    public UserEntity getClient() {
-        return client;
+    public Set<UserEntity> getClients() {
+        return clients;
     }
 
-    public void setClient(UserEntity client) {
-        this.client = client;
+    public void setClients(Set<UserEntity> clients) {
+        this.clients = clients;
     }
 
     public Long getPictureId() {

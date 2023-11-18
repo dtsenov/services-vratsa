@@ -1,37 +1,45 @@
 package bg.softuni.servicesvratsa.model.entity;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-import java.util.Set;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "cart")
 public class CartEntity extends BaseEntity {
 
-    @OneToMany
-    private Set<ProductEntity> products;
+    private String name;
+    private BigDecimal price;
 
-    @OneToMany
-    private Set<ServiceEntity> services;
+    @ManyToOne
+    private UserEntity client;
 
     public CartEntity() {
     }
 
-    public Set<ProductEntity> getProducts() {
-        return products;
+    public String getName() {
+        return name;
     }
 
-    public void setProducts(Set<ProductEntity> products) {
-        this.products = products;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<ServiceEntity> getServices() {
-        return services;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setServices(Set<ServiceEntity> services) {
-        this.services = services;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public UserEntity getClient() {
+        return client;
+    }
+
+    public void setClient(UserEntity client) {
+        this.client = client;
     }
 }

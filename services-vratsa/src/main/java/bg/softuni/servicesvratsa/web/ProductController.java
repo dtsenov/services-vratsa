@@ -92,9 +92,11 @@ public class ProductController {
 
         ProductCurrentViewModel currentProduct = productService.findProductById(id);
         List<CartViewModel> cartViewModels = cartService.findAllInCart();
+        Double totalCartPrice = cartService.totalPrice();
 
         model.addAttribute("currentProduct", currentProduct);
         model.addAttribute("cartViewModels", cartViewModels);
+        model.addAttribute("totalCartPrice", totalCartPrice);
 
 
         return "product-info";

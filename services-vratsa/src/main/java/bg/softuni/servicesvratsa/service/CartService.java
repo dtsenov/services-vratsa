@@ -8,4 +8,6 @@ public interface CartService {
 
 
     List<CartViewModel> findAllInCart();
+
+    Double totalPrice();
 }

@@ -32,8 +32,14 @@ public class UserEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private RoleEntity role;
 
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "clients", fetch = FetchType.EAGER)
     private Set<ProductEntity> products;
+
+    @ManyToMany(mappedBy = "clients", fetch = FetchType.EAGER)
+    private Set<ServiceEntity> services;
+
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    private Set<CartEntity> shoppingCart;
 
     @OneToOne(fetch = FetchType.EAGER)
     private PictureEntity picture;
@@ -111,6 +117,22 @@ public class UserEntity extends BaseEntity {
 
     public void setProducts(Set<ProductEntity> products) {
         this.products = products;
+    }
+
+    public Set<ServiceEntity> getServices() {
+        return services;
+    }
+
+    public void setServices(Set<ServiceEntity> services) {
+        this.services = services;
+    }
+
+    public Set<CartEntity> getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(Set<CartEntity> shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public PictureEntity getPicture() {

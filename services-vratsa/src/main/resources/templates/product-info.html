@@ -9,7 +9,7 @@
     <div class="table-cart-wrapper">
         <table class="current-pr-table">
 
-            <tbody >
+            <tbody>
             <tr>
                 <th class="c-pr-text">Име на продукт</th>
                 <th id="name" th:text="*{name}"></th>
@@ -44,14 +44,17 @@
             <div id="cart" class="cart">
                 <h3 class="c-pr-text">Количка</h3>
                 <div id="cartItems"></div>
-                <div th:if="${cartViewModels.isEmpty()}">Количката е празна!
-                <p>Крайна цена: 0.00лв.</p>
+                <div th:if="${cartViewModels.isEmpty()}">
+                    <p>Количката е празна!</p>
+                    <p>Крайна цена: 0.00лв.</p>
                 </div>
-
-<!--                <div th:if="${!cartViewModels.isEmpty()}">-->
-<!--                    <div th:each="c : ${cartViewModels}" th:value="{}"></div>-->
-<!--                    -->
-<!--                </div>-->
+                <div th:unless="${cartViewModels.isEmpty()}">
+                    <p>Добавени продукти</p>
+                    <div th:each="p : ${cartViewModels}">
+                        <span th:text="${p.name} + ' - ' + ${p.price} + 'лв.'"></span><br>
+                    </div>
+                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -3,6 +3,7 @@ package bg.softuni.servicesvratsa.model.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 @Entity
 @Table(name = "services")
@@ -20,8 +21,8 @@ public class ServiceEntity extends BaseEntity {
     @ManyToOne
     private UserEntity worker;
 
-    @ManyToOne
-    private UserEntity client;
+    @ManyToMany
+    private Set<UserEntity> clients;
 
     private Long pictureId;
 
@@ -60,12 +61,12 @@ public class ServiceEntity extends BaseEntity {
         this.worker = worker;
     }
 
-    public UserEntity getClient() {
-        return client;
+    public Set<UserEntity> getClients() {
+        return clients;
     }
 
-    public void setClient(UserEntity client) {
-        this.client = client;
+    public void setClients(Set<UserEntity> clients) {
+        this.clients = clients;
     }
 
     public Long getPictureId() {

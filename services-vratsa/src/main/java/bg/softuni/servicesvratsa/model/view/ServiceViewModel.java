@@ -1,7 +1,5 @@
 package bg.softuni.servicesvratsa.model.view;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.math.BigDecimal;
 
 public class ServiceViewModel {

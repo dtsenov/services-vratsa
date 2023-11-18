@@ -1,36 +1,29 @@
 package bg.softuni.servicesvratsa.model.view;
 
-import bg.softuni.servicesvratsa.model.entity.ProductEntity;
-import bg.softuni.servicesvratsa.model.entity.ServiceEntity;
-
 import java.math.BigDecimal;
-import java.util.Set;
 
 public class CartViewModel {
 
-    private Set<ProductEntity> products;
-    private Set<ServiceEntity> services;
+    private String name;
+    private BigDecimal price;
 
     public CartViewModel() {
     }
 
-    public Set<ProductEntity> getProducts() {
-        return products;
+    public String getName() {
+
+        return name;
     }
 
-    public void setProducts(Set<ProductEntity> products) {
-        this.products = products;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Set<ServiceEntity> getServices() {
-        return services;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setServices(Set<ServiceEntity> services) {
-        this.services = services;
-    }
-
-    public boolean isEmpty() {
-        return products.isEmpty() && services.isEmpty();
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }
