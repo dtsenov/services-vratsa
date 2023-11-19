@@ -13,6 +13,8 @@ public class CartEntity extends BaseEntity {
     private String name;
     private BigDecimal price;
 
+    private Long productId;
+
     @ManyToOne
     private UserEntity client;
 
@@ -41,5 +43,13 @@ public class CartEntity extends BaseEntity {
 
     public void setClient(UserEntity client) {
         this.client = client;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

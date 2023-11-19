@@ -10,6 +10,12 @@
         <table class="current-pr-table">
 
             <tbody>
+
+            <tr>
+                <th class="c-pr-text">ID на продукт</th>
+                <th id="id" th:text="*{id}"></th>
+            </tr>
+
             <tr>
                 <th class="c-pr-text">Име на продукт</th>
                 <th id="name" th:text="*{name}"></th>
@@ -40,69 +46,49 @@
             </tbody>
         </table>
 
-        <div class="cart-container" th:object="${cartViewModels}">
-            <div id="cart" class="cart">
-                <h3 class="c-pr-text">Количка</h3>
-                <div id="cartItems"></div>
-                <div th:if="${cartViewModels.isEmpty()}">
-                    <p>Количката е празна!</p>
-                    <p>Крайна цена: 0.00лв.</p>
-                </div>
-                <div th:unless="${cartViewModels.isEmpty()}">
-                    <p>Добавени продукти</p>
-                    <div th:each="p : ${cartViewModels}">
-                        <span th:text="${p.name} + ' - ' + ${p.price} + 'лв.'"></span><br>
-                    </div>
-                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="cart-container" th:object="${cartViewModels}">-->
+<!--            <div id="cart" class="cart">-->
+<!--                <h3 class="c-pr-text">Количка</h3>-->
+<!--                <div id="cartItems"></div>-->
+<!--                <div th:if="${cartViewModels.isEmpty()}">-->
+<!--                    <p>Количката е празна!</p>-->
+<!--                    <p>Крайна цена: 0.00лв.</p>-->
+<!--                </div>-->
+<!--                <div th:unless="${cartViewModels.isEmpty()}">-->
+<!--                    <p>Добавени продукти</p>-->
+<!--                    <div th:each="p : ${cartViewModels}">-->
+<!--                        <span th:value="${p.name}" th:text="${p.name}"></span><br>-->
+<!--                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>-->
+
+<!--                        <form id="delete-form"-->
+<!--                              th:method="DELETE"-->
+<!--                              th:action="@{/products/all/{id}(id=${p.id})}">-->
+
+<!--                            <input type="hidden" name="id" th:value="${p.id}">-->
+
+<!--                            <input type="submit" value="Изтрий">-->
+<!--                        </form>-->
+<!--                    </div>-->
+<!--                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 
     <div class="add-to-cart-btn-wrapper">
-        <button onclick="addToCart()" id="add-to-cart-btn" class="add-to-cart-btn">Добави в количка</button>
+        <form id="addToCartForm"
+              th:method="POST"
+              th:action="@{/products/all/{id}(id=${currentProduct.id})}">
+
+            <input type="hidden" name="name" th:value="${currentProduct.name}">
+            <input type="hidden" name="price" th:value="${currentProduct.price}">
+
+            <input type="submit" value="Добави в количка">
+        </form>
     </div>
 
 </div>
 
-<script>
-    let totalCartPrice = 0;
-
-    function addToCart() {
-        const currentName = document.getElementById("name");
-        const currentPrice = document.getElementById("price");
-        const cartItemsElement = document.getElementById("cartItems");
-        const totalPriceElement = document.getElementById("totalPrice");
-
-        const cartItemElement = document.createElement("div");
-        cartItemElement.className = 'cart-item';
-
-        const itemNameElement = document.createElement('p');
-        const itemPriceElement = document.createElement('p');
-        itemNameElement.textContent = 'Продукт: ' + currentName.textContent;
-        itemPriceElement.textContent = 'Цена: ' + currentPrice.textContent + 'лв'
-
-        const deleteBtnElement = document.createElement('button');
-        deleteBtnElement.textContent = 'Изтрий';
-        deleteBtnElement.className = 'delete-btn';
-        deleteBtnElement.onclick = function () {
-            cartItemsElement.removeChild(cartItemElement);
-            totalCartPrice -= currentName;
-            totalPriceElement.textContent = totalCartPrice.textContent;
-        }
-
-        cartItemElement.appendChild(itemNameElement);
-        cartItemElement.appendChild(itemPriceElement)
-        cartItemElement.appendChild(deleteBtnElement);
-
-        cartItemsElement.appendChild(cartItemElement);
-
-        totalCartPrice += currentPrice;
-        totalPriceElement.textContent = totalCartPrice.textContent;
-
-    }
-
-</script>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

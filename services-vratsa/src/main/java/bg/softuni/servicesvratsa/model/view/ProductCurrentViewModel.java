@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class ProductCurrentViewModel {
 
+    private Long id;
+
     private String name;
 
     private BigDecimal price;
@@ -20,6 +22,14 @@ public class ProductCurrentViewModel {
     private String pictureTitle;
 
     public ProductCurrentViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

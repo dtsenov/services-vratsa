@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final String rememberMeKey;
@@ -29,6 +32,9 @@ public class SecurityConfiguration {
                                 .requestMatchers("/", "/users/login", "/users/register", "/about", "/users/login-error").permitAll()
                                 .requestMatchers("/services/add").hasRole("BOSS")
                                 .requestMatchers("/products/add").hasRole("BOSS")
+                                .requestMatchers("/products/all").permitAll()
+                                .requestMatchers("/services/all").permitAll()
+                                .requestMatchers(HttpMethod.POST).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .formLogin(

@@ -4,10 +4,20 @@ import java.math.BigDecimal;
 
 public class CartViewModel {
 
+    private Long id;
     private String name;
     private BigDecimal price;
+    private Long productId;
 
     public CartViewModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -25,5 +35,13 @@ public class CartViewModel {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }

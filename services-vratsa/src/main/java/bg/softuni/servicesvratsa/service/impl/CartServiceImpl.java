@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.service.impl;
 
 import bg.softuni.servicesvratsa.model.entity.CartEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
+import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
 import bg.softuni.servicesvratsa.repository.CartRepository;
 import bg.softuni.servicesvratsa.service.CartService;
 import org.modelmapper.ModelMapper;
@@ -40,4 +41,23 @@ public class CartServiceImpl implements CartService {
         }
         return totalSum;
     }
+
+    @Override
+    public void addToCart(Long id, ProductCurrentViewModel productCurrentViewModel) {
+
+        CartEntity cartEntity = modelMapper.map(
+                productCurrentViewModel, CartEntity.class);
+
+        cartEntity.setProductId(id);
+
+        cartRepository.save(cartEntity);
+    }
+
+    @Override
+    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
+        cartRepository.deleteById(cartViewModel.getId());
+
+    }
+
+
 }
