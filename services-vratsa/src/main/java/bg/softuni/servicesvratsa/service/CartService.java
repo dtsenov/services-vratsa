@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service;
 
+import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
 
@@ -12,8 +13,7 @@ public interface CartService {
 
     Double totalPrice();
 
-
-    void addToCart(Long id, ProductCurrentViewModel productCurrentViewModel);
-
     void deleteFromCart(Long id, CartViewModel cartViewModel);
+
+    void addToCart(String username, AddToCartDTO addToCartDTO);
 }

@@ -22,14 +22,14 @@ public class CartRestController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/productId")
+    @PostMapping("/{productId}")
     public ResponseEntity<String> addToCart(@PathVariable("productId") Long productId,
                                             @AuthenticationPrincipal UserDetails userDetails,
                                             @RequestBody AddToCartDTO addToCartDTO) {
 
-        Long userId = addToCartDTO.getUserId();
+        String username = userDetails.getUsername();
 
-        cartService.addToCart(userId, addToCartDTO);
+        cartService.addToCart(username, addToCartDTO);
 
         return ResponseEntity.ok("Добавено в количката");
     }

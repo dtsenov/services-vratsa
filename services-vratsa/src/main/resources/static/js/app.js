@@ -1,4 +1,4 @@
-// function attachEvents() {
+function addToCart(name, price) {
 //
 // // let BASE_URL = ""
 // let addToCartBtn = document.getElementById("add-to-cart-btn");
@@ -7,7 +7,7 @@
 
 let totalCartPrice = 0;
 
-function addToCart(name, price) {
+
     const cartItemsElement = document.getElementById("cartItems");
     const totalPriceElement = document.getElementById("totalPrice");
 

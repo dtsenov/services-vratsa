@@ -46,33 +46,33 @@
             </tbody>
         </table>
 
-<!--        <div class="cart-container" th:object="${cartViewModels}">-->
-<!--            <div id="cart" class="cart">-->
-<!--                <h3 class="c-pr-text">Количка</h3>-->
-<!--                <div id="cartItems"></div>-->
-<!--                <div th:if="${cartViewModels.isEmpty()}">-->
-<!--                    <p>Количката е празна!</p>-->
-<!--                    <p>Крайна цена: 0.00лв.</p>-->
-<!--                </div>-->
-<!--                <div th:unless="${cartViewModels.isEmpty()}">-->
-<!--                    <p>Добавени продукти</p>-->
-<!--                    <div th:each="p : ${cartViewModels}">-->
-<!--                        <span th:value="${p.name}" th:text="${p.name}"></span><br>-->
-<!--                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>-->
+        <div class="cart-container" th:object="${cartViewModels}">
+            <div id="cart" class="cart">
+                <h3 class="c-pr-text">Количка</h3>
+                <div id="cartItems"></div>
+                <div th:if="${cartViewModels.isEmpty()}">
+                    <p>Количката е празна!</p>
+                    <p>Крайна цена: 0.00лв.</p>
+                </div>
+                <div th:unless="${cartViewModels.isEmpty()}">
+                    <p>Добавени продукти</p>
+                    <div th:each="p : ${cartViewModels}">
+                        <span th:value="${p.name}" th:text="${p.name}"></span><br>
+                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>
 
-<!--                        <form id="delete-form"-->
-<!--                              th:method="DELETE"-->
-<!--                              th:action="@{/products/all/{id}(id=${p.id})}">-->
+                        <form id="delete-form"
+                              th:method="DELETE"
+                              th:action="@{/products/all/{id}(id=${p.id})}">
 
-<!--                            <input type="hidden" name="id" th:value="${p.id}">-->
+                            <input type="hidden" name="id" th:value="${p.id}">
 
-<!--                            <input type="submit" value="Изтрий">-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+                            <input type="submit" value="Изтрий">
+                        </form>
+                    </div>
+                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="add-to-cart-btn-wrapper">

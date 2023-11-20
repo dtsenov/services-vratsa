@@ -1,25 +1,29 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.model.entity.CartEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
 import bg.softuni.servicesvratsa.repository.CartRepository;
 import bg.softuni.servicesvratsa.service.CartService;
+import bg.softuni.servicesvratsa.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
+    private final ProductService productService;
     private final ModelMapper modelMapper;
 
-    public CartServiceImpl(CartRepository cartRepository, ModelMapper modelMapper) {
+    public CartServiceImpl(CartRepository cartRepository, ProductService productService, ModelMapper modelMapper) {
         this.cartRepository = cartRepository;
+        this.productService = productService;
         this.modelMapper = modelMapper;
     }
 
@@ -37,25 +41,30 @@ public class CartServiceImpl implements CartService {
         Double totalSum = 0.00;
 
         for (CartEntity cartEntity : cartRepository.findAll()) {
-           totalSum += Double.parseDouble(String.valueOf(cartEntity.getPrice()));
+            ProductCurrentViewModel productById = productService.findProductById(cartEntity.getProductId());
+
+            totalSum += Double.parseDouble(String.valueOf(productById.getPrice()));
         }
         return totalSum;
     }
 
     @Override
-    public void addToCart(Long id, ProductCurrentViewModel productCurrentViewModel) {
+    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
+        cartRepository.deleteById(cartViewModel.getId());
 
-        CartEntity cartEntity = modelMapper.map(
-                productCurrentViewModel, CartEntity.class);
-
-        cartEntity.setProductId(id);
-
-        cartRepository.save(cartEntity);
     }
 
     @Override
-    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
-        cartRepository.deleteById(cartViewModel.getId());
+    public void addToCart(String username, AddToCartDTO addToCartDTO) {
+
+        CartEntity cartEntity = modelMapper.map(
+                addToCartDTO, CartEntity.class);
+        ProductCurrentViewModel productById = productService.findProductById(cartEntity.getProductId());
+
+        cartEntity.setUsername(username);
+        productById.setName(productById.getName());
+
+        cartRepository.save(cartEntity);
 
     }
 

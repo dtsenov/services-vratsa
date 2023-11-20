@@ -1,13 +1,11 @@
 package bg.softuni.servicesvratsa.model.binding;
 
-import bg.softuni.servicesvratsa.model.entity.CartEntity;
-
 public class AddToCartDTO {
 
     private Long id;
     private Long userId;
     private Integer quantity;
-    private CartEntity product;
+    private Long productId;
 
     public AddToCartDTO() {
     }
@@ -36,11 +34,11 @@ public class AddToCartDTO {
         this.quantity = quantity;
     }
 
-    public CartEntity getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(CartEntity product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 }
