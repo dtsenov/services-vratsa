@@ -1,37 +1,25 @@
-function addToCart(name, price) {
-//
-// // let BASE_URL = ""
-// let addToCartBtn = document.getElementById("add-to-cart-btn");
-// let name = document.getElementById("name");
-// let price = document.getElementById("price");
+async function addToCart() {
+    let BASE_URL = "/products/all";
+    let productId = document.getElementById("productId").value;
 
-let totalCartPrice = 0;
+    try {
+        const response = await fetch(BASE_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId
+            })
+        });
 
+        if (!response.ok) {
+            throw new Error('Продуктът не се добави в количката.');
+        }
 
-    const cartItemsElement = document.getElementById("cartItems");
-    const totalPriceElement = document.getElementById("totalPrice");
-
-    const cartItemElement = document.createElement("div");
-    cartItemElement.className = 'cart-item';
-
-    const itemNameElement = document.createElement('span');
-    itemNameElement.textContent = name + price.toFixed(2) + ' лв.';
-
-    const deleteBtnElement = document.createElement('button');
-    deleteBtnElement.textContent = 'Изтрий';
-    deleteBtnElement.className = 'delete-btn';
-    deleteBtnElement.onclick = function () {
-        cartItemsElement.removeChild(cartItemElement);
-        totalCartPrice -= price;
-        totalPriceElement.textContent = totalCartPrice.toFixed(2);
+        const data = await response.json();
+        console.log('Успешно добавен продукт: ', data);
+    } catch (error) {
+        console.error('ГРЕШКА: ', error.message);
     }
-
-    cartItemElement.appendChild(itemNameElement);
-    cartItemElement.appendChild(deleteBtnElement);
-
-    cartItemsElement.appendChild(cartItemElement);
-
-    totalCartPrice += price;
-    totalPriceElement.textContent = totalCartPrice.toFixed(2);
-
 }

@@ -2,18 +2,18 @@ package bg.softuni.servicesvratsa.web;
 
 import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.service.CartService;
-import com.cloudinary.api.ApiResponse;
-import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RestController
-@RequestMapping("/products/all")
 public class CartRestController {
 
     private final CartService cartService;
@@ -22,14 +22,21 @@ public class CartRestController {
         this.cartService = cartService;
     }
 
-    @PostMapping("/{productId}")
+   @RequestMapping(value = "/products/all/{productId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addToCart(@PathVariable("productId") Long productId,
                                             @AuthenticationPrincipal UserDetails userDetails,
-                                            @RequestBody AddToCartDTO addToCartDTO) {
+                                            @RequestBody AddToCartDTO addToCartDTO,
+                                            HttpServletRequest request) {
 
-        String username = userDetails.getUsername();
+       if (request.getMethod().equals(HttpMethod.POST.toString())) {
+           request.setAttribute(CsrfToken.class.getName(), null);
+       }
 
-        cartService.addToCart(username, addToCartDTO);
+
+
+            String username = userDetails.getUsername();
+
+            cartService.addToCart(username, addToCartDTO);
 
         return ResponseEntity.ok("Добавено в количката");
     }

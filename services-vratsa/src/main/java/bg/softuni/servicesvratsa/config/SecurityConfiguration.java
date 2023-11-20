@@ -34,9 +34,10 @@ public class SecurityConfiguration {
                                 .requestMatchers("/products/add").hasRole("BOSS")
                                 .requestMatchers("/products/all").permitAll()
                                 .requestMatchers("/services/all").permitAll()
-                                .requestMatchers(HttpMethod.POST).permitAll()
+                                .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .csrf().disable()
                 .formLogin(
                         formLogin -> {
                             formLogin

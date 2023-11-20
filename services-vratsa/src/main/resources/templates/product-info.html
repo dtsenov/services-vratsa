@@ -13,7 +13,7 @@
 
             <tr>
                 <th class="c-pr-text">ID на продукт</th>
-                <th id="id" th:text="*{id}"></th>
+                <th id="productId" th:text="*{id}"></th>
             </tr>
 
             <tr>
@@ -76,19 +76,83 @@
     </div>
 
     <div class="add-to-cart-btn-wrapper">
-        <form id="addToCartForm"
-              th:method="POST"
-              th:action="@{/products/all/{id}(id=${currentProduct.id})}">
+<!--        <form id="addToCartForm"-->
+<!--              th:method="POST"-->
+<!--              th:action="@{/products/all/{id}(id=${currentProduct.id})}">-->
 
-            <input type="hidden" name="name" th:value="${currentProduct.name}">
-            <input type="hidden" name="price" th:value="${currentProduct.price}">
+<!--            <input type="hidden" name="name" th:value="${currentProduct.name}">-->
+<!--            <input type="hidden" name="price" th:value="${currentProduct.price}">-->
 
-            <input type="submit" value="Добави в количка">
-        </form>
+<!--            <input type="submit" value="Добави в количка">-->
+<!--        </form>-->
+
+        <button onclick="addToCart()" class="add-to-cart-btn">ДОБАВИ В КОЛИЧКА</button>
     </div>
 
 </div>
 
+
+<script>
+
+    function addToCart() {
+        let BASE_URL = "/products/all/";
+        let productId = document.getElementById("productId").innerText;
+        let addToCartBtn = document.getElementById("addToCartBtn");
+
+        // Деактивиране на бутона
+        // addToCartBtn.disabled = true;
+
+        fetch(BASE_URL + productId, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: productId
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Продуктът не се добави в количката.');
+                }
+                return response.text();
+            })
+            .then(data => {
+                console.log('Успешно добавен продукт: ', data);
+            })
+            .catch(error => {
+                console.error('ГРЕШКА: ', error.message);
+            });
+    }
+
+    // async function addToCart() {
+    //     let BASE_URL = "/products/all/";
+    //     let productId = document.getElementById("productId").innerText;
+    //
+    //     try {
+    //         const response = await fetch(BASE_URL + productId, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify({
+    //                 productId: productId
+    //             })
+    //         });
+    //
+    //         if (!response.ok) {
+    //             throw new Error('Продуктът не се добави в количката.');
+    //         }
+    //
+    //         const data = await response.text();
+    //         console.log('Успешно добавен продукт: ', data);
+    //     } catch (error) {
+    //         console.error('ГРЕШКА: ', error.message);
+    //     }
+    // }
+
+
+</script>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

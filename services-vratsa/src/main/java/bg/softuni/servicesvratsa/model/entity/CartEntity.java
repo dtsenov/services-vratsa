@@ -1,8 +1,10 @@
 package bg.softuni.servicesvratsa.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
 @Entity
