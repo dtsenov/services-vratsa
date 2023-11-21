@@ -1,9 +1,6 @@
 package bg.softuni.servicesvratsa.model.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -11,8 +8,11 @@ import java.util.Set;
 @Table(name = "cart")
 public class CartEntity extends BaseEntity {
 
+    @Column(name = "product_id", nullable = false)
     private Long productId;
     private Integer quantity;
+
+    @Column(name = "username", nullable = false)
     private String username;
 
     @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.EAGER)
