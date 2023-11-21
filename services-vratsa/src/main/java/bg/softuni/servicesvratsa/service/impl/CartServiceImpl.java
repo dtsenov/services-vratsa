@@ -10,8 +10,8 @@ import bg.softuni.servicesvratsa.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,6 +68,23 @@ public class CartServiceImpl implements CartService {
 
         cartRepository.save(cartEntity);
 
+    }
+
+    @Override
+    public List<CartViewModel> getAllProductsByUser(String username) {
+
+
+        List<CartEntity> allProductsInCart = cartRepository.findAllByUsername(username);
+        List<CartViewModel> cartViewModelList = new ArrayList<>();
+
+        allProductsInCart.forEach(product -> {
+            CartViewModel cartViewModel = modelMapper.map(product, CartViewModel.class);
+            cartViewModel.setName(productService.findProductById(product.getId()).getName());
+            cartViewModel.setPrice(productService.findProductById(product.getId()).getPrice());
+            cartViewModelList.add(cartViewModel);
+        });
+
+        return cartViewModelList;
     }
 
 

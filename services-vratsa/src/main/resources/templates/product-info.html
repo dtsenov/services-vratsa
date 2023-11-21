@@ -46,7 +46,7 @@
             </tbody>
         </table>
 
-        <div class="cart-container" th:object="${cartViewModels}">
+        <div id="cart-container" class="cart-container" th:object="${cartViewModels}">
             <div id="cart" class="cart">
                 <h3 class="c-pr-text">Количка</h3>
                 <div id="cartItems"></div>
@@ -123,33 +123,33 @@
             .catch(error => {
                 console.error('ГРЕШКА: ', error.message);
             });
+
+        reloadCart();
     }
 
-    // async function addToCart() {
-    //     let BASE_URL = "/products/all/";
-    //     let productId = document.getElementById("productId").innerText;
-    //
-    //     try {
-    //         const response = await fetch(BASE_URL + productId, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify({
-    //                 productId: productId
-    //             })
-    //         });
-    //
-    //         if (!response.ok) {
-    //             throw new Error('Продуктът не се добави в количката.');
-    //         }
-    //
-    //         const data = await response.text();
-    //         console.log('Успешно добавен продукт: ', data);
-    //     } catch (error) {
-    //         console.error('ГРЕШКА: ', error.message);
-    //     }
-    // }
+    function reloadCart() {
+        const cartContainer = document.getElementById('cart-container');
+        let BASE_URL = "/cart";
+
+
+        fetch(BASE_URL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Грешка при извличане на данни от количката. Статус код: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                cartContainer.innerHTML = '';
+
+                data.forEach(product => {
+                    const productElement = document.createElement('div');
+                    productElement.textContent = `${product.name} - ${product.price}лв.`;
+                    cartContainer.appendChild(productElement);
+                });
+            })
+            .catch(error => console.error('Грешка при зареждане на количката:', error.message));
+    }
 
 
 </script>
