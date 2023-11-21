@@ -57,12 +57,14 @@ public class CartServiceImpl implements CartService {
     @Override
     public void addToCart(String username, AddToCartDTO addToCartDTO) {
 
+        ProductCurrentViewModel viewModel = productService.findProductById(addToCartDTO.getProductId());
+
         CartEntity cartEntity = modelMapper.map(
-                addToCartDTO, CartEntity.class);
-        ProductCurrentViewModel productById = productService.findProductById(cartEntity.getProductId());
+                viewModel, CartEntity.class);
+
+        cartEntity.setProductId(viewModel.getId());
 
         cartEntity.setUsername(username);
-        productById.setName(productById.getName());
 
         cartRepository.save(cartEntity);
 
