@@ -17,4 +17,6 @@ public interface CartService {
     void addToCart(String username, AddToCartDTO addToCartDTO);
 
     List<CartViewModel> getAllProductsByUser(String username);
+
+    void deleteProduct(Long productId);
 }

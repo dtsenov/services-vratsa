@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.authentication.configuration.EnableGlobalAuthentication;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +28,7 @@ public class CartRestController {
         this.cartService = cartService;
     }
 
-   @RequestMapping(value = "/products/all/{productId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+   @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addToCart(@PathVariable("productId") Long productId,
                                             @AuthenticationPrincipal UserDetails userDetails,
                                             @RequestBody AddToCartDTO addToCartDTO,
@@ -44,10 +46,20 @@ public class CartRestController {
     }
 
     @GetMapping("/cart")
-    public ResponseEntity<List<CartViewModel>> getCart(Authentication authentication) {
+    @ResponseBody
+    public ResponseEntity<List<CartViewModel>> getCart() {
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<CartViewModel> cartViewModels = cartService.getAllProductsByUser(authentication.getName());
         return ResponseEntity.ok(cartViewModels);
+    }
+
+    @DeleteMapping("/cart/{productId}")
+    public ResponseEntity<String> deleteProduct(@PathVariable("productId") Long productId) {
+
+        cartService.deleteProduct(productId);
+
+        return ResponseEntity.noContent().build();
     }
 }
 

@@ -7,12 +7,17 @@ import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableMethodSecurity
@@ -34,10 +39,11 @@ public class SecurityConfiguration {
                                 .requestMatchers("/products/add").hasRole("BOSS")
                                 .requestMatchers("/products/all").permitAll()
                                 .requestMatchers("/services/all").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/products/**").hasRole("BOSS")
+                                .requestMatchers(HttpMethod.GET, "/products/**", "/products/all/**", "/cart", "/cart/**").hasRole("BOSS")
+                                .requestMatchers(HttpMethod.DELETE, "/cart/**").hasRole("BOSS")
                                 .anyRequest().authenticated()
                 )
-                .csrf().disable()
                 .formLogin(
                         formLogin -> {
                             formLogin
@@ -63,7 +69,20 @@ public class SecurityConfiguration {
                                     .rememberMeParameter("rememberme")
                                     .rememberMeCookieName("rememberme");
                         }
-                ).build();
+                ).cors(Customizer.withDefaults())
+                .build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("*"); // или поставете вашите разрешени оригини
+
+        // конфигурирайте другите CORS настройки по ваш избор
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean

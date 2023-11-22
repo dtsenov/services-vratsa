@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/products")
 public class ProductController {
 

@@ -87,5 +87,10 @@ public class CartServiceImpl implements CartService {
         return cartViewModelList;
     }
 
+    @Override
+    public void deleteProduct(Long productId) {
+        cartRepository.deleteById(productId);
+    }
+
 
 }
