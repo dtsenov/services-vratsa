@@ -31,12 +31,7 @@ public class CartRestController {
    @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addToCart(@PathVariable("productId") Long productId,
                                             @AuthenticationPrincipal UserDetails userDetails,
-                                            @RequestBody AddToCartDTO addToCartDTO,
-                                            HttpServletRequest request) {
-
-       if (request.getMethod().equals(HttpMethod.POST.toString())) {
-           request.setAttribute(CsrfToken.class.getName(), null);
-       }
+                                            @RequestBody AddToCartDTO addToCartDTO) {
 
             String username = userDetails.getUsername();
 

@@ -53,34 +53,9 @@
             <div id="cart" class="cart">
                 <h3 class="c-pr-text">Количка</h3>
                 <div id="cartItems"></div>
-                <!--                <div th:if="${cartViewModels.isEmpty()}">-->
-                <!--                    <p>Количката е празна!</p>-->
-                <!--                    <p>Крайна цена: 0.00лв.</p>-->
-                <!--                </div>-->
-                <!--                <div th:unless="${cartViewModels.isEmpty()}">-->
-                <!--                    <p>Добавени продукти</p>-->
-                <!--                    <div th:each="p : ${cartViewModels}">-->
-                <!--                        <span th:value="${p.name}" th:text="${p.name}"></span><br>-->
-                <!--                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>-->
-
-                <!--                        <form id="delete-form"-->
-                <!--                              th:method="DELETE"-->
-                <!--                              th:action="@{/products/all/{id}(id=${p.id})}">-->
-
-                <!--                            <input type="hidden" name="id" th:value="${p.id}">-->
-
-                <!--                            <input type="submit" value="Изтрий">-->
-                <!--                        </form>-->
-                <!--                    </div>-->
-                <!--                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>-->
-                <!--                </div>-->
             </div>
         </div>
     </div>
-
-    <!--    <div class="add-to-cart-btn-wrapper">-->
-    <!--        <button onclick="addToCart()" class="add-to-cart-btn">ДОБАВИ В КОЛИЧКА</button>-->
-    <!--    </div>-->
 
     <form th:object="${currentProduct}"
           th:action="@{/products/all/{productId}(productId = ${currentProduct.id})}"
@@ -99,9 +74,6 @@
         let addToCartBtn = document.getElementById("addToCartBtn");
 
         let csrfToken = document.querySelector('input[name="_csrf"]').value;
-
-        // Деактивиране на бутона
-        // addToCartBtn.disabled = true;
 
         fetch(BASE_URL + productId, {
             method: 'POST',
@@ -133,8 +105,6 @@
     function reloadCart() {
         const cartItems = document.getElementById('cartItems');
         let BASE_URL = "/cart";
-        let productId = document.getElementById("productId").innerText;
-
 
         fetch(BASE_URL)
             .then(response => {

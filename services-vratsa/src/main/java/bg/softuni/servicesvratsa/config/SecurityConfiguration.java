@@ -42,7 +42,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/products/all").permitAll()
                                 .requestMatchers("/services/all").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/products/**").hasRole("BOSS")
-                                .requestMatchers(HttpMethod.GET, "/products/**", "/products/all/**", "/cart", "/cart/**").hasRole("BOSS")
+                                .requestMatchers(HttpMethod.GET, "/products/all/**", "/cart", "/cart/**").hasRole("BOSS")
                                 .requestMatchers(HttpMethod.DELETE, "/cart/**").hasRole("BOSS")
                                 .anyRequest().authenticated()
                 )
