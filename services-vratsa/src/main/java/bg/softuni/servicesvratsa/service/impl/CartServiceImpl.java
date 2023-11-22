@@ -62,8 +62,6 @@ public class CartServiceImpl implements CartService {
         CartEntity cartEntity = modelMapper.map(
                 viewModel, CartEntity.class);
 
-        cartEntity.setProductId(viewModel.getId());
-
         cartEntity.setUsername(username);
 
         cartRepository.save(cartEntity);

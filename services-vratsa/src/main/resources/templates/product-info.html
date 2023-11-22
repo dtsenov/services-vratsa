@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/commons::head}"></head>
+<head th:replace="~{fragments/commons::head}">
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+</head>
 <body onload="reloadCart()">
 <header th:replace="~{fragments/commons::nav}"></header>
 
@@ -50,34 +53,40 @@
             <div id="cart" class="cart">
                 <h3 class="c-pr-text">Количка</h3>
                 <div id="cartItems"></div>
-<!--                <div th:if="${cartViewModels.isEmpty()}">-->
-<!--                    <p>Количката е празна!</p>-->
-<!--                    <p>Крайна цена: 0.00лв.</p>-->
-<!--                </div>-->
-<!--                <div th:unless="${cartViewModels.isEmpty()}">-->
-<!--                    <p>Добавени продукти</p>-->
-<!--                    <div th:each="p : ${cartViewModels}">-->
-<!--                        <span th:value="${p.name}" th:text="${p.name}"></span><br>-->
-<!--                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>-->
+                <!--                <div th:if="${cartViewModels.isEmpty()}">-->
+                <!--                    <p>Количката е празна!</p>-->
+                <!--                    <p>Крайна цена: 0.00лв.</p>-->
+                <!--                </div>-->
+                <!--                <div th:unless="${cartViewModels.isEmpty()}">-->
+                <!--                    <p>Добавени продукти</p>-->
+                <!--                    <div th:each="p : ${cartViewModels}">-->
+                <!--                        <span th:value="${p.name}" th:text="${p.name}"></span><br>-->
+                <!--                        <span th:value="${p.price}" th:text="${p.price} + 'лв.'"></span><br>-->
 
-<!--                        <form id="delete-form"-->
-<!--                              th:method="DELETE"-->
-<!--                              th:action="@{/products/all/{id}(id=${p.id})}">-->
+                <!--                        <form id="delete-form"-->
+                <!--                              th:method="DELETE"-->
+                <!--                              th:action="@{/products/all/{id}(id=${p.id})}">-->
 
-<!--                            <input type="hidden" name="id" th:value="${p.id}">-->
+                <!--                            <input type="hidden" name="id" th:value="${p.id}">-->
 
-<!--                            <input type="submit" value="Изтрий">-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>-->
-<!--                </div>-->
+                <!--                            <input type="submit" value="Изтрий">-->
+                <!--                        </form>-->
+                <!--                    </div>-->
+                <!--                    <div th:text="'Крайна цена ' + ${totalCartPrice}"></div>-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
 
-    <div class="add-to-cart-btn-wrapper">
-        <button onclick="addToCart()" class="add-to-cart-btn">ДОБАВИ В КОЛИЧКА</button>
-    </div>
+    <!--    <div class="add-to-cart-btn-wrapper">-->
+    <!--        <button onclick="addToCart()" class="add-to-cart-btn">ДОБАВИ В КОЛИЧКА</button>-->
+    <!--    </div>-->
+
+    <form th:object="${currentProduct}"
+          th:action="@{/products/all/{productId}(productId = ${currentProduct.id})}"
+          method="POST" onsubmit="event.preventDefault(); addToCart();">
+        <input type="submit" value="ДОБАВИ В КОЛИЧКА"/>
+    </form>
 
 </div>
 
@@ -88,19 +97,18 @@
         let BASE_URL = "/products/all/";
         let productId = document.getElementById("productId").innerText;
         let addToCartBtn = document.getElementById("addToCartBtn");
-        // const csrfToken = document.querySelector("meta[name='_csrf']").getAttribute("content");
-        // const csrfHeader = document.querySelector("meta[name='_csrf_header']").getAttribute("content");
 
+        let csrfToken = document.querySelector('input[name="_csrf"]').value;
 
         // Деактивиране на бутона
         // addToCartBtn.disabled = true;
 
         fetch(BASE_URL + productId, {
             method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // [csrfHeader]: csrfToken  // Добавяне на CSRF токен в хедъра
-                },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken
+            },
             body: JSON.stringify({
                 productId: productId
             })
@@ -156,8 +164,8 @@
                         productPriceElement.textContent = `${product.price.toFixed(2)}лв.`;
 
                         deleteFromCartBtn.textContent = 'Изтрий'
-                        deleteFromCartBtn.setAttribute('productId', productId);
-                        deleteFromCartBtn.addEventListener('click', deleteFromCart())
+                        deleteFromCartBtn.setAttribute('productId', product.id);
+                        deleteFromCartBtn.addEventListener('click', deleteFromCart);
 
                         cartItems.appendChild(productNameElement);
                         cartItems.appendChild(productPriceElement);
@@ -170,11 +178,16 @@
 
     function deleteFromCart() {
 
-        const productId = document.getElementById("productId").innerText;
+        const productId =  event.currentTarget.getAttribute('productId');
         const BASE_URL = "/cart/";
 
+        let csrfToken = document.querySelector('input[name="_csrf"]').value;
+
         fetch(BASE_URL + productId, {
-            method: 'DELETE'
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            }
         })
             .then(response => {
                 if (!response.ok) {
