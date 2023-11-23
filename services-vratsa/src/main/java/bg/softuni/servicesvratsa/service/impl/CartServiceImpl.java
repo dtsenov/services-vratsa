@@ -5,9 +5,11 @@ import bg.softuni.servicesvratsa.model.entity.CartEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
+import bg.softuni.servicesvratsa.model.view.ServiceViewModel;
 import bg.softuni.servicesvratsa.repository.CartRepository;
 import bg.softuni.servicesvratsa.service.CartService;
 import bg.softuni.servicesvratsa.service.ProductService;
+import bg.softuni.servicesvratsa.service.ServiceService;
 import bg.softuni.servicesvratsa.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,14 @@ public class CartServiceImpl implements CartService {
     private final UserService userService;
     private final ProductService productService;
     private final ModelMapper modelMapper;
+    private final ServiceService serviceService;
 
-    public CartServiceImpl(CartRepository cartRepository, UserService userService, ProductService productService, ModelMapper modelMapper) {
+    public CartServiceImpl(CartRepository cartRepository, UserService userService, ProductService productService, ModelMapper modelMapper, ServiceService serviceService) {
         this.cartRepository = cartRepository;
         this.userService = userService;
         this.productService = productService;
         this.modelMapper = modelMapper;
+        this.serviceService = serviceService;
     }
 
     @Override
@@ -60,7 +64,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addToCart(String username, AddToCartDTO addToCartDTO) {
+    public void addProductToCart(String username, AddToCartDTO addToCartDTO) {
 
         CartEntity cartEntity = cartRepository.findByProductId(addToCartDTO.getProductId());
         UserEntity user = userService.findByUsername(username);
@@ -113,6 +117,25 @@ public class CartServiceImpl implements CartService {
             cartRepository.deleteById(id);
         }
 
+    }
+
+    @Override
+    public void addServiceToCart(String username, Long serviceId) {
+
+        ServiceViewModel serviceById = serviceService.findServiceById(serviceId);
+        UserEntity user = userService.findByUsername(username);
+
+        CartEntity cartEntity = cartRepository.findByProductId(Long.valueOf(serviceById.getServiceId()));
+
+        if (cartEntity != null) {
+            cartEntity.setQuantity(cartEntity.getQuantity() + 1);
+        } else {
+            cartEntity.setQuantity(1);
+            cartEntity.setUsername(username);
+            cartEntity.getClients().add(user);
+        }
+
+        cartRepository.save(cartEntity);
     }
 
 

@@ -14,9 +14,11 @@ public interface CartService {
 
     void deleteFromCart(Long id, CartViewModel cartViewModel);
 
-    void addToCart(String username, AddToCartDTO addToCartDTO);
+    void addProductToCart(String username, AddToCartDTO addToCartDTO);
 
     List<CartViewModel> getAllProductsByUser(String username);
 
     void deleteProduct(Long productId);
+
+    void addServiceToCart(String username, Long serviceId);
 }

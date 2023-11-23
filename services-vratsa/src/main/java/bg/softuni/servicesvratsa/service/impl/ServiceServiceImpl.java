@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -42,6 +43,7 @@ public class ServiceServiceImpl implements ServiceService {
                 case 0:
                     service.setId(1L);
                     service.setName("Смяна на Водомер");
+                    service.setServiceId(UUID.randomUUID().toString());
                     service.setDescription("Професионална услуга за смяна на водомер с нов, " +
                             "висококачествен модел. Включва изваждане на стария водомер, инсталиране на новия, " +
                             "и тестване за коректна работа. " +
@@ -53,6 +55,7 @@ public class ServiceServiceImpl implements ServiceService {
                 case 1:
                     service.setId(2L);
                     service.setName("Ремонт и Смяна на Кранове");
+                    service.setServiceId(UUID.randomUUID().toString());
                     service.setDescription("Извършваме ремонт и смяна на всички видове кранове в дома или бизнес сграда. " +
                             "Независимо дали става въпрос за течове, неправилна работа или просто обновяване, " +
                             "нашите техници осигуряват бърза и ефективна услуга.");
@@ -63,6 +66,7 @@ public class ServiceServiceImpl implements ServiceService {
                 case 2:
                     service.setId(3L);
                     service.setName("Инсталиране на Санитарни Прибори");
+                    service.setServiceId(UUID.randomUUID().toString());
                     service.setDescription("Предлагаме услуги за инсталиране на санитарни прибори като тоалетни, " +
                             "умивалници, душ кабини и други. Нашият екип от квалифицирани техници гарантира " +
                             "коректна инсталация и функционалност на всеки санитарен елемент. " +
@@ -74,6 +78,7 @@ public class ServiceServiceImpl implements ServiceService {
                 case 3:
                     service.setId(4L);
                     service.setName("Обновяване на Водопроводната Система");
+                    service.setServiceId(UUID.randomUUID().toString());
                     service.setDescription("Планираме и извършваме обновяване на водопроводната система в жилищни, " +
                             "търговски или индустриални обекти. Това включва замяна на стари тръби, " +
                             "инсталация на нови кранове и оборудване за подобряване на ефективността и " +

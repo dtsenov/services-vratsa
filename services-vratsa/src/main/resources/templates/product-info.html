@@ -59,7 +59,7 @@
 
     <form th:object="${currentProduct}"
           th:action="@{/products/all/{productId}(productId = ${currentProduct.id})}"
-          method="POST" onsubmit="event.preventDefault(); addToCart();">
+          method="POST" onsubmit="event.preventDefault(); addProductToCart();">
         <input type="submit" value="ДОБАВИ В КОЛИЧКА"/>
     </form>
 

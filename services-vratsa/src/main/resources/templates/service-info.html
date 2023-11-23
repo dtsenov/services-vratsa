@@ -13,6 +13,12 @@
         <table class="current-pr-table">
 
             <tbody th:object="${currentService}">
+
+            <tr>
+                <th class="c-pr-text">ID на услуга</th>
+                <th id="serviceId" th:text="*{id}"></th>
+            </tr>
+
             <tr>
                 <th class="c-pr-text">Име на услуга</th>
                 <th th:text="*{name}"></th>
@@ -47,7 +53,7 @@
 
     <form th:object="${currentService}"
           th:action="@{/products/all/{productId}(productId = ${currentService.id})}"
-          method="POST" onsubmit="event.preventDefault(); addToCart();">
+          method="POST" onsubmit="event.preventDefault(); addServiceToCart();">
         <input type="submit" value="ДОБАВИ В КОЛИЧКА"/>
     </form>
 </div>

@@ -12,6 +12,9 @@ public class ServiceEntity extends BaseEntity {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
+    @Column(name = "service_id")
+    private String serviceId;
+
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
@@ -31,6 +34,14 @@ public class ServiceEntity extends BaseEntity {
 
     public String getName() {
         return name;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 
     public void setName(String name) {

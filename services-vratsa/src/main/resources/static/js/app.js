@@ -1,4 +1,4 @@
-function addToCart() {
+function addProductToCart() {
     let BASE_URL = "/products/all/";
     let productId = document.getElementById("productId").innerText;
     let addToCartBtn = document.getElementById("addToCartBtn");
@@ -29,6 +29,38 @@ function addToCart() {
             console.error('ГРЕШКА: ', error.message);
         });
 
+
+}
+
+function addServiceToCart() {
+    let BASE_URL = "/services/all/";
+    let serviceId = document.getElementById("serviceId").innerText;
+
+    let csrfToken = document.querySelector('input[name="_csrf"]').value;
+
+    fetch(BASE_URL + serviceId, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': csrfToken
+        },
+        body: JSON.stringify({
+            serviceId: serviceId
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Услугата не се добави в количката.');
+            }
+            return response.text();
+        })
+        .then(data => {
+            console.log('Успешно добавена услуга: ', data);
+            reloadCart();
+        })
+        .catch(error => {
+            console.error('ГРЕШКА: ', error.message);
+        });
 
 }
 
