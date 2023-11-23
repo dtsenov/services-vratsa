@@ -127,17 +127,20 @@
 
                     data.forEach(product => {
                         const productNameElement = document.createElement('div');
+                        const productQuantityElement = document.createElement('div');
                         const productPriceElement = document.createElement('div');
                         const deleteFromCartBtn = document.createElement('button');
 
-                        productNameElement.textContent = `${product.name}`;
-                        productPriceElement.textContent = `${product.price.toFixed(2)}лв.`;
+                        productNameElement.textContent = `Име: ${product.name}`;
+                        productQuantityElement.textContent = `Количество: ${product.quantity}бр.`
+                        productPriceElement.textContent = `Цена: ${product.price.toFixed(2)}лв.`;
 
                         deleteFromCartBtn.textContent = 'Изтрий'
                         deleteFromCartBtn.setAttribute('productId', product.id);
                         deleteFromCartBtn.addEventListener('click', deleteFromCart);
 
                         cartItems.appendChild(productNameElement);
+                        cartItems.appendChild(productQuantityElement)
                         cartItems.appendChild(productPriceElement);
                         cartItems.appendChild(deleteFromCartBtn);
                     });

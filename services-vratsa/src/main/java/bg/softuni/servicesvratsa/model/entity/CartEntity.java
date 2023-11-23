@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,6 +20,8 @@ public class CartEntity extends BaseEntity {
     private Set<UserEntity> clients;
 
     public CartEntity() {
+        quantity = 0;
+        clients = new HashSet<>();
     }
 
     public Long getProductId() {
