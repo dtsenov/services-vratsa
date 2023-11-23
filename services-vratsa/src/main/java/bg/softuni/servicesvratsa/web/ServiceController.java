@@ -3,8 +3,10 @@ package bg.softuni.servicesvratsa.web;
 import bg.softuni.servicesvratsa.model.binding.ServiceAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.service.ServicesServiceModel;
+import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ServiceViewModel;
 import bg.softuni.servicesvratsa.repository.PictureRepository;
+import bg.softuni.servicesvratsa.service.CartService;
 import bg.softuni.servicesvratsa.service.CloudinaryService;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ServiceService;
@@ -14,12 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/services")
@@ -30,13 +30,15 @@ public class ServiceController {
     private final PictureRepository pictureRepository;
     private final ServiceService serviceService;
     private final ModelMapper modelMapper;
+    private final CartService cartService;
 
-    public ServiceController(CloudinaryService cloudinaryService, PictureService pictureService, PictureRepository pictureRepository, ServiceService serviceService, ModelMapper modelMapper) {
+    public ServiceController(CloudinaryService cloudinaryService, PictureService pictureService, PictureRepository pictureRepository, ServiceService serviceService, ModelMapper modelMapper, CartService cartService) {
         this.cloudinaryService = cloudinaryService;
         this.pictureService = pictureService;
         this.pictureRepository = pictureRepository;
         this.serviceService = serviceService;
         this.modelMapper = modelMapper;
+        this.cartService = cartService;
     }
 
     @ModelAttribute
@@ -89,7 +91,12 @@ public class ServiceController {
     public String productInfo(@PathVariable ("id") Long id, Model model) {
 
         ServiceViewModel currentService = serviceService.findServiceById(id);
+        List<CartViewModel> cartViewModels = cartService.findAllInCart();
+        Double totalCartPrice = cartService.totalPrice();
+
         model.addAttribute("currentService", currentService);
+        model.addAttribute("cartViewModels", cartViewModels);
+        model.addAttribute("totalCartPrice", totalCartPrice);
 
         return "service-info";
     }
