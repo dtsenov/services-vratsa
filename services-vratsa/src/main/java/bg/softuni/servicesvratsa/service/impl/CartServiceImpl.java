@@ -75,8 +75,13 @@ public class CartServiceImpl implements CartService {
             cartEntity.setQuantity(cartEntity.getQuantity() + 1);
         } else {
             cartEntity = new CartEntity();
+
+            ProductCurrentViewModel product = productService.findProductByProductId(addToCartDTO.getProductId());
+
+            cartEntity.setName(product.getName());
+            cartEntity.setPrice(product.getPrice());
             cartEntity.setQuantity(1);
-            cartEntity.setProductId(addToCartDTO.getProductId());
+            cartEntity.setProductId(product.getProductId());
             cartEntity.setUsername(username);
             cartEntity.getClients().add(user);
         }
@@ -123,17 +128,20 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void addServiceToCart(String username, Long serviceId) {
+    public void addServiceToCart(String username, String serviceId) {
 
-        ServiceViewModel serviceById = serviceService.findServiceById(serviceId);
         UserEntity user = userService.findByUsername(username);
-
-        CartEntity cartEntity = cartRepository.findByProductId(serviceById.getServiceId()).orElse(null);
+        CartEntity cartEntity = cartRepository.findByProductId(serviceId).orElse(null);
 
         if (cartEntity != null) {
             cartEntity.setQuantity(cartEntity.getQuantity() + 1);
         } else {
+            cartEntity = new CartEntity();
+
+            serviceService.findServiceByServiceId(serviceId);
+
             cartEntity.setQuantity(1);
+            cartEntity.setProductId(serviceId);
             cartEntity.setUsername(username);
             cartEntity.getClients().add(user);
         }

@@ -36,7 +36,7 @@ public class CartRestController {
     }
 
     @PostMapping(value = "/services/all/{serviceId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addServiceToCart(@PathVariable("serviceId") Long serviceId,
+    public ResponseEntity<String> addServiceToCart(@PathVariable("serviceId") String serviceId,
                                                    @AuthenticationPrincipal UserDetails userDetails) {
 
         String username = userDetails.getUsername();

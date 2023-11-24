@@ -130,4 +130,22 @@ public class ServiceServiceImpl implements ServiceService {
         return serviceViewModel;
 
     }
+
+    @Override
+    public ServiceViewModel findServiceByServiceId(String serviceId) {
+        ServiceEntity serviceEntity = serviceRepository.findByServiceId(serviceId).orElse(null);
+
+        ServiceViewModel serviceViewModel = modelMapper.map(serviceEntity, ServiceViewModel.class);
+
+        if (serviceEntity != null) {
+            PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
+
+            serviceViewModel.setPictureTitle(picture.getTitle());
+            serviceViewModel.setPictureUrl(picture.getUrl());
+        }
+
+        return serviceViewModel;
+
+        //TODO
+    }
 }

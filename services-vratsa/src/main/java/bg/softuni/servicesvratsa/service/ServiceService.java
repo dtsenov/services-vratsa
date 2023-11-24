@@ -15,4 +15,6 @@ public interface ServiceService {
 
 
     ServiceViewModel findServiceById(Long id);
+
+    ServiceViewModel findServiceByServiceId(String serviceId);
 }
