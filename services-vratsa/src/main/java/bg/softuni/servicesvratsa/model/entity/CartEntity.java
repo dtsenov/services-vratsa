@@ -10,7 +10,10 @@ import java.util.Set;
 public class CartEntity extends BaseEntity {
 
     @Column(name = "product_id", nullable = false)
-    private Long productId;
+//    private Long productId;
+
+    private String productId;
+
     private Integer quantity;
 
     @Column(name = "username", nullable = false)
@@ -24,11 +27,20 @@ public class CartEntity extends BaseEntity {
         clients = new HashSet<>();
     }
 
-    public Long getProductId() {
+//    public Long getProductId() {
+//        return productId;
+//    }
+//
+//    public void setProductId(Long productId) {
+//        this.productId = productId;
+//    }
+
+
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

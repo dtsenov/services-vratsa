@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.web;
 
 import bg.softuni.servicesvratsa.model.binding.ProductAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
+import bg.softuni.servicesvratsa.model.entity.ProductEntity;
 import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductAllViewModel;
@@ -11,13 +12,11 @@ import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.util.List;
@@ -92,14 +91,16 @@ public class ProductController {
     @GetMapping("/all/{id}")
     public String productInfo(@PathVariable("id") Long id, Model model) {
 
+        ProductEntity productEntity = productService.findProductById(id);
+        String productId = productEntity.getProductId();
 
-        ProductCurrentViewModel currentProduct = productService.findProductById(id);
+        ProductCurrentViewModel currentProduct = productService.findProductByProductId(productId);
         List<CartViewModel> cartViewModels = cartService.findAllInCart();
-        Double totalCartPrice = cartService.totalPrice();
+//        Double totalCartPrice = cartService.totalPrice();
 
         model.addAttribute("currentProduct", currentProduct);
         model.addAttribute("cartViewModels", cartViewModels);
-        model.addAttribute("totalCartPrice", totalCartPrice);
+//        model.addAttribute("totalCartPrice", totalCartPrice);
 
 
         return "product-info";

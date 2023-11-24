@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service;
 
+import bg.softuni.servicesvratsa.model.entity.ProductEntity;
 import bg.softuni.servicesvratsa.model.service.ProductServiceModel;
 import bg.softuni.servicesvratsa.model.view.ProductAllViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
@@ -13,5 +14,7 @@ public interface ProductService {
 
     List<ProductAllViewModel> getAllProducts();
 
-    ProductCurrentViewModel findProductById(Long id);
+    ProductCurrentViewModel findProductByProductId(String productId);
+
+    ProductEntity findProductById(Long id);
 }

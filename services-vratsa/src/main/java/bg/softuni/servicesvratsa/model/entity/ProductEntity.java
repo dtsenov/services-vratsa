@@ -13,6 +13,7 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    private String productId;
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
@@ -40,6 +41,14 @@ public class ProductEntity extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public BigDecimal getPrice() {

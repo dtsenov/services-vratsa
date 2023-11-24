@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.service.impl;
 
 import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.model.entity.CartEntity;
+import bg.softuni.servicesvratsa.model.entity.ProductEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
@@ -50,7 +51,7 @@ public class CartServiceImpl implements CartService {
         Double totalSum = 0.00;
 
         for (CartEntity cartEntity : cartRepository.findAll()) {
-            ProductCurrentViewModel productById = productService.findProductById(cartEntity.getProductId());
+            ProductCurrentViewModel productById = productService.findProductByProductId(cartEntity.getProductId());
 
             totalSum += Double.parseDouble(String.valueOf(productById.getPrice()));
         }
@@ -66,15 +67,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public void addProductToCart(String username, AddToCartDTO addToCartDTO) {
 
-        CartEntity cartEntity = cartRepository.findByProductId(addToCartDTO.getProductId());
+        CartEntity cartEntity = cartRepository.findByProductId(addToCartDTO.getProductId()).orElse(null);
         UserEntity user = userService.findByUsername(username);
 
 
         if (cartEntity != null) {
             cartEntity.setQuantity(cartEntity.getQuantity() + 1);
         } else {
-            cartEntity = modelMapper.map(addToCartDTO, CartEntity.class);
+            cartEntity = new CartEntity();
             cartEntity.setQuantity(1);
+            cartEntity.setProductId(addToCartDTO.getProductId());
             cartEntity.setUsername(username);
             cartEntity.getClients().add(user);
         }
@@ -90,7 +92,8 @@ public class CartServiceImpl implements CartService {
 
         allProductsInCart.forEach(product -> {
             CartViewModel cartViewModel = modelMapper.map(product, CartViewModel.class);
-            ProductCurrentViewModel currentProduct = productService.findProductById(product.getProductId());
+
+            ProductCurrentViewModel currentProduct = productService.findProductByProductId(product.getProductId());
 
             cartViewModel.setName(currentProduct.getName());
             cartViewModel.setPrice(currentProduct.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
@@ -125,7 +128,7 @@ public class CartServiceImpl implements CartService {
         ServiceViewModel serviceById = serviceService.findServiceById(serviceId);
         UserEntity user = userService.findByUsername(username);
 
-        CartEntity cartEntity = cartRepository.findByProductId(Long.valueOf(serviceById.getServiceId()));
+        CartEntity cartEntity = cartRepository.findByProductId(serviceById.getServiceId()).orElse(null);
 
         if (cartEntity != null) {
             cartEntity.setQuantity(cartEntity.getQuantity() + 1);

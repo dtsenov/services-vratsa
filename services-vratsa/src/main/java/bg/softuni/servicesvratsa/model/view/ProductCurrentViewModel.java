@@ -1,7 +1,5 @@
 package bg.softuni.servicesvratsa.model.view;
 
-import bg.softuni.servicesvratsa.model.enums.ProductTypeEnum;
-
 import java.math.BigDecimal;
 
 public class ProductCurrentViewModel {
@@ -9,6 +7,7 @@ public class ProductCurrentViewModel {
     private Long id;
 
     private String name;
+    private String productId;
 
     private BigDecimal price;
 
@@ -38,6 +37,14 @@ public class ProductCurrentViewModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public BigDecimal getPrice() {

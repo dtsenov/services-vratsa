@@ -2,7 +2,7 @@ package bg.softuni.servicesvratsa.model.binding;
 
 public class AddToCartDTO {
     private Integer quantity;
-    private Long productId;
+    private String productId;
 
     public AddToCartDTO() {
     }
@@ -16,11 +16,11 @@ public class AddToCartDTO {
         this.quantity = quantity;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 }

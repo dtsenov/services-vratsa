@@ -8,7 +8,7 @@ public class CartViewModel {
     private String name;
     private Integer quantity;
     private BigDecimal price;
-    private Long productId;
+    private String productId;
 
     public CartViewModel() {
     }
@@ -46,11 +46,11 @@ public class CartViewModel {
         this.price = price;
     }
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 }

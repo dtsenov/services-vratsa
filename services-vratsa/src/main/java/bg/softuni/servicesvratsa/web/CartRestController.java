@@ -24,7 +24,7 @@ public class CartRestController {
     }
 
    @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> addProductToCart(@PathVariable("productId") Long productId,
+    public ResponseEntity<String> addProductToCart(@PathVariable("productId") String productId,
                                                    @AuthenticationPrincipal UserDetails userDetails,
                                                    @RequestBody AddToCartDTO addToCartDTO) {
 

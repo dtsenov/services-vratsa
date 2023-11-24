@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
                 case 0:
                     product.setId(1L);
                     product.setName("Водомер POWOGAZ");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(36.50));
                     product.setBrand("POWOGAZ");
                     product.setType(ProductTypeEnum.WATER_METER);
@@ -55,6 +57,7 @@ public class ProductServiceImpl implements ProductService {
                 case 1:
                     product.setId(2L);
                     product.setName("Водомер ZENNER");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(34.80));
                     product.setBrand("ZENNER");
                     product.setType(ProductTypeEnum.WATER_METER);
@@ -64,6 +67,7 @@ public class ProductServiceImpl implements ProductService {
                 case 2:
                     product.setId(3L);
                     product.setName("Сферичен кран SAKAR");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(13.23));
                     product.setBrand("SAKAR");
                     product.setType(ProductTypeEnum.WATER_TAP);
@@ -73,6 +77,7 @@ public class ProductServiceImpl implements ProductService {
                 case 3:
                     product.setId(4L);
                     product.setName("Сферичен кран T ARCO");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(12.40));
                     product.setBrand("T ARCO");
                     product.setType(ProductTypeEnum.WATER_TAP);
@@ -82,6 +87,7 @@ public class ProductServiceImpl implements ProductService {
                 case 4:
                     product.setId(5L);
                     product.setName("Водопроводен ключ Rothenberger");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(40.50));
                     product.setBrand("ROTHENBERGER");
                     product.setType(ProductTypeEnum.PLUMBING_WRENCH);
@@ -93,6 +99,7 @@ public class ProductServiceImpl implements ProductService {
                 case 5:
                     product.setId(6L);
                     product.setName("Водопроводен ключ двойно рамо TOPMASTER");
+                    product.setProductId(UUID.randomUUID().toString());
                     product.setPrice(BigDecimal.valueOf(35.70));
                     product.setBrand("TOPMASTER");
                     product.setType(ProductTypeEnum.PLUMBING_WRENCH);
@@ -139,9 +146,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductCurrentViewModel findProductById(Long id) {
+    public ProductCurrentViewModel findProductByProductId(String productId) {
 
-        ProductEntity productEntity = productRepository.findById(id).orElse(null); //TODO THROW EXCEPTION
+        ProductEntity productEntity = productRepository.findByProductId(productId).orElse(null); //TODO THROW EXCEPTION
         ProductCurrentViewModel productCurrentViewModel = modelMapper.map(productEntity, ProductCurrentViewModel.class);
 
         if (productEntity != null) {
@@ -152,6 +159,11 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return productCurrentViewModel;
+    }
+
+    @Override
+    public ProductEntity findProductById(Long id) {
+        return productRepository.findById(id).orElse(null);
     }
 }
 
