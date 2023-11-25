@@ -19,6 +19,7 @@ public class CartEntity extends BaseEntity {
     @Column(name = "product_id", nullable = false)
     private String productId;
 
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
     @Column(name = "username", nullable = false)

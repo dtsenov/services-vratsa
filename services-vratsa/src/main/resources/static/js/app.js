@@ -66,6 +66,7 @@ function addServiceToCart() {
 function reloadCart() {
     const cartItems = document.getElementById('cartItems');
     let BASE_URL = "/cart";
+    const totalPrice = document.createElement('p');
 
     fetch(BASE_URL)
         .then(response => {
@@ -84,13 +85,16 @@ function reloadCart() {
                 cartItems.appendChild(emptyCart);
             } else {
 
+                let totalCartPrice = 0.00;
                 cartItems.innerHTML = '';
 
                 data.forEach(product => {
+                    totalCartPrice += product.price;
                     const productNameElement = document.createElement('div');
                     const productQuantityElement = document.createElement('div');
                     const productPriceElement = document.createElement('div');
                     const deleteFromCartBtn = document.createElement('button');
+
 
                     productNameElement.textContent = `Име: ${product.name}`;
                     productQuantityElement.textContent = `Количество: ${product.quantity}бр.`
@@ -100,11 +104,21 @@ function reloadCart() {
                     deleteFromCartBtn.setAttribute('productId', product.id);
                     deleteFromCartBtn.addEventListener('click', deleteFromCart);
 
+                    totalPrice.textContent = `Обща цена: ${totalCartPrice.toFixed(2)}лв.`;
+
                     cartItems.appendChild(productNameElement);
                     cartItems.appendChild(productQuantityElement)
                     cartItems.appendChild(productPriceElement);
                     cartItems.appendChild(deleteFromCartBtn);
                 });
+
+                const confirmOrderBtn = document.createElement("button");
+                confirmOrderBtn.className = 'confirm-order-btn';
+                confirmOrderBtn.textContent = 'ЗАВЪРШИ ПОРЪЧКА';
+                confirmOrderBtn.addEventListener('click', confirmOrder);
+
+                cartItems.appendChild(totalPrice);
+                cartItems.appendChild(confirmOrderBtn);
             }
         })
         .catch(error => console.error('Грешка при зареждане на количката:', error.message));
@@ -131,4 +145,8 @@ function deleteFromCart() {
             reloadCart();
         })
         .catch(error => console.error('ГРЕШКА: ', error.message));
+}
+
+function confirmOrder() {
+window.location.replace('/make-order')
 }

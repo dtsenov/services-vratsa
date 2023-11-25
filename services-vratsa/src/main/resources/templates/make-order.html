@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<table class="order-user-details table" th:object="${user}">
+    <thead>
+    <tr>
+        <th>Информация за завършване на поръчката</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Име и фамилия:</td>
+        <td><input th:value="*{getFirstName() + getLastName()}"></td>
+    </tr>
+
+    <tr>
+        <td>Адрес:</td>
+        <td><input ></td>
+    </tr>
+
+    <tr>
+        <td>Телефон за връзка:</td>
+        <td><input th:value="*{getPhoneNumber()}"></td>
+    </tr>
+
+    <tr>
+        <td>Имейл:</td>
+        <td><input th:value="*{getEmail()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>
