@@ -97,13 +97,7 @@ public class CartServiceImpl implements CartService {
 
         allProductsInCart.forEach(product -> {
             CartViewModel cartViewModel = modelMapper.map(product, CartViewModel.class);
-
-            ProductCurrentViewModel currentProduct = productService.findProductByProductId(product.getProductId());
-
-            cartViewModel.setName(currentProduct.getName());
-            cartViewModel.setPrice(currentProduct.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
-            cartViewModel.setQuantity(product.getQuantity());
-
+            cartViewModel.setPrice(product.getPrice().multiply(BigDecimal.valueOf(product.getQuantity())));
             cartViewModelList.add(cartViewModel);
         });
 
@@ -138,8 +132,10 @@ public class CartServiceImpl implements CartService {
         } else {
             cartEntity = new CartEntity();
 
-            serviceService.findServiceByServiceId(serviceId);
+            ServiceViewModel currentService = serviceService.findServiceByServiceId(serviceId);
 
+            cartEntity.setName(currentService.getName());
+            cartEntity.setPrice(currentService.getPrice());
             cartEntity.setQuantity(1);
             cartEntity.setProductId(serviceId);
             cartEntity.setUsername(username);

@@ -1,7 +1,6 @@
 function addProductToCart() {
     let BASE_URL = "/products/all/";
     let productId = document.getElementById("productId").innerText;
-    let addToCartBtn = document.getElementById("addToCartBtn");
 
     let csrfToken = document.querySelector('input[name="_csrf"]').value;
 

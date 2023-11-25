@@ -88,15 +88,15 @@ public class ServiceController {
     }
 
     @GetMapping("/all/{id}")
-    public String productInfo(@PathVariable ("id") Long id, Model model) {
+    public String serviceInfo(@PathVariable ("id") Long id, Model model) {
 
         ServiceViewModel currentService = serviceService.findServiceById(id);
         List<CartViewModel> cartViewModels = cartService.findAllInCart();
-        Double totalCartPrice = cartService.totalPrice();
+//        Double totalCartPrice = cartService.totalPrice();
 
         model.addAttribute("currentService", currentService);
         model.addAttribute("cartViewModels", cartViewModels);
-        model.addAttribute("totalCartPrice", totalCartPrice);
+//        model.addAttribute("totalCartPrice", totalCartPrice);
 
         return "service-info";
     }
