@@ -2,15 +2,19 @@ package bg.softuni.servicesvratsa.web;
 
 import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
+import bg.softuni.servicesvratsa.model.view.OrderViewModel;
 import bg.softuni.servicesvratsa.service.CartService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -18,19 +22,21 @@ import java.util.List;
 public class CartRestController {
 
     private final CartService cartService;
+    private final ModelMapper modelMapper;
 
-    public CartRestController(CartService cartService) {
+    public CartRestController(CartService cartService, ModelMapper modelMapper) {
         this.cartService = cartService;
+        this.modelMapper = modelMapper;
     }
 
-   @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addProductToCart(@PathVariable("productId") String productId,
                                                    @AuthenticationPrincipal UserDetails userDetails,
                                                    @RequestBody AddToCartDTO addToCartDTO) {
 
-            String username = userDetails.getUsername();
+        String username = userDetails.getUsername();
 
-            cartService.addProductToCart(username, addToCartDTO);
+        cartService.addProductToCart(username, addToCartDTO);
 
         return ResponseEntity.ok("Добавено в количката");
     }

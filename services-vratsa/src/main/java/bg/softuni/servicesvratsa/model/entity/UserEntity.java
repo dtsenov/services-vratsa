@@ -42,6 +42,9 @@ public class UserEntity extends BaseEntity {
     @ManyToOne
     private CartEntity shoppingCart;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<OrderEntity> orders;
+
     @OneToOne(fetch = FetchType.EAGER)
     private PictureEntity picture;
 
@@ -134,6 +137,14 @@ public class UserEntity extends BaseEntity {
 
     public void setShoppingCart(CartEntity shoppingCart) {
         this.shoppingCart = shoppingCart;
+    }
+
+    public Set<OrderEntity> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<OrderEntity> orders) {
+        this.orders = orders;
     }
 
     public PictureEntity getPicture() {

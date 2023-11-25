@@ -1,8 +1,6 @@
 package bg.softuni.servicesvratsa.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
@@ -22,6 +20,49 @@ public class OrderEntity extends BaseEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "username", nullable = false)
-    private String username;
+    @ManyToOne
+    private UserEntity user;
+
+    public OrderEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }

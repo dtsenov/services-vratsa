@@ -112,13 +112,15 @@ function reloadCart() {
                     cartItems.appendChild(deleteFromCartBtn);
                 });
 
-                const confirmOrderBtn = document.createElement("button");
-                confirmOrderBtn.className = 'confirm-order-btn';
-                confirmOrderBtn.textContent = 'ЗАВЪРШИ ПОРЪЧКА';
-                confirmOrderBtn.addEventListener('click', confirmOrder);
+                const confirmCartBtn = document.createElement("button");
+                confirmCartBtn.addEventListener('click', confirmCart);
+                confirmCartBtn.textContent = 'ЗАВЪРШИ ПОРЪЧКА';
+                confirmCartBtn.className = 'confirm-order-btn';
+
 
                 cartItems.appendChild(totalPrice);
-                cartItems.appendChild(confirmOrderBtn);
+                cartItems.appendChild(confirmCartBtn);
+
             }
         })
         .catch(error => console.error('Грешка при зареждане на количката:', error.message));
@@ -147,6 +149,6 @@ function deleteFromCart() {
         .catch(error => console.error('ГРЕШКА: ', error.message));
 }
 
-function confirmOrder() {
-window.location.replace('/make-order')
+function confirmCart() {
+    window.location.replace('/make-order');
 }
