@@ -65,6 +65,7 @@ function addServiceToCart() {
 
 function reloadCart() {
     const cartItems = document.getElementById('cartItems');
+    const cart = document.getElementById('cart');
     let BASE_URL = "/cart";
     const totalPrice = document.createElement('p');
 
@@ -94,6 +95,9 @@ function reloadCart() {
                     const productQuantityElement = document.createElement('div');
                     const productPriceElement = document.createElement('div');
                     const deleteFromCartBtn = document.createElement('button');
+                    const currentItemContainer = document.createElement('div');
+
+                    currentItemContainer.className = 'currentCartItem';
 
 
                     productNameElement.textContent = `Име: ${product.name}`;
@@ -102,14 +106,18 @@ function reloadCart() {
 
                     deleteFromCartBtn.textContent = 'Изтрий'
                     deleteFromCartBtn.setAttribute('productId', product.id);
+                    deleteFromCartBtn.className = 'delete-cart-btn';
                     deleteFromCartBtn.addEventListener('click', deleteFromCart);
 
+                    totalPrice.className = 'totalCartPrice';
                     totalPrice.textContent = `Обща цена: ${totalCartPrice.toFixed(2)}лв.`;
 
-                    cartItems.appendChild(productNameElement);
-                    cartItems.appendChild(productQuantityElement)
-                    cartItems.appendChild(productPriceElement);
-                    cartItems.appendChild(deleteFromCartBtn);
+                    currentItemContainer.appendChild(productNameElement);
+                    currentItemContainer.appendChild(productQuantityElement)
+                    currentItemContainer.appendChild(productPriceElement);
+                    currentItemContainer.appendChild(deleteFromCartBtn);
+
+                    cartItems.appendChild(currentItemContainer);
                 });
 
                 const confirmCartBtn = document.createElement("button");
@@ -151,29 +159,4 @@ function deleteFromCart() {
 
 function confirmCart() {
     window.location.replace('/make-order');
-
-    // let BASE_URL = "/make-order";
-    //
-    // fetch(BASE_URL, {
-    //     method: 'GET',
-    //     headers: {
-    //         'Content-Type': 'application/json', // ако сървърът изисква Content-Type
-    //         // Допълнителни хедъри, ако са необходими
-    //     },
-    //     // Други настройки за заявката, ако са необходими
-    // })
-    //     .then(response => {
-    //         if (!response.ok) {
-    //             throw new Error(`Грешка при извличане на данни от /make-order. Статус код: ${response.status}`);
-    //         }
-    //         return response.json(); // или response.text(), в зависимост от това каква е очакваната отговор
-    //     })
-    //     .then(data => {
-    //         console.log('Успешно извлечени данни: ', data);
-    //         // Действия след успешно извличане на данни
-    //     })
-    //     .catch(error => {
-    //         console.error('Грешка: ', error.message);
-    //         // Действия при грешка
-    //     });
 }

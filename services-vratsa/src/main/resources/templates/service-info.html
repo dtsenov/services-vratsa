@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <form th:object="${currentService}"
+    <form class="add-to-cart-form" th:object="${currentService}"
           th:action="@{/services/all/{productId}(productId = ${currentService.id})}"
           method="POST" onsubmit="event.preventDefault(); addServiceToCart();">
         <input type="submit" value="ДОБАВИ В КОЛИЧКА"/>

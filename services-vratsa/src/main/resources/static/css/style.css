@@ -1,5 +1,5 @@
 .header {
-    height: 500px;
+    height: 385px;
     background-image: url(/images/Water-Meter-Replacement-Program---Website-Banner.png);
     background-repeat: no-repeat;
     background-size: 100% 380px;
@@ -57,8 +57,13 @@
     color: #e5e5e5;
 }
 
+.header__nav h5 {
+    color: white;
+    font-size: 18px;
+}
+
 .header__text-heading {
-    font-size: 60px;
+    font-size: 50px;
     font-weight: bold;
     margin-bottom: 0;
 }
@@ -66,7 +71,7 @@
 .header__text-subheading {
     font-weight: normal;
     margin-top: 0;
-    font-size: 32px;
+    font-size: 26px;
 }
 
 .header__text p {
@@ -329,12 +334,34 @@
     width: 60%;
 }
 
+.cart-container {
+    width: 12%;
+    margin-left: 10px;
+    border: 1px solid lightgray;
+}
+
+.currentCartItem {
+    border: 1px solid lightgray;
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.totalCartPrice {
+    text-align: center;
+}
+
 .c-pr-text {
-    width: 30%;
     background-color: #1845ad;
     font-size: 18px;
     color: white;
     text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#cartItems {
+    text-align: left;
+    margin-left: 3px;
 }
 
 .add-to-cart-btn-wrapper {
@@ -357,4 +384,23 @@
 .order-compl-cont {
     text-align: center;
     color: #1845ad;
+}
+
+.add-to-cart-form {
+    text-align: right;
+    width: 51%;
+}
+
+.add-to-cart-form input:hover {
+    background-color: lightgray;
+    color: black;
+}
+
+.add-to-cart-form input {
+    border: none;
+    border-radius: 50px;
+    background-color: #1845ad;
+    color: white;
+    padding: 11px;
+    margin-top: 10px;
 }

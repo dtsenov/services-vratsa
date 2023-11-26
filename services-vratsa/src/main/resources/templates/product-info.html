@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <form th:object="${currentProduct}"
+    <form class="add-to-cart-form" th:object="${currentProduct}"
           th:action="@{/products/all/{productId}(productId = ${currentProduct.id})}"
           method="POST" onsubmit="event.preventDefault(); addProductToCart();">
         <input type="submit" value="ДОБАВИ В КОЛИЧКА"/>
