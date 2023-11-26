@@ -145,5 +145,10 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cartEntity);
     }
 
+    @Override
+    public void deleteAllByUser(String username) {
+        cartRepository.deleteByUsername(username);
+    }
+
 
 }

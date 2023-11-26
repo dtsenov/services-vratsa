@@ -151,4 +151,29 @@ function deleteFromCart() {
 
 function confirmCart() {
     window.location.replace('/make-order');
+
+    // let BASE_URL = "/make-order";
+    //
+    // fetch(BASE_URL, {
+    //     method: 'GET',
+    //     headers: {
+    //         'Content-Type': 'application/json', // ако сървърът изисква Content-Type
+    //         // Допълнителни хедъри, ако са необходими
+    //     },
+    //     // Други настройки за заявката, ако са необходими
+    // })
+    //     .then(response => {
+    //         if (!response.ok) {
+    //             throw new Error(`Грешка при извличане на данни от /make-order. Статус код: ${response.status}`);
+    //         }
+    //         return response.json(); // или response.text(), в зависимост от това каква е очакваната отговор
+    //     })
+    //     .then(data => {
+    //         console.log('Успешно извлечени данни: ', data);
+    //         // Действия след успешно извличане на данни
+    //     })
+    //     .catch(error => {
+    //         console.error('Грешка: ', error.message);
+    //         // Действия при грешка
+    //     });
 }

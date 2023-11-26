@@ -21,4 +21,6 @@ public interface CartService {
     void deleteProduct(Long productId);
 
     void addServiceToCart(String username, String serviceId);
+
+    void deleteAllByUser(String name);
 }
