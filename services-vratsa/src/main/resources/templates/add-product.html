@@ -5,70 +5,77 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
+<main class="main__add-product-form">
 <h2 class="add-pr-sc-h2">Добави продукт</h2>
-<form
-        th:method="POST"
-        th:action="@{/products/add}"
-        th:object="${productAddBindingModel}"
-        enctype="multipart/form-data">
 
-    <div class="form-group">
-        <div class="label-holder">
-            <label for="product-name" class="form-label">Име на продукт</label><br/>
+<div class="add-pr-sc-form">
+    <form
+            th:method="POST"
+            th:action="@{/products/add}"
+            th:object="${productAddBindingModel}"
+            enctype="multipart/form-data">
+
+        <div class="form-group-add-pr-sc">
+            <div class="label-holder">
+                <label for="product-name" class="form-label">Име на продукт</label><br/>
+            </div>
+            <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
+            <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
         </div>
-        <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
-               type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
-        <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
-    </div>
 
 
-    <div class="form-group">
-        <div class="label-holder">
-            <label for="product-price" class="form-label">Цена на продукт</label><br/>
+        <div class="form-group-add-pr-sc">
+            <div class="label-holder">
+                <label for="product-price" class="form-label">Цена на продукт</label><br/>
+            </div>
+            <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" name="price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
+            <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
         </div>
-        <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
-               type="text" name="price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
-        <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
-    </div>
 
-    <div class="form-group">
-        <div class="label-holder">
-            <label for="product-brand" class="form-label">Име на производител</label><br/>
+        <div class="form-group-add-pr-sc">
+            <div class="label-holder">
+                <label for="product-brand" class="form-label">Име на производител</label><br/>
+            </div>
+            <input th:field="*{brand}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" name="brand" id="product-brand" placeholder="Име на производител.."><br/>
+            <small th:errors="*{brand}" class="invalid-feedback text-danger">Username error message</small>
         </div>
-        <input th:field="*{brand}" th:errorclass="'is-invalid alert-danger'"
-                type="text" name="brand" id="product-brand" placeholder="Име на производител.."><br/>
-        <small th:errors="*{brand}" class="invalid-feedback text-danger">Username error message</small>
-    </div>
 
-    <div class="form-group">
-        <select th:field="*{type}" id="product-type" name="type">
-            <option value="">Избери тип</option>
-            <option th:each="t : ${T(bg.softuni.servicesvratsa.model.enums.ProductTypeEnum).values()}"
-                    th:value="${t}" th:text="${t}">Водомер
-            </option>
-        </select>
-    </div>
-
-    <div class="form-group">
-        <div class="label-holder">
-            <label for="product-description" class="form-label">Описание на продукт</label><br/>
+        <div class="form-group-add-pr-sc">
+            <select th:field="*{type}" id="product-type" name="type">
+                <option value="">Избери тип</option>
+                <option th:each="t : ${T(bg.softuni.servicesvratsa.model.enums.ProductTypeEnum).values()}"
+                        th:value="${t}" th:text="${t}">Водомер
+                </option>
+            </select>
         </div>
-        <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
-                name="description" id="product-description" placeholder="Описание на продукт.."></textarea><br/>
-        <small th:errors="*{description}" class="invalid-feedback text-danger">Username error message</small>
-    </div>
 
-    <div class="form-group">
-        <div class="label-holder">
-            <label for="product-picture" class="form-label">Добави снимка</label><br/>
+        <div class="form-group-add-pr-sc">
+            <div class="label-holder">
+                <label for="product-description" class="form-label">Описание на продукт</label><br/>
+            </div>
+            <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
+                      name="description" id="product-description" placeholder="Описание на продукт.."></textarea><br/>
+            <small th:errors="*{description}" class="invalid-feedback text-danger">Username error message</small>
         </div>
-        <input type="file" name="picture" id="product-picture"><br/>
-        <small th:if="${isEmpty}" class="invalid-feedback text-danger">*Задължително поле. Моля добавете снимка!</small><br/>
-    </div>
-    <input type="submit" value="Добави">
+
+        <div class="form-group-add-pr-sc">
+            <div class="label-holder">
+                <label for="product-picture" class="form-label">Добави снимка</label><br/>
+            </div>
+            <input type="file" name="picture" id="product-picture"><br/>
+            <small th:if="${isEmpty}" class="invalid-feedback text-danger">*Задължително поле. Моля добавете
+                снимка!</small><br/>
+        </div>
+        <input class="add-pr-sc-btn" type="submit" value="Добави">
 
 
-</form>
+    </form>
+</div>
+</main>
+
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

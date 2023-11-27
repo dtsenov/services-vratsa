@@ -5,14 +5,16 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
-<h2>Добави услуга</h2>
+<h2 class="add-pr-sc-h2">Добави услуга</h2>
+
+<div class="add-pr-sc-form">
 <form
         th:method="POST"
         th:action="@{/services/add}"
         th:object="${serviceAddBindingModel}"
         enctype="multipart/form-data">
 
-    <div class="form-group">
+    <div class="form-group-add-pr-sc">
         <div class="label-holder">
             <label for="service-name" class="form-label">Име на услуга</label>
         </div>
@@ -21,7 +23,7 @@
         <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group-add-pr-sc">
         <div class="label-holder">
             <label for="service-description" class="form-label">Описание на услуга</label>
         </div>
@@ -30,7 +32,7 @@
         <small th:errors="*{description}" class="invalid-feedback text-danger">Description error message</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group-add-pr-sc">
         <div class="label-holder">
             <label for="service-price" class="form-label">Цена на услуга</label>
         </div>
@@ -39,17 +41,18 @@
         <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
     </div>
 
-    <div class="form-group">
+    <div class="form-group-add-pr-sc">
         <div class="label-holder">
             <label for="service-picture" class="form-label">Добави снимка</label>
         </div>
         <input type="file" name="picture" id="service-picture"><br/>
         <small th:if="${isEmpty}" class="invalid-feedback text-danger">*Задължително поле. Моля добавете снимка!</small><br/>
     </div>
-    <input type="submit" value="Добави">
+    <input class="add-pr-sc-btn" type="submit" value="Добави">
 
 
 </form>
+</div>
 
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>

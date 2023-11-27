@@ -42,7 +42,8 @@
 .nav_list-item button,
 .header__text-btn,
 .logout-dropbtn,
-.add-to-cart-btn {
+.add-to-cart-btn,
+.add-pr-sc-btn {
     color: white;
     background-color: #1845ad;
     padding: 6px 30px;
@@ -273,7 +274,7 @@
 .form-label,
 .submit-form,
 .reg-submit-form {
-    font-size: 26px;
+    font-size: 20px;
     color: #1845ad;
 }
 
@@ -412,4 +413,39 @@
 .contact-confirm {
     text-align: center;
     color: #1845ad;
+}
+
+.add-pr-sc-h2 {
+    text-align: center;
+    color: #1845ad;
+    font-size: 32px;
+}
+
+.add-pr-sc-form {
+    display: flex;
+    justify-content: center;
+}
+
+.form-group-add-pr-sc input,
+.form-group-add-pr-sc textarea {
+    width: 100%;
+}
+
+.form-group-add-pr-sc textarea {
+    min-width: 760px;
+    min-height: 150px;
+}
+
+.form-group-add-pr-sc {
+    margin-bottom: 14px;
+}
+
+.add-pr-sc-btn {
+    padding: 10px 70px;
+    font-size: 20px;
+}
+
+.add-pr-sc-btn:hover {
+    background-color: lightgray;
+    color: black;
 }
