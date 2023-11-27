@@ -256,7 +256,7 @@
 
 .contacts__container-form,
 .register__container-form {
-    width: 50%;
+    width: 25%;
     margin-top: 50px;
     display: inline-block;
 }
@@ -403,4 +403,8 @@
     color: white;
     padding: 11px;
     margin-top: 10px;
+}
+
+.invalid-feedback {
+    color: red;
 }

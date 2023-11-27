@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.model.binding;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.Length;
 
@@ -15,6 +16,10 @@ public class UserRegisterBindingModel {
     @Length(min = 5, message = "Паролата трябва да е поне 5 символа")
     private String password;
 
+    @NotBlank(message = "Полето не трябва да е празно!")
+    @Length(min = 5, message = "Паролата трябва да е поне 5 символа")
+    private String confirmPassword;
+
     @NotBlank(message = "Полето трябва да съдържа валидно име!")
     private String firstName;
 
@@ -25,14 +30,16 @@ public class UserRegisterBindingModel {
     @Email(message = "Моля, въведете валиден имейл!")
     private String email;
 
-    @NotBlank(message = "Полето не трябва да е празно!")
+    @NotNull(message = "Полето не трябва да е празно!")
     @Positive(message = "Моля, въведете позитивно число!")
     private Integer age;
 
     @NotBlank(message = "Полето не трябва да е празно!")
+    @Length(min = 10, message = "Телефонния номер трябва да е поне 10 символа")
     private String phoneNumber;
 
     public UserRegisterBindingModel() {
+        age = 0;
     }
 
     public String getUsername() {
@@ -49,6 +56,14 @@ public class UserRegisterBindingModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFirstName() {

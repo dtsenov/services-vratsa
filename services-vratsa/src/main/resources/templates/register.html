@@ -7,37 +7,87 @@
 <main class="main__reg-form">
     <h2>РЕГИСТРАЦИЯ</h2>
     <div class="register__container-form">
-    <form th:method="POST"
-          th:action="@{/users/register}">
+        <form th:method="POST"
+              th:action="@{/users/register}"
+              th:object="${userRegisterBindingModel}">
 
-        <label for="username" class="form-label">Потребителско име</label>
-        <input type="text" id="username" name="username" class="reg-form" placeholder="Потребителско име..">
+            <div class="form-group">
+                <label for="username" class="form-label">Потребителско име</label>
+                <input th:field="*{username}" th:errorclass="'is-invalid alert-danger'" type="text" id="username"
+                       name="username" class="reg-form"
+                       required="required" minlength="5" maxlength="20" placeholder="Потребителско име..">
+                <small th:errors="*{username}" class="invalid-feedback text-danger">Username error
+                    message</small>
+            </div>
 
-        <label for="password" class="form-label">Парола</label>
-        <input type="password" id="password" name="password" class="reg-form" placeholder="Парола..">
+            <div class="form-group">
+                <label for="password" class="form-label">Парола</label>
+                <input th:field="*{password}" th:errorclass="'is-invalid alert-danger'" type="password" id="password"
+                       name="password" class="reg-form"
+                       required="required" minlength="5" placeholder="Парола..">
+                <small th:errors="*{password}" class="invalid-feedback text-danger">Password error
+                    message</small>
 
-        <label for="confirmPassword" class="form-label">Потвърдете паролата</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" class="reg-form"
-               placeholder="Потвърдете паролата..">
+            </div>
 
-        <label for="fname" class="form-label">Име</label>
-        <input type="text" id="fname" name="firstName" class="reg-form" placeholder="Име..">
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label">Потвърдете паролата</label>
+                <input th:field="*{confirmPassword}" th:errorclass="'is-invalid alert-danger'" type="password"
+                       id="confirmPassword" name="confirmPassword"
+                       required="required" minlength="5" class="reg-form"
+                       placeholder="Потвърдете паролата..">
+                <small th:errors="*{confirmPassword}" class="invalid-feedback text-danger">Confirm
+                    password error message</small>
+            </div>
 
-        <label for="lname" class="form-label">Фамилия</label>
-        <input type="text" id="lname" name="lastName" class="reg-form" placeholder="Фамилия..">
+            <div class="form-group">
+                <label for="firstName" class="form-label">Име</label>
+                <input th:field="*{firstName}" th:errorclass="'is-invalid alert-danger'" type="text" id="firstName"
+                       name="firstName" class="reg-form"
+                       required="required" minlength="1" placeholder="Име..">
+                <small th:errors="*{firstName}" class="invalid-feedback text-danger">First name
+                    error message</small>
 
-        <label for="age" class="form-label">Години</label>
-        <input type="text" id="age" name="age" class="reg-form" placeholder="Години..">
+            </div>
 
-        <label for="email" class="form-label">Имейл</label>
-        <input type="text" id="email" name="email" class="reg-form" placeholder="Имейл..">
+            <div class="form-group">
+                <label for="lastName" class="form-label">Фамилия</label>
+                <input th:field="*{lastName}" th:errorclass="'is-invalid alert-danger'" type="text" id="lastName"
+                       name="lastName" class="reg-form"
+                       required="required" minlength="1" placeholder="Фамилия..">
+                <small th:errors="*{lastName}" class="invalid-feedback text-danger">Last name error
+                    message</small>
+            </div>
 
-        <label for="phone" class="form-label">Телефон</label>
-        <input type="text" id="phone" name="phoneNumber" class="reg-form" placeholder="+359..">
+            <div class="form-group">
+                <label for="age" class="form-label">Години</label>
+                <input th:field="*{age}" th:errorclass="'is-invalid alert-danger'" type="number" min="1" id="age" name="age"
+                       class="reg-form" placeholder="Години..">
+                <small th:errors="*{age}" class="invalid-feedback text-danger">Age error
+                    message</small>
+            </div>
 
-        <input type="submit" value="Регистрация" class="reg-submit-form">
+            <div class="form-group">
+                <label for="email" class="form-label">Имейл</label>
+                <input th:field="*{email}" th:errorclass="'is-invalid alert-danger'" type="text" id="email" name="email"
+                       class="reg-form"
+                       required="required" minlength="1" placeholder="Имейл..">
+                <small th:errors="*{email}" class="invalid-feedback text-danger">Email error
+                    message</small>
+            </div>
 
-    </form>
+            <div class="form-group">
+                <label for="phoneNumber" class="form-label">Телефон</label>
+                <input th:field="*{phoneNumber}" th:errorclass="'is-invalid alert-danger'" type="text" id="phoneNumber"
+                       name="phoneNumber" class="reg-form"
+                       required="required" minlength="10" placeholder="+359..">
+                <small th:errors="*{phoneNumber}" class="invalid-feedback text-danger">Phone number
+                    error message</small>
+            </div>
+
+            <input type="submit" value="Регистрация" class="reg-submit-form">
+
+        </form>
     </div>
 </main>
 </body>
