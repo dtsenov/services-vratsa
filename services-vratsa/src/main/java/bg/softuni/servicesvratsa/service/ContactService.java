@@ -1,5 +1,7 @@
 package bg.softuni.servicesvratsa.service;
 
+import bg.softuni.servicesvratsa.model.service.ContactServiceModel;
+
 public interface ContactService {
-    ContactService saveMessage(ContactService map);
+    void saveMessage(ContactServiceModel contactServiceModel);
 }

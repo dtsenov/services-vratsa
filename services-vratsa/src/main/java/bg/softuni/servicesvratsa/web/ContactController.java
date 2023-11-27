@@ -1,12 +1,14 @@
 package bg.softuni.servicesvratsa.web;
 
 import bg.softuni.servicesvratsa.model.binding.ContactBindingModel;
+import bg.softuni.servicesvratsa.model.service.ContactServiceModel;
 import bg.softuni.servicesvratsa.service.ContactService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -21,12 +23,17 @@ public class ContactController {
         this.modelMapper = modelMapper;
     }
 
+    @ModelAttribute
+    public ContactBindingModel contactBindingModel() {
+        return new ContactBindingModel();
+    }
+
     @GetMapping("/contacts")
     public String contacts() {
         return "contacts";
     }
 
-    @PostMapping
+    @PostMapping("/contacts")
     public String contactConfirm(@Valid ContactBindingModel contactBindingModel,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
@@ -41,7 +48,7 @@ public class ContactController {
 
         }
 
-        contactService.saveMessage(modelMapper.map(contactBindingModel, ContactService.class));
+        contactService.saveMessage(modelMapper.map(contactBindingModel, ContactServiceModel.class));
 
         return "contact-confirm";
     }

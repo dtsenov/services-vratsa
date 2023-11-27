@@ -408,3 +408,8 @@
 .invalid-feedback {
     color: red;
 }
+
+.contact-confirm {
+    text-align: center;
+    color: #1845ad;
+}

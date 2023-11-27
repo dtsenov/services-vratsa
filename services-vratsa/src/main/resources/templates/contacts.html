@@ -8,22 +8,52 @@
 <main class="main__contact-form">
     <h2>СВЪРЖЕТЕ СЕ С НАС</h2>
     <div class="contacts__container-form">
-        <form action="POST">
+        <form th:method="POST"
+              th:action="@{/contacts}"
+              th:object="${contactBindingModel}">
 
-            <label for="fname" class="form-label">Име</label>
-            <input type="text" id="fname" name="firstname" class="form-input" placeholder="Име..">
+            <div class="form-group">
+                <label for="firstname" class="form-label">Име</label>
+                <input th:field="*{firstName}" th:errorclass="'is-invalid alert-danger'"
+                       required="required" type="text" id="firstname" name="firstname" class="form-input"
+                       placeholder="Име..">
+                <small th:errors="*{firstName}" class="invalid-feedback text-danger">First name
+                    error message</small>
+            </div>
 
-            <label for="lname" class="form-label">Фамилия</label>
-            <input type="text" id="lname" name="lastname" class="form-input" placeholder="Фамилия..">
+            <div class="form-group">
+                <label for="lastname" class="form-label">Фамилия</label>
+                <input th:field="*{lastName}" th:errorclass="'is-invalid alert-danger'"
+                       required="required" type="text" id="lastname" name="lastname" class="form-input"
+                       placeholder="Фамилия..">
+                <small th:errors="*{lastName}" class="invalid-feedback text-danger">Last name
+                    error message</small>
+            </div>
 
-            <label for="email" class="form-label">Имейл</label>
-            <input type="text" id="email" name="email" class="form-input" placeholder="Имейл..">
+            <div class="form-group">
+                <label for="email" class="form-label">Имейл</label>
+                <input th:field="*{email}" th:errorclass="'is-invalid alert-danger'"
+                       required="required" type="text" id="email" name="email" class="form-input" placeholder="Имейл..">
+                <small th:errors="*{email}" class="invalid-feedback text-danger">Email error message</small>
+            </div>
 
-            <label for="phone" class="form-label">Телефон</label>
-            <input type="text" id="phone" name="phone" class="form-input" placeholder="+359..">
+            <div class="form-group">
+                <label for="phoneNumber" class="form-label">Телефон</label>
+                <input th:field="*{phoneNumber}" th:errorclass="'is-invalid alert-danger'"
+                       required="required" type="text" id="phoneNumber" name="phoneNumber" class="form-input"
+                       placeholder="+359..">
+                <small th:errors="*{phoneNumber}" class="invalid-feedback text-danger">Phone number
+                    error message</small>
+            </div>
 
-            <label for="subject" class="form-label">Съобщение</label>
-            <textarea id="subject" name="subject" placeholder="Съобщение.." class="form-input" style="height:200px"></textarea>
+            <div class="form-group">
+                <label for="subject" class="form-label">Съобщение</label>
+                <textarea th:field="*{message}" th:errorclass="'is-invalid alert-danger'"
+                          required="required" id="subject" name="subject" placeholder="Съобщение.." class="form-input"
+                          style="height:200px"></textarea>
+                <small th:errors="*{message}" class="invalid-feedback text-danger">Message
+                    error message</small>
+            </div>
 
             <input type="submit" value="Изпрати" class="submit-form">
 

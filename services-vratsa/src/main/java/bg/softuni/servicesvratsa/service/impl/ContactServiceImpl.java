@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.service.impl;
 
 import bg.softuni.servicesvratsa.model.entity.ContactEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
+import bg.softuni.servicesvratsa.model.service.ContactServiceModel;
 import bg.softuni.servicesvratsa.repository.ContactRepository;
 import bg.softuni.servicesvratsa.service.ContactService;
 import bg.softuni.servicesvratsa.service.UserService;
@@ -24,17 +25,14 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactService saveMessage(ContactService contactService) {
+    public void saveMessage(ContactServiceModel contactServiceModel) {
 
-        ContactEntity contactEntity = modelMapper.map(contactService, ContactEntity.class);
+        ContactEntity contactEntity = modelMapper.map(contactServiceModel, ContactEntity.class);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserEntity user = userService.findByUsername(authentication.getName());
 
         contactEntity.setUser(user);
-        contactEntity.setAnswered(false);
 
         contactRepository.save(contactEntity);
-
-        return null;
     }
 }
