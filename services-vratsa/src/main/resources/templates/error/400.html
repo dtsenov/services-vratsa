@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="bad-request-error">
+  <p>Възникна грешка при обработката на заявката.</p>
+  <p>Моля, проверете въведените данни и опитайте отново.</p>
+  <img src="/images/bad-request-error.png" alt="bad-request-error" width="600" height="300">
+</div>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>

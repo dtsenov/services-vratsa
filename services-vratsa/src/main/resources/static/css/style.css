@@ -417,7 +417,9 @@
 
 .add-pr-sc-h2,
 .product-not-found,
-.page-not-found {
+.page-not-found,
+.server-error,
+.bad-request-error {
     text-align: center;
     color: #1845ad;
     font-size: 32px;
