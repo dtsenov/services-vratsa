@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="server-error">
+    <p>Възникна проблем при обработката на заявката. Извиняваме се за неудобството.</p>
+    <p>Екипът ни за поддръжка е информиран и работи по отстраняването на проблема.</p>
+    <p>Моля, опитайте отново по-късно.</p>
+    <img src="/images/server-error.png" alt="server-error" width="600" height="300">
+</div>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>
