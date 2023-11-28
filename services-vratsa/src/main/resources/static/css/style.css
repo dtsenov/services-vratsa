@@ -273,7 +273,8 @@
 
 .form-label,
 .submit-form,
-.reg-submit-form {
+.reg-submit-form,
+.login-form button {
     font-size: 20px;
     color: #1845ad;
 }
@@ -452,4 +453,27 @@
 .add-pr-sc-btn:hover {
     background-color: lightgray;
     color: black;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-log {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 20px;
+}
+
+.login-form label {
+    color: #1845ad;
+    font-size: 20px;
+}
+
+.login-form h3 {
+   font-size: 36px;
+    color: #1845ad;
+    margin-bottom: 10px;
 }

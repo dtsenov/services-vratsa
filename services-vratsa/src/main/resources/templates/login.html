@@ -5,23 +5,26 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
-<form th:method="POST"
+<form class="login-form"
+      th:method="POST"
       th:action="@{/users/login}">
 
     <h3>Вход</h3>
 
     <p th:if="${hasError}" class="invalid-feedback">ГРЕШНО ПОТРЕБИТЕЛСКО ИМЕ ИЛИ ПАРОЛА!</p>
     <label for="username">Потребителско име</label>
-    <input type="text"
+    <input class="input-log"
+           type="text"
            name="username"
-           placeholder="Username"
+           placeholder="Потребителско име.."
            id="username">
 
     <label for="password">Парола</label>
-    <input type="password"
+    <input class="input-log"
+           type="password"
            min="3" max="20"
            name="password"
-           placeholder="Password"
+           placeholder="Парола.."
            id="password">
 
     <div>
@@ -30,7 +33,7 @@
                name="rememberme"
                id="rememberme">
     </div>
-    <button>Log In</button>
+    <button>Вход</button>
 </form>
 
 
