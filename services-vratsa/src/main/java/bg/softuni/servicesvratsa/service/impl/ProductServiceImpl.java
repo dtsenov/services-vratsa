@@ -167,7 +167,7 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = productRepository.findById(id).orElse(null);
 
         if (product == null) {
-            throw new ProductNotFoundException("Продуктът който се опитвате да достъпите с ID: " + id + " неможе да бъде открит!");
+            throw new ProductNotFoundException("Продуктът, който се опитвате да достъпите с ID: " + id + " неможе да бъде открит!");
         }
 
         return modelMapper.map(product, ProductServiceModel.class);

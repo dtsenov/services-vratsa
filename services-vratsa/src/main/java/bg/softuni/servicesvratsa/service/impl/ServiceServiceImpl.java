@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.exception.ProductNotFoundException;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.entity.ServiceEntity;
 import bg.softuni.servicesvratsa.model.service.ServicesServiceModel;
@@ -118,14 +119,16 @@ public class ServiceServiceImpl implements ServiceService {
     public ServiceViewModel findServiceById(Long id) {
         ServiceEntity serviceEntity = serviceRepository.findById(id).orElse(null);//TODO THROW EXCEPTION
 
+        if (serviceEntity == null) {
+            throw new ProductNotFoundException("Услугата, която се опитвате да достъпите с ID: " + id + " неможе да бъде открита!");
+        }
+
         ServiceViewModel serviceViewModel = modelMapper.map(serviceEntity, ServiceViewModel.class);
 
-        if (serviceEntity != null) {
-            PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
+        PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
 
-            serviceViewModel.setPictureTitle(picture.getTitle());
-            serviceViewModel.setPictureUrl(picture.getUrl());
-        }
+        serviceViewModel.setPictureTitle(picture.getTitle());
+        serviceViewModel.setPictureUrl(picture.getUrl());
 
         return serviceViewModel;
 
@@ -135,17 +138,17 @@ public class ServiceServiceImpl implements ServiceService {
     public ServiceViewModel findServiceByServiceId(String serviceId) {
         ServiceEntity serviceEntity = serviceRepository.findByServiceId(serviceId).orElse(null);
 
-        ServiceViewModel serviceViewModel = modelMapper.map(serviceEntity, ServiceViewModel.class);
-
-        if (serviceEntity != null) {
-            PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
-
-            serviceViewModel.setPictureTitle(picture.getTitle());
-            serviceViewModel.setPictureUrl(picture.getUrl());
+        if (serviceEntity == null) {
+            throw new ProductNotFoundException("Услугата, която се опитвате да достъпите с ID: " + serviceId + " неможе да бъде открита!");
         }
 
-        return serviceViewModel;
+        ServiceViewModel serviceViewModel = modelMapper.map(serviceEntity, ServiceViewModel.class);
 
-        //TODO
+        PictureEntity picture = pictureService.findPictureById(serviceEntity.getPictureId());
+
+        serviceViewModel.setPictureTitle(picture.getTitle());
+        serviceViewModel.setPictureUrl(picture.getUrl());
+
+        return serviceViewModel;
     }
 }

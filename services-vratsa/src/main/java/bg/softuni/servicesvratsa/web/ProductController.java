@@ -95,8 +95,6 @@ public class ProductController {
 
         ProductServiceModel product = productService.findProductById(id);
 
-
-
         String productId = product.getProductId();
 
         ProductCurrentViewModel currentProduct = productService.findProductByProductId(productId);
