@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.exception.ProductNotFoundException;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.entity.ProductEntity;
 import bg.softuni.servicesvratsa.model.enums.ProductTypeEnum;
@@ -162,8 +163,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity findProductById(Long id) {
-        return productRepository.findById(id).orElse(null);
+    public ProductServiceModel findProductById(Long id) {
+        ProductEntity product = productRepository.findById(id).orElse(null);
+
+        if (product == null) {
+            throw new ProductNotFoundException("Продуктът който се опитвате да достъпите с ID: " + id + " неможе да бъде открит!");
+        }
+
+        return modelMapper.map(product, ProductServiceModel.class);
     }
 }
 

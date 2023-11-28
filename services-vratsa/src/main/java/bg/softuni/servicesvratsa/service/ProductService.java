@@ -16,5 +16,5 @@ public interface ProductService {
 
     ProductCurrentViewModel findProductByProductId(String productId);
 
-    ProductEntity findProductById(Long id);
+    ProductServiceModel findProductById(Long id);
 }

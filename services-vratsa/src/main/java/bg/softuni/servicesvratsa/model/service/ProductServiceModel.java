@@ -10,6 +10,8 @@ public class ProductServiceModel {
 
     private String name;
 
+    private String productId;
+
     private BigDecimal price;
 
     private String brand;
@@ -35,6 +37,14 @@ public class ProductServiceModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public BigDecimal getPrice() {

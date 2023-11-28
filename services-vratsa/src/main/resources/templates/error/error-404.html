@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}">
+    <title>Грешка</title>
+</head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="product-not-found">
+    <p th:text="${error}">ПРОДУКТЪТ/УСЛУГАТА НЕ СЪЩЕСТВУВА!</p>
+    <img class="product-not-found-img" src="/images/empty-box.png" alt="empty">
+</div>
+
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>

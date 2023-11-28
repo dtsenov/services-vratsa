@@ -415,7 +415,8 @@
     color: #1845ad;
 }
 
-.add-pr-sc-h2 {
+.add-pr-sc-h2,
+.product-not-found {
     text-align: center;
     color: #1845ad;
     font-size: 32px;

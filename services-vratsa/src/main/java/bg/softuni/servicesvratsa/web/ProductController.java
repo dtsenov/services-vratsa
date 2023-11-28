@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.web;
 
+import bg.softuni.servicesvratsa.exception.ProductNotFoundException;
 import bg.softuni.servicesvratsa.model.binding.ProductAddBindingModel;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.entity.ProductEntity;
@@ -11,6 +12,7 @@ import bg.softuni.servicesvratsa.service.CartService;
 import bg.softuni.servicesvratsa.service.PictureService;
 import bg.softuni.servicesvratsa.service.ProductService;
 import jakarta.validation.Valid;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,8 +93,11 @@ public class ProductController {
     @GetMapping("/all/{id}")
     public String productInfo(@PathVariable("id") Long id, Model model) {
 
-        ProductEntity productEntity = productService.findProductById(id);
-        String productId = productEntity.getProductId();
+        ProductServiceModel product = productService.findProductById(id);
+
+
+
+        String productId = product.getProductId();
 
         ProductCurrentViewModel currentProduct = productService.findProductByProductId(productId);
         List<CartViewModel> cartViewModels = cartService.findAllInCart();
