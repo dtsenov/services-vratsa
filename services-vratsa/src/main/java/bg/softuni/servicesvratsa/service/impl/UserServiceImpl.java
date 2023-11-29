@@ -4,6 +4,7 @@ import bg.softuni.servicesvratsa.model.entity.RoleEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.enums.RoleNameEnum;
 import bg.softuni.servicesvratsa.model.service.UserServiceModel;
+import bg.softuni.servicesvratsa.model.view.UserViewModel;
 import bg.softuni.servicesvratsa.model.view.WorkerViewModel;
 import bg.softuni.servicesvratsa.repository.RoleRepository;
 import bg.softuni.servicesvratsa.repository.UserRepository;
@@ -110,6 +111,37 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
+    }
+
+    @Override
+    public List<UserViewModel> findAllWorkers() {
+        List<UserEntity> allByRole = userRepository
+                .findAllByRole(roleRepository.findByRole(RoleNameEnum.WORKER));
+
+        List<UserViewModel> allWorkers = new ArrayList<>();
+
+        allByRole
+                .forEach(userEntity -> {
+                    UserViewModel userViewModel = modelMapper.map(userEntity, UserViewModel.class);
+                    allWorkers.add(userViewModel);
+                });
+
+        return allWorkers;
+    }
+
+    @Override
+    public List<UserViewModel> findAllClients() {
+        List<UserEntity> allByRole = userRepository.findAllByRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
+
+        List<UserViewModel> allClients = new ArrayList<>();
+
+        allByRole
+                .forEach(userEntity -> {
+                    UserViewModel userViewModel = modelMapper.map(userEntity, UserViewModel.class);
+                    allClients.add(userViewModel);
+                });
+
+        return allClients;
     }
 
 }

@@ -60,6 +60,8 @@
                     <div class="dropdown-content">
                         <a href="/services/add">Добави услуга</a>
                         <a href="/products/add">Добави продукт</a>
+                        <a href="/admin/clients">Клиенти</a>
+                        <a href="/admin/workers">Работници</a>
                     </div>
                 </div>
             </li>
@@ -70,14 +72,13 @@
             </li>
             <li class="nav_list-item" sec:authorize="!isAuthenticated()">
                 <a href="/users/register">
-                    <button class="dropbtn">Регистрация</button>
+                    <button class="dropbtn" type="submit">Регистрация</button>
                 </a>
             </li>
             <li class="nav_list-item" sec:authorize="isAuthenticated()">
                 <form th:method="post"
-                      th:action="@{/users/logout}"
-                      class="logout-dropbtn">
-                    <input type="submit" class="logout-dropbtn" value="Изход"/>
+                      th:action="@{/users/logout}">
+                    <button class="dropbtn" type="submit">Изход</button>
                 </form>
             </li>
         </ul>
@@ -88,7 +89,7 @@
         <h2 class="header__text-subheading">Бързи ВиК услуги и Ремонти по Домовете във Враца.
             Квалифицирани Водопроводчици за Качествени ВиК ремонти.</h2>
 
-        <button class="header__text-btn"><a href="/workers">Нашите специалисти</a></button>
+        <a href="/our-specialists"><button class="header__text-btn">Нашите специалисти</button></a>
     </div>
 </header>
 </body>

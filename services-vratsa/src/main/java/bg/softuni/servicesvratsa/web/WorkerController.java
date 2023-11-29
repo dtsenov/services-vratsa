@@ -18,12 +18,12 @@ public class WorkerController {
     }
 
 
-    @GetMapping("/workers")
+    @GetMapping("/our-specialists")
     public String workers(Model model) {
 
        List<WorkerViewModel> workers = workerService.findAllWorkers();
         model.addAttribute("workers", workers);
 
-        return "our-workers";
+        return "our-specialists";
     }
 }
