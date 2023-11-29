@@ -7,31 +7,46 @@
 
 
 <div class="pr-table-wrapper">
-<table class="product-table table">
-    <thead>
-    <tr>
-        <th> Име на продукт </th>
-        <th> Цена на продукт </th>
-        <th> Производител </th>
-        <th> Тип </th>
-        <th> Снимка </th>
-        <th> Детайли </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:if="${allProducts.isEmpty()}">
-        <td colspan="2"> В момента няма налични продукти. </td>
-    </tr>
-    <tr th:each="p : ${allProducts}" class="product-tr-hover tr">
-        <td><span th:text="${p.name}"> Име </span></td>
-        <td><span th:text="${p.price} + 'лв.'"> Цена </span></td>
-        <td><span th:text="${p.brand}"> Производител </span></td>
-        <td><span th:text="${p.type}"> Тип </span></td>
-        <td><img th:src="${p.pictureUrl}" th:alt="${p.pictureTitle}" height="50" width="50" class="img-zoom-hover"></td>
-        <td><a th:href="@{/products/all/{id}(id=${p.id})}">Виж</a></td>
-    </tr>
-    </tbody>
-</table>
+    <table class="product-table table">
+        <thead>
+        <tr>
+            <th> Име на продукт</th>
+            <th> Цена на продукт</th>
+            <th> Производител</th>
+            <th> Тип</th>
+            <th> Снимка</th>
+            <th> Детайли</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${allProducts.isEmpty()}">
+            <td colspan="2"> В момента няма налични продукти.</td>
+        </tr>
+        <tr th:each="p : ${allProducts}" class="product-tr-hover tr">
+            <td><span th:text="${p.name}"> Име </span></td>
+            <td><span th:text="${p.price} + 'лв.'"> Цена </span></td>
+            <td><span th:text="${p.brand}"> Производител </span></td>
+
+            <td>
+                <th:block th:if="${p.type.name() == 'PLUMBING_WRENCH'}">
+                    <span>Водопроводен ключ</span>
+                </th:block>
+
+                <th:block th:if="${p.type.name() == 'WATER_METER'}">
+                    <span>Водомер</span>
+                </th:block>
+
+                <th:block th:if="${p.type.name() == 'WATER_TAP'}">
+                    <span>Кран</span>
+                </th:block>
+            </td>
+
+            <td><img th:src="${p.pictureUrl}" th:alt="${p.pictureTitle}" height="50" width="50" class="img-zoom-hover">
+            </td>
+            <td><a th:href="@{/products/all/{id}(id=${p.id})}">Виж</a></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
