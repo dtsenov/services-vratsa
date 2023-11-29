@@ -41,10 +41,6 @@ public class SecurityConfiguration {
                                 .requestMatchers("/products/add").hasRole("BOSS")
                                 .requestMatchers("/products/all").permitAll()
                                 .requestMatchers("/services/all").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/products/**").hasAnyRole("CLIENT", "BOSS", "WORKER")
-                                .requestMatchers(HttpMethod.POST, "/contacts").hasAnyRole("CLIENT", "BOSS", "WORKER")
-                                .requestMatchers(HttpMethod.GET, "/products/all/**", "/cart", "/cart/**").hasAnyRole("CLIENT", "BOSS", "WORKER")
-                                .requestMatchers(HttpMethod.DELETE, "/cart/**").hasRole("BOSS")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(
