@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity user = new UserEntity();
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
 
             switch (i) {
                 case 0:
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
                     break;
                 case 1:
                     user.setId(2L);
-                    user.setFirstName("Tosho");
-                    user.setLastName("Toshev");
+                    user.setFirstName("Тодор");
+                    user.setLastName("Тодоров");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
                     user.setEmail("tosho@example.com");
                     user.setUsername("tosho");
@@ -67,14 +67,25 @@ public class UserServiceImpl implements UserService {
                     break;
                 case 2:
                     user.setId(3L);
-                    user.setFirstName("Gosho");
-                    user.setLastName("Goshev");
+                    user.setFirstName("Георги");
+                    user.setLastName("Георгиев");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
                     user.setEmail("gosho@example.com");
                     user.setUsername("gosho");
                     user.setPassword(passwordEncoder.encode("gosho"));
                     user.setPhoneNumber("+359848444422");
                     user.setAge(19);
+                    break;
+                case 3:
+                    user.setId(4L);
+                    user.setFirstName("Илиян");
+                    user.setLastName("Илиев");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
+                    user.setEmail("tosho@example.com");
+                    user.setUsername("ilian");
+                    user.setPassword(passwordEncoder.encode("ilian"));
+                    user.setPhoneNumber("+359848444456");
+                    user.setAge(30);
                     break;
             }
 
@@ -101,16 +112,4 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username).orElse(null);
     }
 
-    @Override
-    public List<WorkerViewModel> findAllWorkers() {
-        List<UserEntity> allByRole = userRepository.findAllByRole(roleRepository.findByRole(RoleNameEnum.WORKER));
-        List<WorkerViewModel> workers = new ArrayList<>();
-
-        allByRole.forEach(userEntity -> {
-            WorkerViewModel worker = modelMapper.map(userEntity, WorkerViewModel.class);
-            workers.add(worker);
-        });
-
-        return workers;
-    }
 }

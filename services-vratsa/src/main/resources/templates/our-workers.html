@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="cards__workers-card-container">
+    <div class="worker-card-container" th:each="w : ${workers}" th:object="${w}">
+        <table>
+            <div class="workers-head" th:text="*{age > 25} ? 'ПРОФЕСИОНАЛИСТ' : 'МЛАДШИ'"></div>
+            <tbody>
+            <tr>
+                <td>Име:</td>
+                <td th:text="|*{firstName} *{lastName}|">Име</td>
+            </tr>
+
+            <tr>
+                <td>Години:</td>
+                <td th:text="*{age}">Години:</td>
+            </tr>
+
+            <tr>
+                <td>Телефон:</td>
+                <td th:text="*{phoneNumber}">Телефон</td>
+            </tr>
+
+            <tr>
+                <td>Имейл:</td>
+                <td th:text="*{email}">Имейл</td>
+            </tr>
+
+            <tr>
+                <td>Описание:</td>
+                <td th:text="*{description}">Описание</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>
