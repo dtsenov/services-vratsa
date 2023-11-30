@@ -3,7 +3,6 @@ package bg.softuni.servicesvratsa.service.impl;
 import bg.softuni.servicesvratsa.model.entity.RoleEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.enums.RoleNameEnum;
-import bg.softuni.servicesvratsa.repository.RoleRepository;
 import bg.softuni.servicesvratsa.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,6 +48,9 @@ public class ServicesVratsaUserDetailServiceTest {
 
         assertNotNull(userDetails);
         assertEquals(testUserEntity.getUsername(), userDetails.getUsername());
+        assertEquals(testUserEntity.getPassword(), userDetails.getPassword());
+        assertEquals("ROLE_" + testUserEntity.getRole().getRole(),
+                userDetails.getAuthorities().stream().findFirst().get().toString());
     }
 
     private static UserEntity createUserToTest() {
