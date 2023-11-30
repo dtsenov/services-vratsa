@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.exception.UserNotFoundException;
 import bg.softuni.servicesvratsa.model.entity.RoleEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.enums.RoleNameEnum;
@@ -9,12 +10,14 @@ import bg.softuni.servicesvratsa.model.view.WorkerViewModel;
 import bg.softuni.servicesvratsa.repository.RoleRepository;
 import bg.softuni.servicesvratsa.repository.UserRepository;
 import bg.softuni.servicesvratsa.service.UserService;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -142,6 +145,32 @@ public class UserServiceImpl implements UserService {
                 });
 
         return allClients;
+    }
+
+    @Override
+    public void hireWorker(Long clientId) {
+
+        UserEntity userEntity = userRepository.findById(clientId).orElse(null);
+
+        if (userEntity == null) {
+            throw new UserNotFoundException("Потребителят, който се опитвате да достъпите с ID: " + clientId + " неможе да бъде открит!");
+        }
+
+        userEntity.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
+        userRepository.save(userEntity);
+    }
+
+    @Override
+    public void fireWorker(Long workerId) {
+
+        UserEntity userEntity = userRepository.findById(workerId).orElse(null);
+
+        if (userEntity == null) {
+            throw new UserNotFoundException("Потребителят, който се опитвате да достъпите с ID: " + workerId + " неможе да бъде открит!");
+        }
+
+        userEntity.setRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
+        userRepository.save(userEntity);
     }
 
 }

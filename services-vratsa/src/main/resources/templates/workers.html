@@ -4,6 +4,47 @@
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="workers-table-wrapper">
+    <table class="workers-table table">
+        <thead>
+        <tr>
+            <th>Потребителско име</th>
+            <th>Име</th>
+            <th>Фамилия</th>
+            <th>Имейл</th>
+            <th>Години</th>
+            <th>Телефон</th>
+            <th>Уволни</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${workers.isEmpty()}">
+            <td colspan="2"> В момента няма налични продукти.</td>
+        </tr>
+        <tr th:each="w : ${workers}" class="worker-tr-hover tr">
+            <td><span th:text="${w.username}">Потребителско име</span></td>
+            <td><span th:text="${w.firstName}">Име</span></td>
+            <td><span th:text="${w.lastName}">Фамилия</span></td>
+            <td><span th:text="${w.email}">Имейл</span></td>
+            <td><span th:text="${w.age}">Години</span></td>
+            <td><span th:text="${w.phoneNumber}">Телефон</span></td>
+
+            <td>
+                <form th:action="@{/admin/workers/fire}"
+                      th:method="POST"
+                      th:object="${w}">
+
+                    <input type="hidden" th:name="workerId" th:value="${w.id}" >
+
+                    <button type="submit">Уволни</button>
+
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

@@ -4,6 +4,48 @@
 <head th:replace="~{fragments/commons::head}"></head>
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="clients-table-wrapper">
+    <table class="clients-table table">
+        <thead>
+        <tr>
+            <th>Потребителско име</th>
+            <th>Име</th>
+            <th>Фамилия</th>
+            <th>Имейл</th>
+            <th>Години</th>
+            <th>Телефон</th>
+            <th>Наеми</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${clients.isEmpty()}">
+            <td colspan="2"> В момента няма налични продукти.</td>
+        </tr>
+        <tr th:each="c : ${clients}" class="worker-tr-hover tr">
+            <td><span th:text="${c.username}">Потребителско име</span></td>
+            <td><span th:text="${c.firstName}">Име</span></td>
+            <td><span th:text="${c.lastName}">Фамилия</span></td>
+            <td><span th:text="${c.email}">Имейл</span></td>
+            <td><span th:text="${c.age}">Години</span></td>
+            <td><span th:text="${c.phoneNumber}">Телефон</span></td>
+
+            <td>
+                <form th:action="@{/admin/clients/hire}"
+                      th:method="POST"
+                      th:object="${c}">
+
+                    <input type="hidden" th:name="clientId" th:value="${c.id}"/>
+
+                    <button type="submit">Наеми</button>
+
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

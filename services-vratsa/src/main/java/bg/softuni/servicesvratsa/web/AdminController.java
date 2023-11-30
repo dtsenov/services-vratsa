@@ -5,7 +5,9 @@ import bg.softuni.servicesvratsa.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,5 +39,17 @@ public class AdminController {
         model.addAttribute("clients", clients);
 
         return "clients";
+    }
+
+    @PostMapping("/clients/hire")
+    public String hireWorker(@RequestParam ("clientId") Long clientId) {
+        userService.hireWorker(clientId);
+        return "redirect:/admin/clients";
+    }
+
+    @PostMapping("/workers/fire")
+    public String fireWorker(@RequestParam("workerId") Long workerId) {
+        userService.fireWorker(workerId);
+        return "redirect:/admin/workers";
     }
 }

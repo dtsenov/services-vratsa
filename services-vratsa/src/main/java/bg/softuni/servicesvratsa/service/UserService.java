@@ -18,4 +18,8 @@ public interface UserService {
     List<UserViewModel> findAllWorkers();
 
     List<UserViewModel> findAllClients();
+
+    void hireWorker(Long clientId);
+
+    void fireWorker(Long workerId);
 }
