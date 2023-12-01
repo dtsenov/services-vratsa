@@ -92,11 +92,9 @@ public class ServiceController {
 
         ServiceViewModel currentService = serviceService.findServiceById(id);
         List<CartViewModel> cartViewModels = cartService.findAllInCart();
-//        Double totalCartPrice = cartService.totalPrice();
 
         model.addAttribute("currentService", currentService);
         model.addAttribute("cartViewModels", cartViewModels);
-//        model.addAttribute("totalCartPrice", totalCartPrice);
 
         return "service-info";
     }

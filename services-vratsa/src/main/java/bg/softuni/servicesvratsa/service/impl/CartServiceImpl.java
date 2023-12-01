@@ -45,24 +45,24 @@ public class CartServiceImpl implements CartService {
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public Double totalPrice() {
-
-        Double totalSum = 0.00;
-
-        for (CartEntity cartEntity : cartRepository.findAll()) {
-            ProductCurrentViewModel productById = productService.findProductByProductId(cartEntity.getProductId());
-
-            totalSum += Double.parseDouble(String.valueOf(productById.getPrice()));
-        }
-        return totalSum;
-    }
-
-    @Override
-    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
-        cartRepository.deleteById(cartViewModel.getId());
-
-    }
+//    @Override
+//    public Double totalPrice() {
+//
+//        Double totalSum = 0.00;
+//
+//        for (CartEntity cartEntity : cartRepository.findAll()) {
+//            ProductCurrentViewModel productById = productService.findProductByProductId(cartEntity.getProductId());
+//
+//            totalSum += Double.parseDouble(String.valueOf(productById.getPrice()));
+//        }
+//        return totalSum;
+//    }
+//
+//    @Override
+//    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
+//        cartRepository.deleteById(cartViewModel.getId());
+//
+//    }
 
     @Override
     public void addProductToCart(String username, AddToCartDTO addToCartDTO) {

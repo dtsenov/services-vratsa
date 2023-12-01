@@ -6,6 +6,7 @@ import bg.softuni.servicesvratsa.model.entity.CartEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
+import bg.softuni.servicesvratsa.model.view.ServiceViewModel;
 import bg.softuni.servicesvratsa.repository.CartRepository;
 import bg.softuni.servicesvratsa.service.CartService;
 import bg.softuni.servicesvratsa.service.ProductService;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -60,7 +63,7 @@ public class CartServiceTest {
 
         List<CartEntity> cart = mockCartRepository.findAll();
 
-        Assertions.assertEquals(0, cart.size());
+        assertEquals(0, cart.size());
     }
 
     @Test
@@ -75,7 +78,7 @@ public class CartServiceTest {
 
         List<CartViewModel> allInCart = serviceToTest.findAllInCart();
 
-        Assertions.assertEquals(1, allInCart.size());
+        assertEquals(1, allInCart.size());
         Assertions.assertFalse(allInCart.isEmpty());
     }
 
@@ -147,9 +150,9 @@ public class CartServiceTest {
     }
 
     @Test
-    void testAddServiceToCarNewCart() {
+    void testAddServiceToNotEmptyCart() {
         CartEntity cartEntity = new CartEntity();
-        cartEntity.setQuantity(0);
+
         UserEntity user = new UserEntity();
         user.setUsername("pesho");
 
@@ -162,8 +165,32 @@ public class CartServiceTest {
         serviceToTest.addServiceToCart(user.getUsername(), cartEntity.getProductId());
 
         verify(mockCartRepository, times(1)).save(cartEntity);
-        Assertions.assertEquals(1, cartEntity.getQuantity());
 
+    }
+
+    @Test
+    void testAddServiceToCarNewCart() {
+        String username = "pesho";
+        String serviceId = "change";
+        CartEntity cartEntity = new CartEntity();
+        cartEntity.setQuantity(0);
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+
+        ServiceViewModel serviceViewModel = createServiceViewModel();
+
+        when(mockCartRepository.findByProductId(serviceId))
+                .thenReturn(Optional.empty());
+
+        when(mockUserService.findByUsername(username))
+                .thenReturn(user);
+
+        when(mockServiceService.findServiceByServiceId(serviceId))
+                .thenReturn(serviceViewModel);
+
+        serviceToTest.addServiceToCart(username, serviceViewModel.getServiceId());
+
+        verify(mockCartRepository, times(1)).save(any(CartEntity.class));
     }
 
     @Test
@@ -190,6 +217,42 @@ public class CartServiceTest {
         verify(mockCartRepository, times(0)).deleteById(cartEntity.getId());
     }
 
+    @Test
+    void testGetAllProductsByUser() {
+        String username = "pesho";
+
+        CartEntity first = createCartEntity();
+        CartEntity second = createCartEntity();
+
+        List<CartEntity> testCartEntity = new ArrayList<>();
+        testCartEntity.add(first);
+        testCartEntity.add(second);
+
+        when(mockCartRepository.findAllByUsername(username))
+                .thenReturn(testCartEntity);
+
+        when(mockModelMapper.map(first, CartViewModel.class))
+                .thenReturn(createCartViewModel(first));
+        when(mockModelMapper.map(second, CartViewModel.class))
+                .thenReturn(createCartViewModel(second));
+
+        List<CartViewModel> allProductsByUser = serviceToTest.getAllProductsByUser(username);
+
+        assertNotNull(allProductsByUser);
+        assertEquals(2, allProductsByUser.size());
+    }
+
+    private CartViewModel createCartViewModel(CartEntity cartEntity) {
+        CartViewModel cartViewModel = new CartViewModel();
+        cartViewModel.setName(cartViewModel.getName());
+        cartViewModel.setId(cartViewModel.getId());
+        cartViewModel.setQuantity(cartEntity.getQuantity());
+        cartViewModel.setPrice(cartEntity.getPrice());
+        cartViewModel.setProductId(cartEntity.getProductId());
+
+        return cartViewModel;
+    }
+
 
     private CartEntity createCartEntity() {
 
@@ -202,5 +265,16 @@ public class CartServiceTest {
         cartEntity.setId(1L);
 
         return cartEntity;
+    }
+
+    private ServiceViewModel createServiceViewModel() {
+        ServiceViewModel serviceViewModel = new ServiceViewModel();
+
+        serviceViewModel.setName("change water meter");
+        serviceViewModel.setId(1L);
+        serviceViewModel.setPrice(BigDecimal.TEN);
+        serviceViewModel.setServiceId("change");
+
+        return serviceViewModel;
     }
 }

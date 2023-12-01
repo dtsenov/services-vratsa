@@ -10,9 +10,9 @@ public interface CartService {
 
     List<CartViewModel> findAllInCart();
 
-    Double totalPrice();
-
-    void deleteFromCart(Long id, CartViewModel cartViewModel);
+//    Double totalPrice();
+//
+//    void deleteFromCart(Long id, CartViewModel cartViewModel);
 
     void addProductToCart(String username, AddToCartDTO addToCartDTO);
 
