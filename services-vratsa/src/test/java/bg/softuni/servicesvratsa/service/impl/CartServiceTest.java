@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -148,12 +146,56 @@ public class CartServiceTest {
         verify(mockCartRepository, times(1)).save(existingCartEntity);
     }
 
+    @Test
+    void testAddServiceToCarNewCart() {
+        CartEntity cartEntity = new CartEntity();
+        cartEntity.setQuantity(0);
+        UserEntity user = new UserEntity();
+        user.setUsername("pesho");
+
+        when(mockCartRepository.findByProductId(cartEntity.getProductId()))
+                .thenReturn(Optional.of(cartEntity));
+
+        when(mockUserService.findByUsername(user.getUsername()))
+                .thenReturn(user);
+
+        serviceToTest.addServiceToCart(user.getUsername(), cartEntity.getProductId());
+
+        verify(mockCartRepository, times(1)).save(cartEntity);
+        Assertions.assertEquals(1, cartEntity.getQuantity());
+
+    }
+
+    @Test
+    void testDeleteProductByIdWhenQuantityIsOne() {
+        CartEntity cartEntity = createCartEntity();
+        when(mockCartRepository.findById(1L)).thenReturn(Optional.of(cartEntity));
+
+        serviceToTest.deleteProduct(cartEntity.getId());
+
+        verify(mockCartRepository, times(0)).save(cartEntity);
+        verify(mockCartRepository, times(1)).deleteById(eq(cartEntity.getId()));
+    }
+
+    @Test
+    void testDeleteProductByIdWHenQuantityIsMoreThanOne() {
+
+        CartEntity cartEntity = createCartEntity();
+        cartEntity.setQuantity(2);
+        when(mockCartRepository.findById(1L)).thenReturn(Optional.of(cartEntity));
+
+        serviceToTest.deleteProduct(cartEntity.getId());
+
+        verify(mockCartRepository, times(1)).save(cartEntity);
+        verify(mockCartRepository, times(0)).deleteById(cartEntity.getId());
+    }
+
 
     private CartEntity createCartEntity() {
 
         CartEntity cartEntity = new CartEntity();
         cartEntity.setName("Water meter");
-        cartEntity.setQuantity(2);
+        cartEntity.setQuantity(1);
         cartEntity.setProductId("dsadshkwqhdasda");
         cartEntity.setPrice(BigDecimal.valueOf(12));
         cartEntity.setUsername("gosho");
