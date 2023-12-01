@@ -2,7 +2,6 @@ package bg.softuni.servicesvratsa.service.impl;
 
 import bg.softuni.servicesvratsa.model.binding.AddToCartDTO;
 import bg.softuni.servicesvratsa.model.entity.CartEntity;
-import bg.softuni.servicesvratsa.model.entity.ProductEntity;
 import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import bg.softuni.servicesvratsa.model.view.CartViewModel;
 import bg.softuni.servicesvratsa.model.view.ProductCurrentViewModel;
@@ -149,6 +148,7 @@ public class CartServiceImpl implements CartService {
     public void deleteAllByUser(String username) {
         cartRepository.deleteByUsername(username);
     }
+
 
 
 }

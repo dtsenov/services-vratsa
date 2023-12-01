@@ -242,6 +242,13 @@ public class CartServiceTest {
         assertEquals(2, allProductsByUser.size());
     }
 
+    @Test
+    void testDeleteAllByUser() {
+        String username = "pesho";
+        serviceToTest.deleteAllByUser(username);
+        verify(mockCartRepository, times(1)).deleteByUsername(username);
+    }
+
     private CartViewModel createCartViewModel(CartEntity cartEntity) {
         CartViewModel cartViewModel = new CartViewModel();
         cartViewModel.setName(cartViewModel.getName());
