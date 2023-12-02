@@ -29,8 +29,8 @@ public class ServiceServiceImpl implements ServiceService {
         this.pictureService = pictureService;
     }
 
-
     @Override
+
     public void initServices() {
 
         if (serviceRepository.count() != 0) {
