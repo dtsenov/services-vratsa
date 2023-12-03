@@ -320,7 +320,7 @@
 
 .product-table tr:nth-child(even),
 .clients-table tr:nth-child(even),
-.workers-table tr:nth-child(even){
+.workers-table tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
@@ -487,7 +487,7 @@
 }
 
 .login-form h3 {
-   font-size: 36px;
+    font-size: 36px;
     color: #1845ad;
     margin-bottom: 10px;
 }
@@ -523,3 +523,25 @@
     border: 1px solid #1845ad;
 }
 
+.container-403 {
+    color: #1845ad;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-container {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}

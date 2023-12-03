@@ -5,64 +5,66 @@
 <body>
 <header th:replace="~{fragments/commons::nav}"></header>
 
-<table class="order-user-details table" th:object="${user}">
-    <thead>
-    <tr>
-        <th>Информация за завършване на поръчката</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Име и фамилия:</td>
-        <td><input th:value="*{getFirstName() + getLastName()}"></td>
-    </tr>
+<div class="order-container">
+    <table class="order-user-details table" th:object="${user}">
+        <thead>
+        <tr>
+            <th>Информация за завършване на поръчката</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>Име и фамилия:</td>
+            <td><input th:value="*{getFirstName() + getLastName()}"></td>
+        </tr>
 
-    <tr>
-        <td>Адрес:</td>
-        <td><input></td>
-    </tr>
+        <tr>
+            <td>Адрес:</td>
+            <td><input></td>
+        </tr>
 
-    <tr>
-        <td>Телефон за връзка:</td>
-        <td><input th:value="*{getPhoneNumber()}"></td>
-    </tr>
+        <tr>
+            <td>Телефон за връзка:</td>
+            <td><input th:value="*{getPhoneNumber()}"></td>
+        </tr>
 
-    <tr>
-        <td>Имейл:</td>
-        <td><input th:value="*{getEmail()}"></td>
-    </tr>
-    </tbody>
-</table>
+        <tr>
+            <td>Имейл:</td>
+            <td><input th:value="*{getEmail()}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 
-<div class="empty-order-cart" th:if="${cartViewModels.size() == 0}">НЯМА ДОБАВЕНИ ПРОДУКТИ</div>
-<div class="products-order-cart" th:unless="${cartViewModels.size() == 0}">
-    <div class="table-info-pr-wrapper">
-        <h3 class="info-pr-h3">Информация за продукти</h3>
-        <table class="order-cart-details table">
-            <thead>
-            <tr>
-                <th>Име</th>
-                <td>Цена</td>
-                <td>Количество</td>
-            </tr>
-            </thead>
+    <div class="empty-order-cart" th:if="${cartViewModels.size() == 0}">НЯМА ДОБАВЕНИ ПРОДУКТИ</div>
+    <div class="products-order-cart" th:unless="${cartViewModels.size() == 0}">
+        <div class="table-info-pr-wrapper">
+            <h3 class="info-pr-h3">Информация за продукти</h3>
+            <table class="order-cart-details table">
+                <thead>
+                <tr>
+                    <th>Име</th>
+                    <td>Цена</td>
+                    <td>Количество</td>
+                </tr>
+                </thead>
 
-            <tbody>
-            <tr th:each="p : ${cartViewModels}">
-                <td th:text="${p.name}"></td>
+                <tbody>
+                <tr th:each="p : ${cartViewModels}">
+                    <td th:text="${p.name}"></td>
 
-                <td th:text="${p.price}"></td>
+                    <td th:text="${p.price}"></td>
 
-                <td th:text="${p.quantity}"></td>
-            </tr>
-            </tbody>
-        </table>
-        <form class="order-complete-btn"
-              th:method="POST"
-              th:action="@{/order-completed}">
-            <input type="submit" value="ПОРЪЧАЙ">
-        </form>
+                    <td th:text="${p.quantity}"></td>
+                </tr>
+                </tbody>
+            </table>
+            <form class="order-complete-btn"
+                  th:method="POST"
+                  th:action="@{/order-completed}">
+                <input type="submit" value="ПОРЪЧАЙ">
+            </form>
+        </div>
     </div>
 </div>
 </body>
