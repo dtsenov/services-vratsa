@@ -1,5 +1,6 @@
 package bg.softuni.servicesvratsa.service.impl;
 
+import bg.softuni.servicesvratsa.exception.ProductNotFoundException;
 import bg.softuni.servicesvratsa.model.entity.PictureEntity;
 import bg.softuni.servicesvratsa.model.entity.ServiceEntity;
 import bg.softuni.servicesvratsa.model.service.ServicesServiceModel;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -104,16 +106,16 @@ public class ServiceServiceTest {
     @Test
     void testFindServiceByIdSuccess() {
         ServiceEntity testServiceEntity = createServiceEntity();
-        ServicesServiceModel testServicesServiceModel = createServicesServiceModel();
+        ServiceViewModel testServiceViewModel = createServiceViewModel();
         PictureEntity testPictureEntity = createPictureEntity();
 
         when(mockServiceRepository.findById(testServiceEntity.getId()))
                 .thenReturn(Optional.of(testServiceEntity));
 
-        when(mockModelMapper.map(testServiceEntity, ServicesServiceModel.class))
-                .thenReturn(testServicesServiceModel);
+        when(mockModelMapper.map(testServiceEntity, ServiceViewModel.class))
+                .thenReturn(testServiceViewModel);
 
-        when(mockPictureService.findPictureById(1L))
+        when(mockPictureService.findPictureById(testServiceEntity.getId()))
                 .thenReturn(testPictureEntity);
 
         ServiceViewModel serviceById = serviceToTest.findServiceById(testServiceEntity.getId());
@@ -122,12 +124,66 @@ public class ServiceServiceTest {
         Assertions.assertEquals("change water meter", serviceById.getName());
     }
 
+    @Test
+    void testFindServiceByIdThrows() {
+
+        when(mockServiceRepository.findById(1L))
+                .thenReturn(Optional.empty());
+
+        assertThrows(ProductNotFoundException.class,
+                () -> serviceToTest.findServiceById(1L));
+    }
+
+    @Test
+    void testFindServiceByServiceIdSuccess() {
+        ServiceEntity testServiceEntity = createServiceEntity();
+        ServiceViewModel testServiceViewModel = createServiceViewModel();
+        PictureEntity testPictureEntity = createPictureEntity();
+
+        when(mockServiceRepository.findByServiceId(testServiceEntity.getServiceId()))
+                .thenReturn(Optional.of(testServiceEntity));
+
+        when(mockModelMapper.map(testServiceEntity, ServiceViewModel.class))
+                .thenReturn(testServiceViewModel);
+
+        when(mockPictureService.findPictureById(testServiceEntity.getId()))
+                .thenReturn(testPictureEntity);
+
+        ServiceViewModel serviceById = serviceToTest.findServiceByServiceId(testServiceEntity.getServiceId());
+
+        Assertions.assertEquals(1, serviceById.getId());
+        Assertions.assertEquals("change water meter", serviceById.getName());
+    }
+
+    @Test
+    void testFindServiceByServiceIdThrows() {
+
+        when(mockServiceRepository.findByServiceId("1L"))
+                .thenReturn(Optional.empty());
+
+        assertThrows(ProductNotFoundException.class,
+                () -> serviceToTest.findServiceByServiceId("1L"));
+    }
+
+
+
+    private ServiceViewModel createServiceViewModel() {
+        ServiceViewModel serviceViewModel = new ServiceViewModel();
+
+        serviceViewModel.setName("change water meter");
+        serviceViewModel.setPrice(BigDecimal.TEN);
+        serviceViewModel.setId(1L);
+
+        return serviceViewModel;
+    }
+
     private ServiceEntity createServiceEntity() {
         ServiceEntity serviceEntity = new ServiceEntity();
 
         serviceEntity.setName("change water meter");
         serviceEntity.setPrice(BigDecimal.TEN);
         serviceEntity.setId(1L);
+        serviceEntity.setPictureId(1L);
 
         return serviceEntity;
     }
