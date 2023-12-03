@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
 
         UserEntity user = new UserEntity();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 6; i++) {
 
             switch (i) {
                 case 0:
                     user.setId(1L);
-                    user.setFirstName("Denislav");
-                    user.setLastName("Cenov");
+                    user.setFirstName("Денислав");
+                    user.setLastName("Ценов");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.BOSS));
                     user.setEmail("denislav@example.com");
                     user.setUsername("denislav");
@@ -60,12 +60,12 @@ public class UserServiceImpl implements UserService {
                     break;
                 case 1:
                     user.setId(2L);
-                    user.setFirstName("Тодор");
-                    user.setLastName("Тодоров");
+                    user.setFirstName("Христо");
+                    user.setLastName("Ангелов");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
-                    user.setEmail("tosho@example.com");
-                    user.setUsername("tosho");
-                    user.setPassword(passwordEncoder.encode("tosho"));
+                    user.setEmail("hristo@example.com");
+                    user.setUsername("hristo");
+                    user.setPassword(passwordEncoder.encode("hristo"));
                     user.setPhoneNumber("+359848444433");
                     user.setAge(25);
                     break;
@@ -85,11 +85,33 @@ public class UserServiceImpl implements UserService {
                     user.setFirstName("Илиян");
                     user.setLastName("Илиев");
                     user.setRole(roleRepository.findByRole(RoleNameEnum.WORKER));
-                    user.setEmail("tosho@example.com");
+                    user.setEmail("ilian@example.com");
                     user.setUsername("ilian");
                     user.setPassword(passwordEncoder.encode("ilian"));
                     user.setPhoneNumber("+359848444456");
                     user.setAge(30);
+                    break;
+                case 4:
+                    user.setId(5L);
+                    user.setFirstName("Тодор");
+                    user.setLastName("Тодоров");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
+                    user.setEmail("tosho@example.com");
+                    user.setUsername("todor");
+                    user.setPassword(passwordEncoder.encode("todor"));
+                    user.setPhoneNumber("+359848444457");
+                    user.setAge(26);
+                    break;
+                case 5:
+                    user.setId(6L);
+                    user.setFirstName("Петър");
+                    user.setLastName("Петров");
+                    user.setRole(roleRepository.findByRole(RoleNameEnum.CLIENT));
+                    user.setEmail("petyr@example.com");
+                    user.setUsername("petyr");
+                    user.setPassword(passwordEncoder.encode("petyr"));
+                    user.setPhoneNumber("+359848444458");
+                    user.setAge(23);
                     break;
             }
 
