@@ -535,7 +535,8 @@
     align-items: center;
 }
 
-.order-container {
+.order-container,
+.admin-messages-container {
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
@@ -545,3 +546,27 @@
     align-items: center;
     justify-content: center;
 }
+
+.admin-messages-container {
+    width: 70%;
+}
+
+.admin-messages-container table {
+    width: 100%;
+}
+
+.admin-messages_not-answered,
+.admin-messages_answered {
+    border: 1px solid #1845ad;
+    margin-bottom: 30px;
+}
+
+.admin-messages-container {
+    color: #1845ad;
+    font-size: 24px;
+}
+
+.admin-messages-container table, th, td {
+    border: 1px solid;
+}
+
