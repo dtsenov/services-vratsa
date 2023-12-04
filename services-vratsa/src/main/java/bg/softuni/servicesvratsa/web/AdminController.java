@@ -1,13 +1,12 @@
 package bg.softuni.servicesvratsa.web;
 
+import bg.softuni.servicesvratsa.model.view.ContactViewModel;
 import bg.softuni.servicesvratsa.model.view.UserViewModel;
+import bg.softuni.servicesvratsa.service.ContactService;
 import bg.softuni.servicesvratsa.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,9 +15,11 @@ import java.util.List;
 public class AdminController {
 
     private final UserService userService;
+    private final ContactService contactService;
 
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, ContactService contactService) {
         this.userService = userService;
+        this.contactService = contactService;
     }
 
     @GetMapping("/workers")
@@ -52,4 +53,25 @@ public class AdminController {
         userService.fireWorker(workerId);
         return "redirect:/admin/workers";
     }
+
+    @GetMapping("/messages")
+    public String messages(Model model) {
+
+        List<ContactViewModel> allNotAnsweredMessages = contactService.getAllUnreadMessages();
+        List<ContactViewModel> allAnsweredMessages = contactService.getAllAnsweredMessages();
+
+        model.addAttribute("allNotAnsweredMessages", allNotAnsweredMessages);
+        model.addAttribute("allAnsweredMessages", allAnsweredMessages);
+
+        return "admin-messages";
+    }
+
+    @PostMapping("/messages/read")
+    public String markAsRead(@RequestParam ("messageId") Long messageId) {
+
+        contactService.markMessageAsReadById(messageId);
+
+        return "redirect:/admin/messages";
+    }
+
 }

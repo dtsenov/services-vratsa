@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/commons::head}"></head>
+<body>
+<header th:replace="~{fragments/commons::nav}"></header>
+
+<div class="admin-messages-container">
+    <h3 th:if="${allNotAnsweredMessages.isEmpty()}">В момента няма нови съобщения!</h3>
+    <table th:if="${!allNotAnsweredMessages.isEmpty()}" th:each="m : ${allNotAnsweredMessages}" th:object="${m}">
+        <thead>Чакащи отговор</thead>
+        <tbody>
+        <tr>
+            <td>От:</td>
+            <td th:text="|*{firstName} *{lastName}|"></td>
+        </tr>
+        <tr>
+            <td>Имейл:</td>
+            <td th:text="*{email}"></td>
+        </tr>
+        <tr>
+            <td>Телефон:</td>
+            <td th:text="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Съобщение:</td>
+            <td th:text="*{message}"></td>
+        </tr>
+        <tr>
+            <td>
+                <form th:method="POST"
+                      th:action="@{/admin/messages/read}"
+                      th:object="${m}">
+
+                    <input type="hidden" th:name="messageId" th:value="${m.id}" >
+
+                    <button type="submit">Маркирай като прочетено</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <table th:if="${!allAnsweredMessages.isEmpty()}" th:each="m : ${allAnsweredMessages}" th:object="${m}">
+        <thead>Отговорени</thead>
+        <tbody>
+        <tr>
+            <td>От:</td>
+            <td th:text="|*{firstName} *{lastName}|"></td>
+        </tr>
+        <tr>
+            <td>Имейл:</td>
+            <td th:text="*{email}"></td>
+        </tr>
+        <tr>
+            <td>Телефон:</td>
+            <td th:text="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Съобщение:</td>
+            <td th:text="*{message}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<footer th:replace="~{fragments/commons::footer}"></footer>
+</html>

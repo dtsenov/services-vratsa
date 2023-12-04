@@ -37,10 +37,10 @@ public class SecurityConfiguration {
                         authorizeRequests -> authorizeRequests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .requestMatchers("/resources/**").permitAll()
-                                .requestMatchers("/", "/users/login", "/users/register", "/about", "/users/login-error").permitAll()
-                                .requestMatchers("/services/add", "/products/add", "/admin/workers", "/admin/clients").hasRole("BOSS")
-                                .requestMatchers("/products/all").permitAll()
-                                .requestMatchers("/services/all").permitAll()
+                                .requestMatchers("/", "/users/login", "/users/register", "/about",
+                                        "/users/login-error", "/services/all", "/products/all").permitAll()
+                                .requestMatchers("/services/add", "/products/add", "/admin/workers",
+                                        "/admin/clients", "/admin/messages").hasRole("BOSS")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(
@@ -49,7 +49,7 @@ public class SecurityConfiguration {
                                     .loginPage("/users/login")
                                     .usernameParameter("username")
                                     .passwordParameter("password")
-                                    .defaultSuccessUrl("/")
+                                    .defaultSuccessUrl("/", true)
                                     .failureUrl("/users/login-error");
                         }
                 )
