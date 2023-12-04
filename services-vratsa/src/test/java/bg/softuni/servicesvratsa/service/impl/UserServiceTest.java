@@ -67,7 +67,7 @@ public class UserServiceTest {
 
         serviceToTest.initUsers();
 
-        verify(mockUserRepository, times(4))
+        verify(mockUserRepository, times(6))
                 .save(any());
     }
 
