@@ -9,28 +9,24 @@
     <table class="order-user-details table" th:object="${user}">
         <thead>
         <tr>
-            <th>Информация за завършване на поръчката</th>
+            <h3 class="info-pr-h3">Информация за завършване на поръчката</h3>
         </tr>
         </thead>
         <tbody>
         <tr>
-            <td>Име и фамилия:</td>
-            <td><input th:value="*{getFirstName() + getLastName()}"></td>
+            <td>Име и фамилия: <input required="required" th:value=" *{getFirstName() + ' ' + getLastName()}"></td>
         </tr>
 
         <tr>
-            <td>Адрес:</td>
-            <td><input required="required"></td>
+            <td>Адрес: <input required="required"></td>
         </tr>
 
         <tr>
-            <td>Телефон за връзка:</td>
-            <td><input th:value="*{getPhoneNumber()}"></td>
+            <td>Телефон за връзка: <input required="required" th:value=" *{getPhoneNumber()}"></td>
         </tr>
 
         <tr>
-            <td>Имейл:</td>
-            <td><input th:value="*{getEmail()}"></td>
+            <td>Имейл: <input required="required" th:value=" *{getEmail()}"></td>
         </tr>
         </tbody>
     </table>
