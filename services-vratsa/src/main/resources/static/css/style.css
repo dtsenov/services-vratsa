@@ -570,3 +570,38 @@
     border: 1px solid;
 }
 
+.delete-cart-btn {
+    color: white;
+    background-color: #1845ad;
+    padding: 6px 10px;
+    margin-top: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.confirm-order-btn {
+    color: white;
+    background-color: #1845ad;
+    padding: 6px 10px;
+    margin-top: 5px;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.delete-cart-btn:hover,
+.confirm-order-btn:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.container-confirm-order-btn {
+    display: flex;
+}
+
+#serviceId {
+    display: none;
+}
+
+

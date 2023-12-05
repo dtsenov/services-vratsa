@@ -1,6 +1,6 @@
 function addProductToCart() {
     let BASE_URL = "/products/all/";
-    let productId = document.getElementById("productId").innerText;
+    let productId = document.getElementById("productId").value;
 
     let csrfToken = document.querySelector('input[name="_csrf"]').value;
 
@@ -33,7 +33,7 @@ function addProductToCart() {
 
 function addServiceToCart() {
     let BASE_URL = "/services/all/";
-    let serviceId = document.getElementById("serviceId").innerText;
+    let serviceId = document.getElementById("serviceId").value;
 
     let csrfToken = document.querySelector('input[name="_csrf"]').value;
 
@@ -120,15 +120,18 @@ function reloadCart() {
                     cartItems.appendChild(currentItemContainer);
                 });
 
+                const confirmCartBtnWrapper = document.createElement("div");
+                confirmCartBtnWrapper.className = "container-confirm-order-btn";
+
                 const confirmCartBtn = document.createElement("button");
                 confirmCartBtn.addEventListener('click', confirmCart);
                 confirmCartBtn.textContent = 'ЗАВЪРШИ ПОРЪЧКА';
                 confirmCartBtn.className = 'confirm-order-btn';
 
+                confirmCartBtnWrapper.appendChild(confirmCartBtn);
 
                 cartItems.appendChild(totalPrice);
-                cartItems.appendChild(confirmCartBtn);
-
+                cartItems.appendChild(confirmCartBtnWrapper);
             }
         })
         .catch(error => console.error('Грешка при зареждане на количката:', error.message));

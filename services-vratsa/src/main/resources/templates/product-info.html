@@ -13,12 +13,7 @@
         <table class="current-pr-table">
 
             <tbody>
-
-            <tr>
-                <th class="c-pr-text">ID на продукт</th>
-                <th id="productId" th:text="*{productId}"></th>
-            </tr>
-
+            <input type="hidden" id="productId" th:value="*{productId}"/>
             <tr>
                 <th class="c-pr-text">Име на продукт</th>
                 <th id="name" th:text="*{name}"></th>

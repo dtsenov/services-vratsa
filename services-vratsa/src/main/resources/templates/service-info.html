@@ -10,15 +10,12 @@
 
 <div class="pr-table-wrapper">
     <div class="table-cart-wrapper">
+
+
         <table class="current-pr-table">
 
             <tbody th:object="${currentService}">
-
-            <tr>
-                <th class="c-pr-text">ID на услуга</th>
-                <th id="serviceId" th:text="*{serviceId}"></th>
-            </tr>
-
+            <input type="hidden" id="serviceId" th:value="*{serviceId}"/>
             <tr>
                 <th class="c-pr-text">Име на услуга</th>
                 <th th:text="*{name}"></th>
