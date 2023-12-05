@@ -220,19 +220,25 @@ public class CartServiceTest {
     @Test
     void testGetAllProductsByUser() {
         String username = "pesho";
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
 
         CartEntity first = createCartEntity();
         CartEntity second = createCartEntity();
 
-        List<CartEntity> testCartEntity = new ArrayList<>();
-        testCartEntity.add(first);
-        testCartEntity.add(second);
+        List<CartEntity> testCartEntities = new ArrayList<>();
+        testCartEntities.add(first);
+        testCartEntities.add(second);
 
-        when(mockCartRepository.findAllByUsername(username))
-                .thenReturn(testCartEntity);
+        when(mockUserService.findByUsername(username))
+                .thenReturn(user);
+
+        when(mockCartRepository.findAllByUser(user))
+                .thenReturn(testCartEntities);
 
         when(mockModelMapper.map(first, CartViewModel.class))
                 .thenReturn(createCartViewModel(first));
+
         when(mockModelMapper.map(second, CartViewModel.class))
                 .thenReturn(createCartViewModel(second));
 
@@ -245,8 +251,14 @@ public class CartServiceTest {
     @Test
     void testDeleteAllByUser() {
         String username = "pesho";
+        UserEntity user = new UserEntity();
+        user.setUsername(username);
+
+        when(mockUserService.findByUsername(username))
+                .thenReturn(user);
+
         serviceToTest.deleteAllByUser(username);
-        verify(mockCartRepository, times(1)).deleteByUsername(username);
+        verify(mockCartRepository, times(1)).deleteByUser(user);
     }
 
     private CartViewModel createCartViewModel(CartEntity cartEntity) {
@@ -263,12 +275,15 @@ public class CartServiceTest {
 
     private CartEntity createCartEntity() {
 
+        UserEntity user = new UserEntity();
+        user.setUsername("gosho");
+
         CartEntity cartEntity = new CartEntity();
         cartEntity.setName("Water meter");
         cartEntity.setQuantity(1);
         cartEntity.setProductId("dsadshkwqhdasda");
         cartEntity.setPrice(BigDecimal.valueOf(12));
-        cartEntity.setUsername("gosho");
+        cartEntity.setUser(user);
         cartEntity.setId(1L);
 
         return cartEntity;

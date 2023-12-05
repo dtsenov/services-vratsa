@@ -1,12 +1,11 @@
 package bg.softuni.servicesvratsa.repository;
 
 import bg.softuni.servicesvratsa.model.entity.CartEntity;
-import bg.softuni.servicesvratsa.model.view.CartViewModel;
+import bg.softuni.servicesvratsa.model.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,7 +17,7 @@ public interface CartRepository extends JpaRepository<CartEntity, Long> {
     @Override
     List<CartEntity> findAll();
 
-    List<CartEntity> findAllByUsername(String username);
+    List<CartEntity> findAllByUser(UserEntity user);
 
     Optional<CartEntity> findByProductId(String productId);
 
@@ -26,8 +25,8 @@ public interface CartRepository extends JpaRepository<CartEntity, Long> {
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM CartEntity c WHERE c.username = :username")
-    void deleteByUsername(@Param("username") String username);
+    @Query("DELETE FROM CartEntity c WHERE c.user= :user")
+    void deleteByUser(UserEntity user);
 
 
 }

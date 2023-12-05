@@ -44,25 +44,6 @@ public class CartServiceImpl implements CartService {
                 .collect(Collectors.toList());
     }
 
-//    @Override
-//    public Double totalPrice() {
-//
-//        Double totalSum = 0.00;
-//
-//        for (CartEntity cartEntity : cartRepository.findAll()) {
-//            ProductCurrentViewModel productById = productService.findProductByProductId(cartEntity.getProductId());
-//
-//            totalSum += Double.parseDouble(String.valueOf(productById.getPrice()));
-//        }
-//        return totalSum;
-//    }
-//
-//    @Override
-//    public void deleteFromCart(Long id, CartViewModel cartViewModel) {
-//        cartRepository.deleteById(cartViewModel.getId());
-//
-//    }
-
     @Override
     public void addProductToCart(String username, AddToCartDTO addToCartDTO) {
 
@@ -81,8 +62,7 @@ public class CartServiceImpl implements CartService {
             cartEntity.setPrice(product.getPrice());
             cartEntity.setQuantity(1);
             cartEntity.setProductId(product.getProductId());
-            cartEntity.setUsername(username);
-            cartEntity.getClients().add(user);
+            cartEntity.setUser(user);
         }
         cartRepository.save(cartEntity);
     }
@@ -90,8 +70,9 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<CartViewModel> getAllProductsByUser(String username) {
 
+        UserEntity user = userService.findByUsername(username);
 
-        List<CartEntity> allProductsInCart = cartRepository.findAllByUsername(username);
+        List<CartEntity> allProductsInCart = cartRepository.findAllByUser(user);
         List<CartViewModel> cartViewModelList = new ArrayList<>();
 
         allProductsInCart.forEach(product -> {
@@ -137,8 +118,7 @@ public class CartServiceImpl implements CartService {
             cartEntity.setPrice(currentService.getPrice());
             cartEntity.setQuantity(1);
             cartEntity.setProductId(serviceId);
-            cartEntity.setUsername(username);
-            cartEntity.getClients().add(user);
+            cartEntity.setUser(user);
         }
 
         cartRepository.save(cartEntity);
@@ -146,7 +126,8 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void deleteAllByUser(String username) {
-        cartRepository.deleteByUsername(username);
+        UserEntity user = userService.findByUsername(username);
+        cartRepository.deleteByUser(user);
     }
 
 

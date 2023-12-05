@@ -22,11 +22,9 @@ import java.util.List;
 public class CartRestController {
 
     private final CartService cartService;
-    private final ModelMapper modelMapper;
 
-    public CartRestController(CartService cartService, ModelMapper modelMapper) {
+    public CartRestController(CartService cartService) {
         this.cartService = cartService;
-        this.modelMapper = modelMapper;
     }
 
     @PostMapping(value = "/products/all/{productId}", consumes = MediaType.APPLICATION_JSON_VALUE)

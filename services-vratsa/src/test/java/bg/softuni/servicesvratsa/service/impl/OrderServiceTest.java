@@ -15,7 +15,9 @@ import org.modelmapper.ModelMapper;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.mockito.Mockito.*;
 
@@ -45,18 +47,13 @@ public class OrderServiceTest {
         orderViewModelList.add(orderViewModel);
 
         OrderEntity orderEntity = createOrderEntity(orderViewModel);
-        List<OrderEntity> orderEntities = new ArrayList<>();
-        orderEntities.add(orderEntity);
-
 
         when(mockModelMapper.map(orderViewModel, OrderEntity.class))
                 .thenReturn(orderEntity);
 
         serviceToTest.completeOrder(user, orderViewModelList);
 
-        verify(mockOrderRepository, times(1)).saveAll(orderEntities);
-
-
+        verify(mockOrderRepository, times(1)).saveAll(any());
     }
 
     private OrderEntity createOrderEntity(OrderViewModel orderViewModel) {

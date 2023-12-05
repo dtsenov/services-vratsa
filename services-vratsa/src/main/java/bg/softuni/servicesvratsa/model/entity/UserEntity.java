@@ -2,6 +2,7 @@ package bg.softuni.servicesvratsa.model.entity;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,9 +40,6 @@ public class UserEntity extends BaseEntity {
     @ManyToMany(mappedBy = "clients", fetch = FetchType.EAGER)
     private Set<ServiceEntity> services;
 
-    @ManyToOne
-    private CartEntity shoppingCart;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<OrderEntity> orders;
 
@@ -49,6 +47,9 @@ public class UserEntity extends BaseEntity {
     private PictureEntity picture;
 
     public UserEntity() {
+        products = new HashSet<>();
+        orders = new HashSet<>();
+        services = new HashSet<>();
     }
 
     public String getUsername() {
@@ -129,14 +130,6 @@ public class UserEntity extends BaseEntity {
 
     public void setServices(Set<ServiceEntity> services) {
         this.services = services;
-    }
-
-    public CartEntity getShoppingCart() {
-        return shoppingCart;
-    }
-
-    public void setShoppingCart(CartEntity shoppingCart) {
-        this.shoppingCart = shoppingCart;
     }
 
     public Set<OrderEntity> getOrders() {

@@ -30,6 +30,7 @@ public class OrderServiceImpl implements OrderService {
         orderViewModels.forEach(
                 product -> {
                     OrderEntity orderEntity = modelMapper.map(product, OrderEntity.class);
+                    user.getOrders().add(orderEntity);
                     orderEntity.setUser(user);
                     orderEntities.add(orderEntity);
                 }

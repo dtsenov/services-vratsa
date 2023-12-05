@@ -1,10 +1,11 @@
 package bg.softuni.servicesvratsa.model.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "cart")
@@ -22,15 +23,11 @@ public class CartEntity extends BaseEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
-    @OneToMany(mappedBy = "shoppingCart", fetch = FetchType.EAGER)
-    private Set<UserEntity> clients;
+    @ManyToOne
+    private UserEntity user;
 
     public CartEntity() {
         quantity = 0;
-        clients = new HashSet<>();
     }
 
     public String getName() {
@@ -65,19 +62,11 @@ public class CartEntity extends BaseEntity {
         this.quantity = quantity;
     }
 
-    public String getUsername() {
-        return username;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Set<UserEntity> getClients() {
-        return clients;
-    }
-
-    public void setClients(Set<UserEntity> clients) {
-        this.clients = clients;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 }
