@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,14 @@ public class OrderController {
 
         List<CartViewModel> cartViewModels = cartService.getAllProductsByUser(authentication.getName());
 
+        BigDecimal totalSumCartView = BigDecimal.valueOf(0);
+        for (CartViewModel cartViewModel : cartViewModels) {
+            BigDecimal price = cartViewModel.getPrice();
+            totalSumCartView = totalSumCartView.add(price);
+        }
+
         model.addAttribute("cartViewModels", cartViewModels);
+        model.addAttribute("totalSumCartView", totalSumCartView.setScale(2));
         model.addAttribute("user", user);
 
         return "make-order";

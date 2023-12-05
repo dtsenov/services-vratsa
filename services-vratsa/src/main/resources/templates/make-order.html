@@ -14,20 +14,29 @@
         </thead>
         <tbody>
         <tr>
-            <td>Име и фамилия: <input required="required" th:value=" *{getFirstName() + ' ' + getLastName()}"></td>
+            <td>
+                <p th:text="|Име и фамилия: *{getFirstName() + ' ' + getLastName()}|"></p>
+            </td>
         </tr>
 
         <tr>
-            <td>Адрес: <input required="required"></td>
+            <td>
+            <p th:text="|Телефон за връзка: *{getPhoneNumber()}|"></p>
+            </td>
         </tr>
 
         <tr>
-            <td>Телефон за връзка: <input required="required" th:value=" *{getPhoneNumber()}"></td>
+            <td>
+                <p th:text="|Имейл: *{getEmail()}|"></p>
+            </td>
         </tr>
 
         <tr>
-            <td>Имейл: <input required="required" th:value=" *{getEmail()}"></td>
+            <td>
+            <p th:text="|Адрес: *{getAddress()}|"></p>
+            </td>
         </tr>
+
         </tbody>
     </table>
 
@@ -55,6 +64,7 @@
                 </tr>
                 </tbody>
             </table>
+            <p class="total-order-price" th:text="|Крайна цена: ${totalSumCartView}лв.|"></p>
             <form class="order-complete-btn"
                   th:method="POST"
                   th:action="@{/order-completed}">

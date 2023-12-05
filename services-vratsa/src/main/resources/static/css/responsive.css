@@ -1,0 +1,384 @@
+@media all and (max-width: 1350px) {
+    .header__logo {
+        width: 60px;
+        height: 60px;
+        margin-left: 50px;
+    }
+
+    .product-table td,
+    .product-table th {
+        font-size: 16px;
+    }
+
+    .header__text-heading {
+        font-size: 42px;
+    }
+
+    .header__text-subheading {
+        font-size: 20px;
+    }
+
+    .header {
+        height: 340px;
+    }
+}
+
+@media all and (max-width: 1280px) {
+
+    .header__nav h5 {
+        font-size: 15px;
+    }
+
+    .nav_list-item button {
+        font-size: 14px;
+        padding: 6px 22px
+    }
+
+    .header__logo {
+        width: 50px;
+        height: 50px;
+        margin-left: 40px;
+    }
+
+    .header__text-heading {
+        font-size: 38px;
+    }
+
+    .header__text-subheading {
+        font-size: 18px;
+    }
+
+    .header {
+        height: 320px;
+    }
+}
+
+@media all and (max-width: 1060px) {
+
+    .header__logo,
+    .container-fluid {
+        display: none;
+    }
+
+    .nav_list {
+        width: 80%;
+    }
+
+    .header {
+        height: 300px;
+    }
+}
+
+@media all and (max-width: 980px) {
+
+    .main__text-container-h3 {
+        font-size: 30px;
+    }
+
+    .main__text-container-desc-detail-h3 {
+        font-size: 18px;
+    }
+
+    .main__text-container-desc-detail-p {
+        font-size: 16px;
+    }
+
+
+    .product-table td,
+    .product-table th,
+    .current-pr-table td,
+    .current-pr-table th {
+        font-size: 14px;
+    }
+
+    .currentCartItem,
+    .totalCartPrice {
+        font-size: 12px;
+    }
+
+    .delete-cart-btn,
+    .confirm-order-btn,
+    .add-to-cart-form input {
+        font-size: 10px;
+    }
+
+    .footer {
+        font-size: 16px;
+    }
+
+    .main__contact-form h2,
+    .main__reg-form h2,
+    .about-container h2 {
+        font-size: 36px;
+    }
+
+    .contacts__container-form,
+    .register__container-form {
+        width: 40%;
+        margin-top: 40px;
+    }
+
+    .about-container__info-desc h3 {
+        font-size: 22px;
+    }
+
+    .about-container__info-desc p {
+        font-size: 16px;
+    }
+
+    .workers-head,
+    .admin-messages-container table, th, td {
+        font-size: 24px;
+    }
+
+    .cards__workers-card-container {
+        width: 70%;
+    }
+}
+
+@media all and (max-width: 850px) {
+
+    .main__text-container-desc {
+        flex-direction: column;
+    }
+
+    .main__text-container-desc-detail {
+        margin-bottom: 18px;
+    }
+
+    .main__text-container-desc-detail {
+        width: 100%;
+    }
+
+    .main__text-container-desc-detail-h3 {
+        font-size: 30px;
+        margin-bottom: 0;
+    }
+
+    .main__text-container-desc-detail-p {
+        font-size: 26px;
+    }
+
+    .header__text {
+        margin-left: 80px;
+        width: 70%;
+    }
+
+    .nav_list {
+        width: 95%;
+    }
+
+    .main__text-container-h3 {
+        font-size: 24px;
+    }
+
+    .main__text-container-p {
+        font-size: 20px;
+    }
+
+    .main__text-container-desc-detail-p {
+        font-size: 20px;
+    }
+
+    .main__text-container-desc-detail-h3 {
+        font-size: 26px;
+    }
+
+    .correct-img-cont-i {
+        margin-top: 28px;
+    }
+
+    .header__text {
+        margin-left: 60px;
+        width: 77%;
+    }
+}
+
+@media all and (max-width: 730px) {
+
+    .nav_list {
+        width: 100%;
+    }
+
+    .nav_list-item button {
+        font-size: 14px;
+        padding: 6px 13px;
+    }
+
+    .currentCartItem,
+    .totalCartPrice {
+        font-size: 10px;
+    }
+
+    .delete-cart-btn,
+    .confirm-order-btn,
+    .add-to-cart-form input {
+        font-size: 8px;
+    }
+
+    .contacts__container-form,
+    .register__container-form {
+        width: 50%;
+        margin-top: 25px;
+    }
+}
+
+@media all and (max-width: 640px) {
+
+    .header {
+        height: 260px;
+    }
+
+    .header__text-heading {
+        font-size: 32px;
+    }
+
+    .header__text-subheading {
+        font-size: 13px;
+    }
+
+    .main__text-container-h3,
+    .main__text-container-desc-detail-h3 {
+        font-size: 20px;
+    }
+
+    .main__text-container-p,
+    .main__text-container-desc-detail-p {
+        font-size: 16px;
+    }
+
+    .correct-img-cont-i {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+        margin-top: 20px;
+    }
+
+    .product-table td,
+    .product-table th,
+    .current-pr-table td,
+    .current-pr-table th {
+        font-size: 12px;
+    }
+
+    .img-zoom-hover {
+        width: 30px;
+        height: 30px;
+    }
+
+    .current-pr-table tbody tr th img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .footer {
+        font-size: 16px;
+    }
+
+    .main__contact-form h2,
+    .main__reg-form h2,
+    .about-container h2 {
+        font-size: 28px;
+    }
+
+    .about-container__info-desc h3 {
+        font-size: 20px;
+    }
+
+    .about-container__info-desc p {
+        font-size: 14px;
+    }
+
+    .workers-head,
+    .admin-messages-container table, th, td {
+        font-size: 20px;
+    }
+}
+
+@media all and (max-width: 560px) {
+
+    .header {
+        height: 245px;
+    }
+
+    .header__text {
+        margin-left: 30px;
+    }
+
+    .nav_list-item button {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .header__text-btn {
+        font-size: 12px;
+        padding: 6px 20px;
+    }
+
+    .header__text-heading {
+        font-size: 26px;
+    }
+
+    .header__text-subheading {
+        font-size: 10px;
+    }
+
+    .main__text-container-h3,
+    .main__text-container-desc-detail-h3 {
+        font-size: 17px;
+    }
+
+    .main__text-container-p,
+    .main__text-container-desc-detail-p {
+        font-size: 13px;
+    }
+
+    .correct-img-cont-i {
+        width: 24px;
+        height: 24px;
+        margin-right: 5px;
+        margin-top: 20px;
+    }
+}
+
+@media all and (max-width: 460px) {
+
+    .header {
+        height: 227px;
+    }
+
+    .nav_list-item button {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+
+    .header__text-btn {
+        font-size: 11px;
+        padding: 6px 18px;
+    }
+
+    .header__text-heading {
+        font-size: 24px;
+    }
+
+    .header__text-subheading {
+        font-size: 10px;
+    }
+
+    .main__text-container-h3,
+    .main__text-container-desc-detail-h3 {
+        font-size: 16px;
+    }
+
+    .main__text-container-p,
+    .main__text-container-desc-detail-p {
+        font-size: 12px;
+    }
+
+    .correct-img-cont-i {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        margin-top: 18px;
+    }
+}

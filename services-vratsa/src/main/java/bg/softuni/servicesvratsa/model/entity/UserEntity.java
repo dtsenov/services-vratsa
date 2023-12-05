@@ -31,6 +31,9 @@ public class UserEntity extends BaseEntity {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
+    @Column(name = "address", nullable = false)
+    private String address;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private RoleEntity role;
 
@@ -106,6 +109,14 @@ public class UserEntity extends BaseEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public RoleEntity getRole() {

@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("denislav");
                     user.setPassword(passwordEncoder.encode("cenov"));
                     user.setPhoneNumber("+359848444444");
+                    user.setAddress("Дъбника, бл. 20, вх. Ж, ап. 20");
                     user.setAge(30);
                     break;
                 case 1:
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("hristo");
                     user.setPassword(passwordEncoder.encode("hristo"));
                     user.setPhoneNumber("+359848444433");
+                    user.setAddress("Дъбника, бл. 7, вх. Ж, ап. 20");
                     user.setAge(25);
                     break;
                 case 2:
@@ -78,6 +80,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("gosho");
                     user.setPassword(passwordEncoder.encode("gosho"));
                     user.setPhoneNumber("+359848444422");
+                    user.setAddress("Дъбника, бл. 8, вх. А, ап. 20");
                     user.setAge(19);
                     break;
                 case 3:
@@ -89,6 +92,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("ilian");
                     user.setPassword(passwordEncoder.encode("ilian"));
                     user.setPhoneNumber("+359848444456");
+                    user.setAddress("Дъбника, бл. 4, вх. Б, ап. 5");
                     user.setAge(30);
                     break;
                 case 4:
@@ -100,6 +104,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("todor");
                     user.setPassword(passwordEncoder.encode("todor"));
                     user.setPhoneNumber("+359848444457");
+                    user.setAddress("Дъбника, бл. 2, вх. В, ап. 2");
                     user.setAge(26);
                     break;
                 case 5:
@@ -111,6 +116,7 @@ public class UserServiceImpl implements UserService {
                     user.setUsername("petyr");
                     user.setPassword(passwordEncoder.encode("petyr"));
                     user.setPhoneNumber("+359848444458");
+                    user.setAddress("Дъбника, бл. 13, вх. Б, ап. 5");
                     user.setAge(23);
                     break;
             }
