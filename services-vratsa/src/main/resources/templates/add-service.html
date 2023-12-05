@@ -19,7 +19,7 @@
             <label for="service-name" class="form-label">Име на услуга</label>
         </div>
         <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
-               type="text" id="service-name" name="name" placeholder="Име на услуга.."><br/>
+               required="required" type="text" id="service-name" name="name" placeholder="Име на услуга.."><br/>
         <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
     </div>
 
@@ -28,7 +28,7 @@
             <label for="service-description" class="form-label">Описание на услуга</label>
         </div>
         <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
-                  name="description" id="service-description" placeholder="Описание на услуга.."></textarea><br/>
+                  required="required" name="description" id="service-description" placeholder="Описание на услуга.."></textarea><br/>
         <small th:errors="*{description}" class="invalid-feedback text-danger">Description error message</small>
     </div>
 
@@ -37,7 +37,7 @@
             <label for="service-price" class="form-label">Цена на услуга</label>
         </div>
         <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
-               type="text" name="price" id="service-price" placeholder="Цена на услуга (пример: 1.11).."><br/>
+               required="required" type="text" name="price" id="service-price" placeholder="Цена на услуга (пример: 1.11).."><br/>
         <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
     </div>
 

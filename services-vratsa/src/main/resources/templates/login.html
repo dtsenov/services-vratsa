@@ -14,6 +14,7 @@
     <p th:if="${hasError}" class="invalid-feedback">ГРЕШНО ПОТРЕБИТЕЛСКО ИМЕ ИЛИ ПАРОЛА!</p>
     <label for="username">Потребителско име</label>
     <input class="input-log"
+           required="required"
            type="text"
            name="username"
            placeholder="Потребителско име.."
@@ -21,6 +22,7 @@
 
     <label for="password">Парола</label>
     <input class="input-log"
+           required="required"
            type="password"
            min="3" max="20"
            name="password"

@@ -20,7 +20,7 @@
                 <label for="product-name" class="form-label">Име на продукт</label><br/>
             </div>
             <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
-                   type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
+                   required="required"  type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
             <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
         </div>
 
@@ -30,7 +30,7 @@
                 <label for="product-price" class="form-label">Цена на продукт</label><br/>
             </div>
             <input th:field="*{price}" th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
+                   required="required" type="text" name="price" id="product-price" placeholder="Цена на продукт (пример: 1.11).."><br/>
             <small th:errors="*{price}" class="invalid-feedback text-danger">Price error message</small>
         </div>
 
@@ -39,7 +39,7 @@
                 <label for="product-brand" class="form-label">Име на производител</label><br/>
             </div>
             <input th:field="*{brand}" th:errorclass="'is-invalid alert-danger'"
-                   type="text" name="brand" id="product-brand" placeholder="Име на производител.."><br/>
+                   required="required"   type="text" name="brand" id="product-brand" placeholder="Име на производител.."><br/>
             <small th:errors="*{brand}" class="invalid-feedback text-danger">Username error message</small>
         </div>
 
