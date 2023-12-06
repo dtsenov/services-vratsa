@@ -39,4 +39,19 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.saveAll(orderEntities);
 
     }
+
+    @Override
+    public List<OrderViewModel> findAllDailyOrders() {
+
+        List<OrderEntity> orderEntities = orderRepository.findAll();
+        List<OrderViewModel> orderViewModels = new ArrayList<>();
+
+        orderEntities.forEach(orderEntity -> {
+            OrderViewModel orderViewModel = modelMapper.map(orderEntity, OrderViewModel.class);
+            orderViewModel.setUsername(orderEntity.getUser().getUsername());
+            orderViewModels.add(orderViewModel);
+        });
+
+        return orderViewModels;
+    }
 }

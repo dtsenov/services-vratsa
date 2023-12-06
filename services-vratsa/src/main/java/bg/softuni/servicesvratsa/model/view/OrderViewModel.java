@@ -10,6 +10,8 @@ public class OrderViewModel {
     private BigDecimal price;
     private String productId;
 
+    private String username;
+
     public OrderViewModel() {
     }
 
@@ -51,5 +53,13 @@ public class OrderViewModel {
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

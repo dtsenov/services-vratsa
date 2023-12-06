@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface OrderService {
     void completeOrder(UserEntity user, List<OrderViewModel> orderViewModels);
+
+    List<OrderViewModel> findAllDailyOrders();
 }
