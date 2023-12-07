@@ -87,7 +87,7 @@ public class ProductController {
                 productAddBindingModel, ProductServiceModel.class));
 
 
-        return "redirect:all";
+        return "redirect:/products/add/success";
     }
 
     @GetMapping("/all/{id}")
@@ -104,6 +104,11 @@ public class ProductController {
         model.addAttribute("cartViewModels", cartViewModels);
 
         return "product-info";
+    }
+
+    @GetMapping("/add/success")
+    public String addSuccess() {
+        return "add-product-success";
     }
 }
 

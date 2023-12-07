@@ -83,8 +83,13 @@ public class ServiceController {
         serviceService.addNewService(picture.getId(), modelMapper.map(
                 serviceAddBindingModel, ServicesServiceModel.class));
 
-        return "redirect:all";
+        return "redirect:/services/add/success";
 
+    }
+
+    @GetMapping("/add/success")
+    public String addSuccess() {
+        return "add-service-success";
     }
 
     @GetMapping("/all/{id}")

@@ -192,6 +192,14 @@
         margin-left: 60px;
         width: 77%;
     }
+
+    .form-group-add-pr-sc textarea {
+        min-width: 660px;
+    }
+
+    #cartItems p {
+        font-size: 14px;
+    }
 }
 
 @media all and (max-width: 730px) {
@@ -220,6 +228,10 @@
     .register__container-form {
         width: 50%;
         margin-top: 25px;
+    }
+
+    #cartItems p {
+        font-size: 13px;
     }
 }
 
@@ -293,6 +305,14 @@
     .admin-messages-container table, th, td {
         font-size: 20px;
     }
+
+    .form-group-add-pr-sc textarea {
+        min-width: 560px;
+    }
+
+    #cartItems p {
+        font-size: 12px;
+    }
 }
 
 @media all and (max-width: 560px) {
@@ -339,6 +359,10 @@
         margin-right: 5px;
         margin-top: 20px;
     }
+
+    .form-group-add-pr-sc textarea {
+        min-width: 460px;
+    }
 }
 
 @media all and (max-width: 460px) {
@@ -380,5 +404,9 @@
         height: 20px;
         margin-right: 5px;
         margin-top: 18px;
+    }
+
+    .form-group-add-pr-sc textarea {
+        min-width: 360px;
     }
 }

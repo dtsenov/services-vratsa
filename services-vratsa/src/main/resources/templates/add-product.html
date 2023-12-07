@@ -47,7 +47,7 @@
             <select th:field="*{type}" id="product-type" name="type">
                 <option value="">Избери тип</option>
                 <option th:each="t : ${T(bg.softuni.servicesvratsa.model.enums.ProductTypeEnum).values()}"
-                        th:value="${t}" th:text="${t}">Водомер
+                     th:value="${t}" th:text="${t.getDescription()}">Водомер
                 </option>
             </select>
         </div>

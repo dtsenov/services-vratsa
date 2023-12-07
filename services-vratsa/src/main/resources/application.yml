@@ -13,8 +13,8 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 1234
-    username: root
+    password: ${PASSWORD_DB}
+    username: ${USERNAME_DB}
     url: jdbc:mysql://localhost:3306/services_vratsa?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
   servlet:
     multipart:
@@ -34,7 +34,7 @@ server:
   port: 8080
 
 services-vratsa:
-  remember.me.key: ${REMEMBER_ME_KEY:topsecret}
+  remember.me.key: ${REMEMBER_ME_KEY}
 
 cloudinary:
   api-key: ${CLOUDINARY_API_KEY}

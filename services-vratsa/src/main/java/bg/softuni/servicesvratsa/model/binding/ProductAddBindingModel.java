@@ -33,7 +33,7 @@ public class ProductAddBindingModel {
 
     public ProductAddBindingModel() {
         picture = null;
-        price = BigDecimal.ZERO;
+        price = BigDecimal.valueOf(0.00).setScale(2);
     }
 
     public String getName() {

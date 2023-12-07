@@ -26,7 +26,7 @@ public class ServiceAddBindingModel {
     private MultipartFile picture;
 
     public ServiceAddBindingModel() {
-        price = BigDecimal.ZERO;
+        price = BigDecimal.valueOf(0.00).setScale(2);
         picture = null;
     }
 
