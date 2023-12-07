@@ -85,6 +85,15 @@
                     error message</small>
             </div>
 
+            <div class="form-group">
+                <label for="address" class="form-label">Телефон</label>
+                <input th:field="*{address}" th:errorclass="'is-invalid alert-danger'" type="text" id="address"
+                       name="address" class="reg-form"
+                       required="required" minlength="5" placeholder="Адрес..">
+                <small th:errors="*{address}" class="invalid-feedback text-danger">Address number
+                    error message</small>
+            </div>
+
             <input type="submit" value="Регистрация" class="reg-submit-form">
 
         </form>

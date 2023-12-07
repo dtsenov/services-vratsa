@@ -38,6 +38,10 @@ public class UserRegisterBindingModel {
     @Length(min = 10, message = "Телефонния номер трябва да е поне 10 символа")
     private String phoneNumber;
 
+    @NotBlank(message = "Полето не трябва да е празно!")
+    @Length(min = 5, message = "Адреса трябва да е поне 5 символа")
+    private String address;
+
     public UserRegisterBindingModel() {
         age = 0;
     }
@@ -104,5 +108,13 @@ public class UserRegisterBindingModel {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

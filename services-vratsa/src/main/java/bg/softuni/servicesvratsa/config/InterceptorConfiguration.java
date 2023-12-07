@@ -1,7 +1,7 @@
 package bg.softuni.servicesvratsa.config;
 
-import bg.softuni.servicesvratsa.utils.LoginInterceptor;
-import bg.softuni.servicesvratsa.utils.RegisterInterceptor;
+import bg.softuni.servicesvratsa.utils.interceptor.LoginInterceptor;
+import bg.softuni.servicesvratsa.utils.interceptor.RegisterInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

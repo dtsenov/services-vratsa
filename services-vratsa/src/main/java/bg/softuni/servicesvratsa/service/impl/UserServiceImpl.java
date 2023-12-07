@@ -133,7 +133,7 @@ public class UserServiceImpl implements UserService {
         RoleEntity role = roleRepository.findByRole(RoleNameEnum.CLIENT);
 
         UserEntity user = modelMapper.map(userServiceModel, UserEntity.class);
-        user.setPassword(passwordEncoder.encode(userServiceModel.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(role);
 
         userRepository.save(user);

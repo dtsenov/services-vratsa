@@ -1,4 +1,4 @@
-package bg.softuni.servicesvratsa.utils;
+package bg.softuni.servicesvratsa.utils.scheduler;
 
 import bg.softuni.servicesvratsa.model.view.InvoiceModelView;
 import bg.softuni.servicesvratsa.model.view.OrderViewModel;
@@ -22,7 +22,7 @@ public class InvoiceGenerationScheduler {
         this.orderService = orderService;
     }
 
-    @Scheduled(cron = "* * 16 * * ?")
+    @Scheduled(cron = "0 0 16 * * ?")
     public void generateInvoices() {
         DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("dd-M-yyyy (H-mm-ss)");
         LocalDateTime dateTime = LocalDateTime.now();

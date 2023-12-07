@@ -1,4 +1,4 @@
-package bg.softuni.servicesvratsa.utils;
+package bg.softuni.servicesvratsa.utils.scheduler;
 
 import bg.softuni.servicesvratsa.model.view.InvoiceModelView;
 import com.google.gson.Gson;
