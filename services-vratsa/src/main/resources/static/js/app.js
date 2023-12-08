@@ -137,7 +137,7 @@ function reloadCart() {
         .catch(error => console.error('Грешка при зареждане на количката:', error.message));
 }
 
-function deleteFromCart() {
+function deleteFromCart(event) {
 
     const productId = event.currentTarget.getAttribute('productId');
     const BASE_URL = "/cart/";
@@ -158,7 +158,13 @@ function deleteFromCart() {
             reloadCart();
         })
         .catch(error => console.error('ГРЕШКА: ', error.message));
+
+    event.stopPropagation();
 }
+
+document.querySelector('.delete-button').addEventListener('click', function (event) {
+    event.stopPropagation();
+});
 
 function confirmCart() {
     window.location.replace('/make-order');

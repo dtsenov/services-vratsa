@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:fragment="head">
+<head th:fragment="head" >
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>ВиК Услуги Враца</title>
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/responsive.css"/>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <script type="text/javascript" src="/js/app.js"></script>
 </head>
-<body>
-<header th:fragment="nav" class="header">
+<body onload="reloadCart()">
+<header th:fragment="nav" class="header" onload="reloadCart()">
     <nav class="header__nav">
         <div class="header__logo">
             <a href="/">
@@ -97,7 +100,18 @@
             <button class="header__text-btn">Нашите специалисти</button>
         </a>
     </div>
+
+    <div class="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <div class="cart-popup">
+            <h3 class="c-pr-text">Количка с продукти</h3>
+            <div id="cartItems"></div>
+        </div>
+    </div>
+
+
 </header>
+
 </body>
 <footer th:fragment="footer" class="footer">
     <p>

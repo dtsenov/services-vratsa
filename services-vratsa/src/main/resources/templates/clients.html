@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{fragments/commons::head}"></head>
-<body>
+<body onload="reloadCart()">
 <header th:replace="~{fragments/commons::nav}"></header>
 
 <div class="clients-table-wrapper">
@@ -45,7 +45,7 @@
         </tbody>
     </table>
 </div>
-
+<script type="text/javascript" src="/js/app.js"></script>
 </body>
 <footer th:replace="~{fragments/commons::footer}"></footer>
 </html>

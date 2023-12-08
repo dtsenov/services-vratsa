@@ -1,8 +1,16 @@
+@import url('https://use.fontawesome.com/releases/v6.5.1/css/all.css');
+
 .header {
     height: 385px;
     background-image: url(/images/Water-Meter-Replacement-Program---Website-Banner.png);
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }
 
 .header__nav {
@@ -664,4 +672,34 @@
 #service-description,
 #service-price {
     font-size: 20px;
+}
+
+.fa-solid {
+    position: absolute;
+    bottom: 0px;
+    right: 50px;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    color: white;
+    font-size: 30px;
+}
+
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+}
+
+.cart-popup {
+    display: none;
+    position: absolute;
+    bottom: auto;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.cart-icon:hover .cart-popup {
+    display: block;
 }
