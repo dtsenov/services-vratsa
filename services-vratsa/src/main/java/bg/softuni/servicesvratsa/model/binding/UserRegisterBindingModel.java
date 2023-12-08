@@ -1,13 +1,16 @@
 package bg.softuni.servicesvratsa.model.binding;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 public class UserRegisterBindingModel {
 
+    @Column(unique = true)
     @NotBlank(message = "Полето не трябва да е празно!")
     @Length(min = 3, max = 20, message = "Потребителското име трябва да е дълго между 3 и 20 символа!")
     private String username;

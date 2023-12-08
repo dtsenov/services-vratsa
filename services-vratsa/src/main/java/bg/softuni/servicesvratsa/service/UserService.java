@@ -22,4 +22,6 @@ public interface UserService {
     void hireWorker(Long clientId);
 
     void fireWorker(Long workerId);
+
+    boolean checkUsername(String username);
 }

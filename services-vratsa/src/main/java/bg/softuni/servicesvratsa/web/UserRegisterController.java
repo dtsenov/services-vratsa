@@ -6,6 +6,7 @@ import bg.softuni.servicesvratsa.service.UserService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +20,8 @@ public class UserRegisterController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
+    private boolean mismatchPasswords;
+    private boolean usernameExist;
 
     public UserRegisterController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
@@ -32,7 +35,10 @@ public class UserRegisterController {
 
 
     @GetMapping("/register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("mismatchPasswords", mismatchPasswords);
+        model.addAttribute("usernameExist", usernameExist);
+
         return "register";
     }
 
@@ -44,7 +50,18 @@ public class UserRegisterController {
         boolean samePasswords = userRegisterBindingModel.getPassword()
                 .equals(userRegisterBindingModel.getConfirmPassword());
 
-        if (bindingResult.hasErrors() || !samePasswords) {
+        boolean isUsernameExist = userService.checkUsername(userRegisterBindingModel.getUsername());
+
+        if (bindingResult.hasErrors() || !samePasswords || !isUsernameExist) {
+
+            if (isUsernameExist) {
+                usernameExist = true;
+            }
+
+            if (!samePasswords) {
+                mismatchPasswords = true;
+            }
+
             redirectAttributes
                     .addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel)
                     .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);

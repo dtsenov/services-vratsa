@@ -201,4 +201,10 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
     }
 
+    @Override
+    public boolean checkUsername(String username) {
+        Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        return userEntity.isPresent();
+    }
+
 }
