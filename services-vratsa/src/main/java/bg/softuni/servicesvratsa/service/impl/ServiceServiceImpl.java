@@ -102,6 +102,7 @@ public class ServiceServiceImpl implements ServiceService {
                 servicesServiceModel, ServiceEntity.class);
 
         service.setPictureId(pictureId);
+        service.setServiceId(UUID.randomUUID().toString());
 
         serviceRepository.save(service);
     }

@@ -12,7 +12,9 @@
 <header th:fragment="nav" class="header">
     <nav class="header__nav">
         <div class="header__logo">
-            <img src="/images/logo.png" alt="">
+            <a href="/">
+                <img src="/images/logo.png" alt="logo">
+            </a>
         </div>
 
         <th:block sec:authorize="isAuthenticated()">
@@ -91,7 +93,9 @@
         <h2 class="header__text-subheading">Бързи ВиК услуги и Ремонти по Домовете във Враца.
             Квалифицирани Водопроводчици за Качествени ВиК ремонти.</h2>
 
-        <a href="/our-specialists"><button class="header__text-btn">Нашите специалисти</button></a>
+        <a href="/our-specialists">
+            <button class="header__text-btn">Нашите специалисти</button>
+        </a>
     </div>
 </header>
 </body>

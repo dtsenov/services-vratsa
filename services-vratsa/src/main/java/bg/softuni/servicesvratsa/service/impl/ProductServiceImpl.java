@@ -123,6 +123,7 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = modelMapper.map(productServiceModel, ProductEntity.class);
 
         product.setPictureId(pictureId);
+        product.setProductId(UUID.randomUUID().toString());
 
         productRepository.save(product);
     }
