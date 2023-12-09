@@ -20,7 +20,9 @@
         </div>
         <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
                required="required" type="text" id="service-name" name="name" placeholder="Име на услуга.."><br/>
-        <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
+        <small th:errors="*{name}" class="invalid-feedback text-danger">Name error message</small>
+        <small th:if="${isServiceNameExists}" class="invalid-feedback text-danger">Съществува услуга със същото име.</small>
+
     </div>
 
     <div class="form-group-add-pr-sc">

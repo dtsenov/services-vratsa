@@ -11,4 +11,6 @@ public interface ServiceRepository extends JpaRepository<ServiceEntity, Long> {
 
 
     Optional<ServiceEntity> findByServiceId(String serviceId);
+
+    Optional<ServiceEntity> findByName(String name);
 }

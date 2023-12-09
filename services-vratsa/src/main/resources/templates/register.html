@@ -26,6 +26,7 @@
                 <input th:field="*{password}" th:errorclass="'is-invalid alert-danger'" type="password" id="password"
                        name="password" class="reg-form"
                        required="required" minlength="5" placeholder="Парола..">
+                <small th:errors="*{password}" class="invalid-feedback text-danger">Password error message</small>
                 <small th:if="${mismatchPasswords}" class="invalid-feedback text-danger">Паролите не съвпадат.</small>
 
             </div>
@@ -72,6 +73,7 @@
                 <input th:field="*{email}" th:errorclass="'is-invalid alert-danger'" type="text" id="email" name="email"
                        class="reg-form"
                        required="required" minlength="1" placeholder="Имейл..">
+                <small th:if="${emailExist}" class="invalid-feedback text-danger">Съществува потребител със същия имейл.</small>
                 <small th:errors="*{email}" class="invalid-feedback text-danger">Email error
                     message</small>
             </div>

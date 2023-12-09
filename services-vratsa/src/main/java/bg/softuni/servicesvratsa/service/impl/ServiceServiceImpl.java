@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -151,5 +152,11 @@ public class ServiceServiceImpl implements ServiceService {
         serviceViewModel.setPictureUrl(picture.getUrl());
 
         return serviceViewModel;
+    }
+
+    @Override
+    public boolean findServiceByName(String name) {
+        Optional<ServiceEntity> serviceEntity = serviceRepository.findByName(name);
+        return serviceEntity.isPresent();
     }
 }

@@ -207,4 +207,10 @@ public class UserServiceImpl implements UserService {
         return userEntity.isPresent();
     }
 
+    @Override
+    public boolean checkEmail(String email) {
+        Optional<UserEntity> userEntity = userRepository.findByEmail(email);
+        return userEntity.isPresent();
+    }
+
 }

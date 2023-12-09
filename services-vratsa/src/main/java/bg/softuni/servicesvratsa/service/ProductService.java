@@ -17,4 +17,6 @@ public interface ProductService {
     ProductCurrentViewModel findProductByProductId(String productId);
 
     ProductServiceModel findProductById(Long id);
+
+    boolean findProductByName(String name);
 }

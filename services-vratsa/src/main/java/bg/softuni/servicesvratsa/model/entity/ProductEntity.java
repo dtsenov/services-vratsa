@@ -10,7 +10,7 @@ import java.util.Set;
 @Table(name = "products")
 public class ProductEntity extends BaseEntity {
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name", nullable = false, unique = true)
     private String name;
 
     private String productId;

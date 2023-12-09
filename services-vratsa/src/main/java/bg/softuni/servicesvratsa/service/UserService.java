@@ -24,4 +24,6 @@ public interface UserService {
     void fireWorker(Long workerId);
 
     boolean checkUsername(String username);
+
+    boolean checkEmail(String email);
 }

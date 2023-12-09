@@ -21,7 +21,8 @@
             </div>
             <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
                    required="required"  type="text" id="product-name" name="name" placeholder="Име на продукт.."><br/>
-            <small th:errors="*{name}" class="invalid-feedback text-danger">Username error message</small>
+            <small th:errors="*{name}" class="invalid-feedback text-danger">Name error message</small>
+            <small th:if="${isProductNameExist}" class="invalid-feedback text-danger">Съществува продукт със същото име.</small>
         </div>
 
 

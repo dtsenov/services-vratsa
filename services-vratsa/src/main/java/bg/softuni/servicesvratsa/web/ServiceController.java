@@ -31,6 +31,7 @@ public class ServiceController {
     private final ServiceService serviceService;
     private final ModelMapper modelMapper;
     private final CartService cartService;
+    private boolean isServiceNameExists;
 
     public ServiceController(CloudinaryService cloudinaryService, PictureService pictureService, PictureRepository pictureRepository, ServiceService serviceService, ModelMapper modelMapper, CartService cartService) {
         this.cloudinaryService = cloudinaryService;
@@ -39,6 +40,7 @@ public class ServiceController {
         this.serviceService = serviceService;
         this.modelMapper = modelMapper;
         this.cartService = cartService;
+        this.isServiceNameExists = false;
     }
 
     @ModelAttribute
@@ -47,7 +49,8 @@ public class ServiceController {
     }
 
     @GetMapping("/add")
-    public String addService() {
+    public String addService(Model model) {
+        model.addAttribute("isServiceNameExists", isServiceNameExists);
         return "add-service";
     }
 
@@ -62,8 +65,13 @@ public class ServiceController {
                                     BindingResult bindingResult,
                                     RedirectAttributes redirectAttributes) throws IOException {
 
+        boolean isNameExists = serviceService.findServiceByName(serviceAddBindingModel.getName());
 
-        if (bindingResult.hasErrors() || serviceAddBindingModel.getPicture().isEmpty()) {
+        if (bindingResult.hasErrors() || serviceAddBindingModel.getPicture().isEmpty() || isNameExists) {
+
+            if (isNameExists) {
+                isServiceNameExists = true;
+            }
 
             if (serviceAddBindingModel.getPicture().isEmpty()) {
                 redirectAttributes.addFlashAttribute("isEmpty", true);

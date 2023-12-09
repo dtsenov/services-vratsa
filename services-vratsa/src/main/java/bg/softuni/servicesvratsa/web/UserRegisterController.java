@@ -22,10 +22,14 @@ public class UserRegisterController {
     private final ModelMapper modelMapper;
     private boolean mismatchPasswords;
     private boolean usernameExist;
+    private boolean emailExist;
 
     public UserRegisterController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        mismatchPasswords = false;
+        usernameExist = false;
+        emailExist = false;
     }
 
     @ModelAttribute
@@ -38,6 +42,7 @@ public class UserRegisterController {
     public String register(Model model) {
         model.addAttribute("mismatchPasswords", mismatchPasswords);
         model.addAttribute("usernameExist", usernameExist);
+        model.addAttribute("emailExist", emailExist);
 
         return "register";
     }
@@ -51,11 +56,18 @@ public class UserRegisterController {
                 .equals(userRegisterBindingModel.getConfirmPassword());
 
         boolean isUsernameExist = userService.checkUsername(userRegisterBindingModel.getUsername());
+        boolean isEmailExist = userService.checkEmail(userRegisterBindingModel.getEmail());
 
-        if (bindingResult.hasErrors() || !samePasswords || !isUsernameExist) {
+        if (bindingResult.hasErrors() || !samePasswords || isUsernameExist || isEmailExist ) {
+
+
 
             if (isUsernameExist) {
                 usernameExist = true;
+            }
+
+            if (isEmailExist) {
+                emailExist = true;
             }
 
             if (!samePasswords) {

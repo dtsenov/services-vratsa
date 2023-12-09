@@ -173,5 +173,11 @@ public class ProductServiceImpl implements ProductService {
 
         return modelMapper.map(product, ProductServiceModel.class);
     }
+
+    @Override
+    public boolean findProductByName(String name) {
+        Optional<ProductEntity> productEntity = productRepository.findByName(name);
+        return productEntity.isPresent();
+    }
 }
 

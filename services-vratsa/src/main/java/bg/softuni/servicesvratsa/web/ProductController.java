@@ -32,12 +32,14 @@ public class ProductController {
     private final ProductService productService;
     private final CartService cartService;
     private final ModelMapper modelMapper;
+    private boolean isProductNameExist;
 
     public ProductController(PictureService pictureService, ProductService productService, CartService cartService, ModelMapper modelMapper) {
         this.pictureService = pictureService;
         this.productService = productService;
         this.cartService = cartService;
         this.modelMapper = modelMapper;
+        this.isProductNameExist = false;
     }
 
     @ModelAttribute
@@ -56,7 +58,8 @@ public class ProductController {
     }
 
     @GetMapping("/add")
-    public String add() {
+    public String add(Model model) {
+        model.addAttribute("isProductNameExist", isProductNameExist);
         return "add-product";
     }
 
@@ -65,7 +68,13 @@ public class ProductController {
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) throws IOException {
 
-        if (bindingResult.hasErrors() || productAddBindingModel.getPicture().isEmpty()) {
+        boolean isNameExist = productService.findProductByName(productAddBindingModel.getName());
+
+        if (bindingResult.hasErrors() || productAddBindingModel.getPicture().isEmpty() || isNameExist) {
+
+            if (isNameExist) {
+                isProductNameExist = true;
+            }
 
             if (productAddBindingModel.getPicture().isEmpty()) {
                 redirectAttributes.addFlashAttribute("isEmpty", true);
