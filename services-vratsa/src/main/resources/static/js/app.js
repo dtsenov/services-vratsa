@@ -78,6 +78,9 @@ function reloadCart() {
         })
         .then(data => {
 
+            let cartProductsCount = document.getElementById("cart-counter");
+            cartProductsCount.innerText = data.length;
+
             if (data.length <= 0) {
                 cartItems.innerHTML = '';
                 let emptyCart = document.createElement('p');

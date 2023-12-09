@@ -703,3 +703,25 @@ body {
 .cart-icon:hover .cart-popup {
     display: block;
 }
+
+#cart-counter {
+    position: absolute;
+    right: 45px;
+    bottom: 18px;
+    background-color: red;
+    color: white;
+    border-radius: 80%;
+    padding: 4px;
+    font-size: 12px;
+}
+
+.cart-p {
+    position: absolute;
+    right: 12px;
+    color: white;
+    bottom: -43px;
+}
+
+.cart-icon:hover .cart-p {
+    display: none;
+}

@@ -101,12 +101,14 @@
         </a>
     </div>
 
-    <div class="cart-icon">
+    <div class="cart-icon" sec:authorize="isAuthenticated()">
         <i class="fa-solid fa-cart-shopping"></i>
         <div class="cart-popup">
-            <h3 class="c-pr-text">Количка с продукти</h3>
+            <h3 class="c-pr-text">Добавени</h3>
             <div id="cartItems"></div>
         </div>
+        <span id="cart-counter">0</span>
+        <p class="cart-p">Моята количка</p>
     </div>
 
 
